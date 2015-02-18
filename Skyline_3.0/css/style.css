@@ -1,0 +1,59 @@
+﻿body {
+    background-color:black;
+    @include box-sizing(border-box);
+}
+
+.wrapper {
+    margin: 60px 0 60px 0;
+}
+
+.main-content {
+    background-color: #FFF;
+    border-width: 1px;
+    border-color: #DDD;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 15px;
+    border-style: solid;
+ }
+
+.navbar-right {
+    margin-right:0;
+}
+
+.navbar-brand-active {
+    color:white !important;
+    background-color: transparent;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.banner {
+    text-align:center;
+    width: 100%;
+    margin: 20px auto auto auto;
+    overflow: hidden;
+    background: white;
+    @include border-radius(.5em);
+        border-width: 1px;
+    border-color: White;
+    border-radius: 4px;
+    border-style: solid;
+}
+    .banner img {
+        max-height: 100%;
+        position:center;
+        @include translateX(-50%);
+    }
+
+
+    .banner img @media(min-width: 800px) {
+      top: 50%;
+      left: 0;
+      max-height: none;
+      width: 100%;
+      @include translateY(-50%);
+    }

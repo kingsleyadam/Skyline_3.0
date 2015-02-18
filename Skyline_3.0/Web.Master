@@ -1,0 +1,208 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Web.master.cs" Inherits="Skyline_3._0.Web" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Skyline Big Red Distributing</title>
+
+    <asp:Literal ID="litBootStrapCSSRef" runat="server"></asp:Literal>
+    <asp:Literal ID="litSiteCSSRef" runat="server"></asp:Literal>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/Default.aspx" CssClass="navbar-brand">Skyline</asp:HyperLink>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navHeaderCollapse">
+                    <ul class="nav navbar-nav navbar-left">
+
+                        <li id="liProducts" runat="server">
+                            <asp:LinkButton ID="lnkProducts" runat="server" CssClass="open-Login">Products</asp:LinkButton>
+                        </li>
+                        <li id="liAboutUs" runat="server">
+                            <asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/about_us.aspx">About Us</asp:HyperLink>
+                        </li>
+                        <li id="liContactUs" runat="server">
+                            <asp:HyperLink ID="lnkContactUs" runat="server" NavigateUrl="~/contact_us.aspx">Contact Us</asp:HyperLink>
+                        </li>
+                        <li id="liAccountInfo" class="dropdown" runat="server">
+                            <asp:HyperLink ID="lnkAccountSettings" CssClass="dropdown-toggle" data-toggle="dropdown" NavigateUrl="#" runat="server">Account <b class="caret"></b></asp:HyperLink>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Website Orders</li>
+                                <li>
+                                    <asp:HyperLink ID="lnkOrders" runat="server" NavigateUrl="~/user/orders.aspx">Orders</asp:HyperLink></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">User Information</li>
+                                <li>
+                                    <asp:HyperLink ID="lnkAccountInfo" runat="server" NavigateUrl="~/user/account_info.aspx">Account Settings</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="lnkChangePassword" runat="server" NavigateUrl="~/user/change_password.aspx">Change Password</asp:HyperLink></li>
+                            </ul>
+                        </li>
+                        <li id="liOrder" runat="server">
+                            <asp:HyperLink ID="lnkOrderForm" runat="server" NavigateUrl="~/stores/order.aspx"><span class="glyphicon glyphicon-shopping-cart"></span></asp:HyperLink>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <asp:LoginView ID="lgnView" runat="server">
+                            <AnonymousTemplate>
+                                <li>
+                                    <a href="#login" data-toggle="modal" data-id="login" class="open-Login">Login</a>
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="lnkSignUp" runat="server" NavigateUrl="user/sign_up.aspx">Need An Account?</asp:HyperLink>
+                                </li>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <li>
+                                    <asp:LoginStatus ID="lgnStatusLoggedIn" runat="server" />
+                                </li>
+                            </LoggedInTemplate>
+                            <RoleGroups>
+                                <asp:RoleGroup Roles="admin">
+                                    <ContentTemplate>
+                                        <li id="liAdmin" runat="server" class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="divider"></li>
+
+
+                                                <li class="dropdown-header">Website Info</li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkChangeLog" runat="server" NavigateUrl="~/admin/change_log.aspx" Text="Site Change Log" /></li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkWebSiteText" runat="server" NavigateUrl="~/admin/glossary.aspx">Website Text</asp:HyperLink>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">User Info</li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkUserList" runat="server" NavigateUrl="~/admin/userlist.aspx">User List</asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkOrders" runat="server" NavigateUrl="~/admin/order.aspx">Orders</asp:HyperLink>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Products</li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkProductList" runat="server" NavigateUrl="~/admin/products.aspx">List</asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkProductImages" runat="server" NavigateUrl="~/admin/productsimage.aspx">Images</asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkProductCategories" runat="server" NavigateUrl="~/admin/productscategory.aspx">Categories</asp:HyperLink>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Categories</li>
+                                                <li>
+                                                    <asp:HyperLink ID="lnkCategories" runat="server" NavigateUrl="~/admin/category.aspx">List</asp:HyperLink>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <asp:LoginStatus ID="lgnStatusAdmin" runat="server" />
+                                        </li>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                            </RoleGroups>
+                        </asp:LoginView>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <div class="container">
+                <div class="main-content">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+
+            <asp:Panel runat="server" ID="pnlBanner" class="container" Visible="false">
+                <div class="banner">
+                    <asp:Image ID="imgBanner" runat="server" ImageUrl="~/images/template_r1_c1.png" />
+                </div>
+            </asp:Panel>
+        </div>
+
+        <asp:Panel ID="pnlFooter" runat="server" CssClass="navbar navbar-default navbar-fixed-bottom" Visible="True">
+            <div class="container">
+                <p class="navbar-text text-muted pull-right">&copy; 2015 Skyline Big Red Distributing</p>
+            </div>
+        </asp:Panel>
+
+        <asp:Panel ID="login" CssClass="loginwrapper modal fade" role="dialog" runat="server">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <asp:Login ID="lgnForm" runat="server" RenderOuterTable="False">
+                                <LayoutTemplate>
+                                    <div class="form-group has-feedback">
+                                        <asp:Label ID="lblUsername" runat="server" Text="Username" AssociatedControlID="Username"></asp:Label>
+                                        <asp:TextBox ID="UserName" CssClass="textbox-top form-control" placeholder="Username" runat="server" />
+                                        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="ctl00$lgnForm" Text="Required" ForeColor="Red" />
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <asp:Label ID="lblPassword" runat="server" Text="Password" AssociatedControlID="Password"></asp:Label>
+                                        <asp:TextBox ID="Password" CssClass=" textbox-bottom form-control" placeholder="Password" TextMode="Password" runat="server" />
+                                        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="ctl00$lgnForm" Text="Required" ForeColor="Red" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:CheckBox ID="RememberMe" CssClass="checkbox-inline" runat="server" Text="Remember Me?" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:HyperLink ID="lnkForgotPwd" runat="server" NavigateUrl="~/user/forgot_password.aspx">Forgot Password?</asp:HyperLink>
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label ID="FailureText" runat="server" EnableViewState="False" class="label label-danger"></asp:Label>
+                                    </div>
+                                    <input type="text" name="loginSource" id="loginSource" value="" class="hidden" />
+                                    <div class="modal-footer">
+                                        <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Login" ValidationGroup="ctl00$lgnForm" CssClass="btn btn-primary" />
+                                        <asp:Button ID="LoginCancel" runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cancel" />
+                                    </div>
+                                </LayoutTemplate>
+                            </asp:Login>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </asp:Panel>
+
+        <asp:Literal ID="litJQueryRef" runat="server"></asp:Literal>
+        <asp:Literal ID="litBootstrapRef" runat="server"></asp:Literal>
+        <script type="text/javascript">
+            $(document).on("click", ".open-Login", function () {
+                var loginFrom = $(this).data('id');
+                $(".modal-body #loginSource").val(loginFrom);
+            });
+        </script>
+        <asp:ContentPlaceHolder ID="JavaScriptContent" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
