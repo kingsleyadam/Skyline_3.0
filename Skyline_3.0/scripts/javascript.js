@@ -22,3 +22,4 @@
     }
     return true;
 }
+function openModal() { $('#login').modal('show'); }

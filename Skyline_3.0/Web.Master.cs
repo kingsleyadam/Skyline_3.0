@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Data.SqlClient;
 using System.Web.SessionState;
+using System.Web.Security;
 
 namespace Skyline_3._0
 {
@@ -82,6 +83,50 @@ namespace Skyline_3._0
             litJQueryRef.Text = "<script src='" + appPath + "scripts/jquery-2.1.3.min.js'></script>";
             litBootstrapJSRef.Text = "<script src='" + appPath + "scripts/bootstrap.min.js'></script>";
             litJavascriptRef.Text = "<script src='" + appPath + "scripts/javascript.js'></script>";
+        }
+
+        protected void lgnForm_LoginError(object sender, EventArgs e)
+        {
+            MembershipUser user = Membership.GetUser(lgnForm.UserName);
+            if (user == null)
+                lgnForm.FailureText = "The username entered does not exist.";
+            else if (user.IsLockedOut)
+                lgnForm.FailureText = "Account is locked. Please user forgot password.";
+            else
+                lgnForm.FailureText = "Incorrect username of password. Please try again.";
+
+            Panel pnlFailureText = (Panel)lgnForm.Controls[0].FindControl("pnlFailureText");
+            if (pnlFailureText != null)
+            {
+                pnlFailureText.Visible = true;
+            }
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        }
+
+        protected void lgnForm_PreRender(object sender, EventArgs e)
+        {
+            Button btnLogin = (Button)lgnForm.Controls[0].FindControl("LoginButton");
+            TextBox txtUsername = (TextBox)lgnForm.Controls[0].FindControl("Username");
+            TextBox txtPassword = (TextBox)lgnForm.Controls[0].FindControl("Password");
+
+            if (btnLogin != null && txtUsername != null && txtPassword != null)
+            {
+                login.DefaultButton = btnLogin.UniqueID;
+
+                if (lgnForm.UserName.ToString().Length > 0)
+                {
+                    txtPassword.Attributes.Add("autofocus", "");
+                    txtUsername.Attributes.Remove("autofocus");
+                }
+                else
+                {
+                    txtUsername.Attributes.Add("autofocus", "");
+                    txtPassword.Attributes.Remove("autofocus");
+                }
+                    
+            }
+                
         }
     }
 }

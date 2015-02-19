@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Login.master.cs" Inherits="Skyline_3._0.Login" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Skyline Big Red Distributing - Log In</title>
+
+    <asp:Literal ID="litBootStrapCSSRef" runat="server"></asp:Literal>
+    <asp:Literal ID="litSiteCSSRef" runat="server"></asp:Literal>
+    <asp:Literal ID="litLoginCSSRef" runat="server"></asp:Literal>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+
+
+
+        <asp:Literal ID="litJQueryRef" runat="server"></asp:Literal>
+        <asp:Literal ID="litBootstrapJSRef" runat="server"></asp:Literal>
+        <asp:Literal ID="litJavascriptRef" runat="server"></asp:Literal>
+        <asp:ContentPlaceHolder ID="JavaScriptContent" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

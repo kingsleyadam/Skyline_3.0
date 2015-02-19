@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\login.css" />
     <Content Include="images\WebsitePics\After\Baby Stuff\Thumbs.db" />
     <Content Include="images\WebsitePics\After\Hats\Thumbs.db" />
     <Content Include="images\WebsitePics\Baby Stuff\Thumbs.db" />
@@ -80,6 +81,7 @@
     <Content Include="user\Web.config" />
     <Content Include="stores\Web.config" />
     <Content Include="admin\Web.config" />
+    <Content Include="Login.Master" />
     <None Include="Properties\PublishProfiles\Skyline 3.0.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -933,6 +935,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.Master.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.Master.designer.cs">
+      <DependentUpon>Login.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="stores\order.aspx.cs">
