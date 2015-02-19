@@ -122,3 +122,23 @@ img {
 .no-margin {
     margin:0;
 }
+
+.no-border {
+    border:none;
+}
+
+.no-border>table {
+    border:none;
+}
+
+.no-border>table>tbody {
+    border:none;
+}
+
+.no-border>table>tbody>tr {
+    border:none;
+}
+
+.no-border>table>tbody>tr>td {
+    border:none;
+}

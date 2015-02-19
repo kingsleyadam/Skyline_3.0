@@ -1019,6 +1019,12 @@
     <Folder Include="images\product_images\compressed\" />
     <Folder Include="images\product_images\thumb\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Glossary\Glossary.csproj">
+      <Project>{44ae6da5-419a-49f3-9cf9-e65bf9cdefea}</Project>
+      <Name>Glossary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skyline_3.0", "Skyline_3.0\Skyline_3.0.csproj", "{FA69CC99-F2ED-42D4-8A48-D7566C787337}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glossary", "Glossary\Glossary.csproj", "{44AE6DA5-419A-49F3-9CF9-E65BF9CDEFEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FA69CC99-F2ED-42D4-8A48-D7566C787337}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA69CC99-F2ED-42D4-8A48-D7566C787337}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA69CC99-F2ED-42D4-8A48-D7566C787337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44AE6DA5-419A-49F3-9CF9-E65BF9CDEFEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44AE6DA5-419A-49F3-9CF9-E65BF9CDEFEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44AE6DA5-419A-49F3-9CF9-E65BF9CDEFEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44AE6DA5-419A-49F3-9CF9-E65BF9CDEFEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
