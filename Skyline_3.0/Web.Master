@@ -194,8 +194,10 @@
             </div>
         </asp:Panel>
 
+        
         <asp:Literal ID="litJQueryRef" runat="server"></asp:Literal>
-        <asp:Literal ID="litBootstrapRef" runat="server"></asp:Literal>
+        <asp:Literal ID="litBootstrapJSRef" runat="server"></asp:Literal>
+        <asp:Literal ID="litJavascriptRef" runat="server"></asp:Literal>
         <script type="text/javascript">
             $(document).on("click", ".open-Login", function () {
                 var loginFrom = $(this).data('id');

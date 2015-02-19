@@ -247,13 +247,22 @@ namespace Skyline_3._0 {
         protected global::System.Web.UI.WebControls.Literal litJQueryRef;
         
         /// <summary>
-        /// litBootstrapRef control.
+        /// litBootstrapJSRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litBootstrapRef;
+        protected global::System.Web.UI.WebControls.Literal litBootstrapJSRef;
+        
+        /// <summary>
+        /// litJavascriptRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litJavascriptRef;
         
         /// <summary>
         /// JavaScriptContent control.

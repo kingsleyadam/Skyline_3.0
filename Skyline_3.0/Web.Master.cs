@@ -75,11 +75,13 @@ namespace Skyline_3._0
             if (!(appPath == "/"))
                 appPath = appPath + "/";
 
+            
             litBootStrapCSSRef.Text = "<link id='cssbootstrap' href='" + appPath + "css/bootstrap.min.css' rel='stylesheet' />";
             litSiteCSSRef.Text = "<link id='csssite' href='" + appPath + "css/style.css' rel='stylesheet' />";
 
             litJQueryRef.Text = "<script src='" + appPath + "scripts/jquery-2.1.3.min.js'></script>";
-            litBootstrapRef.Text = "<script src='" + appPath + "scripts/bootstrap.min.js'></script>";
+            litBootstrapJSRef.Text = "<script src='" + appPath + "scripts/bootstrap.min.js'></script>";
+            litJavascriptRef.Text = "<script src='" + appPath + "scripts/javascript.js'></script>";
         }
     }
 }

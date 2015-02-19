@@ -76,6 +76,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="scripts\javascript.js" />
     <Content Include="user\Web.config" />
     <Content Include="stores\Web.config" />
     <Content Include="admin\Web.config" />

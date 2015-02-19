@@ -13,5 +13,14 @@ namespace Skyline_3._0.user
         {
 
         }
+
+        protected void changePwd_ChangePasswordError(object sender, EventArgs e)
+        {
+            Panel pnlFailureText = (Panel)changePwd.Controls[0].FindControl("pnlFailureText");
+            if (pnlFailureText != null)
+            {
+                pnlFailureText.Visible = true;
+            }
+        }
     }
 }
