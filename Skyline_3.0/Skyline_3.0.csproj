@@ -1024,6 +1024,10 @@
       <Project>{44ae6da5-419a-49f3-9cf9-e65bf9cdefea}</Project>
       <Name>Glossary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserInfo\UserInfo.csproj">
+      <Project>{a95648fb-d599-41e7-84c6-ca5412958e57}</Project>
+      <Name>UserInfo</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -15,7 +15,6 @@
                         <asp:Label ID="lblCurrentPwd" runat="server" Text="Current Password" AssociatedControlID="CurrentPassword"></asp:Label>
                         <asp:TextBox ID="CurrentPassword" runat="server" CssClass="form-control" placeholder="Current Password" TextMode="Password"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="CurrentPasswordRequired" runat="server" Display="None" ControlToValidate="CurrentPassword" ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="ChangePassword1">*</asp:RequiredFieldValidator>
-
                     </div>
 
                     <div class="form-group">
