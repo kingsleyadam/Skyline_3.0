@@ -40,6 +40,25 @@ namespace UserInfo
             }            
         }
 
+        public SkylineUser(string emailAddress, string dbConnection)
+        {
+            Email = emailAddress;
+            ConnectionString = dbConnection;
+            DataSet userDS = GetDataSetByEmail();
+
+            if (userDS.Tables["UserInfo"].Rows.Count == 1)
+            {
+                UserID = new Guid(userDS.Tables["UserInfo"].Rows[0]["UserID"].ToString());
+                SkylineID = (int)userDS.Tables["UserInfo"].Rows[0]["SkylineID"];
+                UserName = userDS.Tables["UserInfo"].Rows[0]["UserName"].ToString();
+                FirstName = userDS.Tables["UserInfo"].Rows[0]["FName"].ToString();
+                LastName = userDS.Tables["UserInfo"].Rows[0]["LName"].ToString();
+                LastLoginDate = (DateTime)userDS.Tables["UserInfo"].Rows[0]["LastLoginDate"];
+                Notifications = (bool)userDS.Tables["UserInfo"].Rows[0]["EmailNotifications"];
+                CompanyName = userDS.Tables["UserInfo"].Rows[0]["Company"].ToString();
+            }
+        }
+
         public Guid UserID
         {
             get { return _userID; }
@@ -140,6 +159,38 @@ namespace UserInfo
             }
         }
 
+        public DataSet GetWebSiteOrders()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("usrGetUserOrders", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramUserID = new SqlParameter("@UserID", SqlDbType.NVarChar, 1000);
+                paramUserID.Direction = ParameterDirection.Input;
+
+                paramUserID.Value = UserID.ToString();
+
+                cmd.Parameters.Add(paramUserID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("WebOrders");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
         private DataSet GetDataSet()
         {
             DataSet ds = new DataSet();
@@ -155,6 +206,38 @@ namespace UserInfo
                 paramUserID.Value = UserID.ToString();
 
                 cmd.Parameters.Add(paramUserID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("UserInfo");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
+        private DataSet GetDataSetByEmail()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetUsersInfoByEmail", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramEmail = new SqlParameter("@Email", SqlDbType.NVarChar, 512);
+                paramEmail.Direction = ParameterDirection.Input;
+
+                paramEmail.Value = Email;
+
+                cmd.Parameters.Add(paramEmail);
 
                 con.Open();
 

@@ -53,7 +53,6 @@
                                 <input type="text" name="loginSource" id="loginSource" value="" class="hidden" />
                                 <div class="modal-footer">
                                     <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Login" ValidationGroup="ctl00$lgnForm" CssClass="btn btn-primary" />
-                                    <asp:Button ID="LoginCancel" runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cancel" />
                                 </div>
                             </LayoutTemplate>
                         </asp:Login>

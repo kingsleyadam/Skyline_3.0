@@ -142,3 +142,23 @@ img {
 .no-border>table>tbody>tr>td {
     border:none;
 }
+
+.input-group-small {
+    max-width:300px;
+}
+
+span.valerror[style*="inline"]
+{
+    display:table-cell !Important;
+    color: #b94a48;
+    background-color: #f2dede;
+}
+
+.panel .table-responsive {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.text-align-right {
+    text-align:right;
+}

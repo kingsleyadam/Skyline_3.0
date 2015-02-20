@@ -1020,6 +1020,10 @@
     <Folder Include="images\product_images\thumb\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Email\Email.csproj">
+      <Project>{75fffcda-6f37-4a55-8989-016ab126cc32}</Project>
+      <Name>Email</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Glossary\Glossary.csproj">
       <Project>{44ae6da5-419a-49f3-9cf9-e65bf9cdefea}</Project>
       <Name>Glossary</Name>
