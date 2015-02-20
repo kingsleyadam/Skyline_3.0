@@ -9,10 +9,10 @@
         </asp:Panel>
 
         <asp:Panel ID="lblForgotPasswordBody" runat="server" CssClass="panel-body">
-            <div class="form-group">
+            <div class="form-group line-break">
                 <asp:Label ID="lblStep1" runat="server" Text="Step 1"></asp:Label>
                 <p class="help-block">Select whether you want to reset your password via your email address or username.</p>
-                <div class="dropdown">
+                <div class="dropdown form-group">
                     <asp:LinkButton ID="btnSelectMethod" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         Select Reset Method (Select One) <span class="caret"></span>
                     </asp:LinkButton>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <asp:Panel ID="pnlEmailStep2" runat="server" Visible="false">
+            <asp:Panel ID="pnlEmailStep2" runat="server" Visible="false" CssClass="line-break">
                 <div class="form-group">
                     <asp:Label ID="lblEmailStep2" runat="server" Text="Step 2"></asp:Label>
                     <p class="help-block">Please fill in your email address in the text box below and click "Reset Password."</p>
@@ -47,7 +47,7 @@
 
             </asp:Panel>
 
-            <asp:Panel ID="pnlUsernameStep2" runat="server" CssClass="form-group" Visible="false" DefaultButton="btnUserNameNextStep">
+            <asp:Panel ID="pnlUsernameStep2" runat="server" CssClass="form-group line-break" Visible="false" DefaultButton="btnUserNameNextStep" >
                 <asp:Label ID="lblUsernameStep2" runat="server" Text="Step 2"></asp:Label>
                 <p class="help-block">Insert your username so we can find your password reset information.</p>
                 <div class="form-group">
@@ -69,38 +69,29 @@
                 </asp:Panel>
             </asp:Panel>
 
-            <asp:Panel ID="pnlUsernameStep3" runat="server" Visible="false">
+            <asp:Panel ID="pnlUsernameStep3" runat="server" Visible="false" CssClass="line-break">
                 <div class="form-group">
                     <asp:Label ID="lblUserNameStep3" runat="server" Text="Step 3"></asp:Label>
                     <p class="help-block">Please fill in the information below and click "Reset Password."</p>
                 </div>
                 <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <asp:Label ID="lblSecurityQuestion" runat="server" Text="Please Answer: "></asp:Label>
-                        </div>
-                        <asp:TextBox ID="txtSecurityAnswer" CssClass="form-control" runat="server" placeholder="Security Answer"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="reqSecurityAnswer" runat="server" ErrorMessage="Security Answer required in order to reset your password" Display="None" ValidationGroup="UserNameResetPassword" ControlToValidate="txtSecurityAnswer" />
-                    </div>
+                    <asp:Label ID="lblSecurityQuestion" runat="server" Text="Please Answer: "></asp:Label>
+                    <asp:TextBox ID="txtSecurityAnswer" CssClass="form-control" runat="server" placeholder="Security Answer"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqSecurityAnswer" runat="server" ErrorMessage="Security Answer required in order to reset your password" Display="None" ValidationGroup="UserNameResetPassword" ControlToValidate="txtSecurityAnswer" />
                 </div>
+
                 <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <asp:Label ID="lblNewPassword" runat="server" Text="New Password: "></asp:Label>
-                        </div>
-                        <asp:TextBox ID="txtNewPassword" CssClass="form-control" runat="server" placeholder="Password must be 7-12 nonblank characters." TextMode="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="reqNewPassword" runat="server" ErrorMessage="New Password is required" Display="None" ValidationGroup="UserNameResetPassword" ControlToValidate="txtNewPassword" />
-                    </div>
+                    <asp:Label ID="lblNewPassword" runat="server" Text="New Password: "></asp:Label>
+                    <asp:TextBox ID="txtNewPassword" CssClass="form-control" runat="server" placeholder="Password must be 7-12 nonblank characters." TextMode="Password"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqNewPassword" runat="server" ErrorMessage="New Password is required" Display="None" ValidationGroup="UserNameResetPassword" ControlToValidate="txtNewPassword" />
                 </div>
+
                 <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <asp:Label ID="lblConfirmNewPassword" runat="server" Text="Confirm New Password: "></asp:Label>
-                        </div>
-                        <asp:TextBox ID="txtConfirmNewPassword" CssClass="form-control" runat="server" placeholder="Password must be 7-12 nonblank characters." TextMode="Password"></asp:TextBox>
-                        <asp:CustomValidator ID="CompareValidator" runat="server" ControlToValidate="txtConfirmNewPassword" ErrorMessage="New Password text must match the Confirm New Password text." ClientValidationFunction="ComparePwd" ValidateEmptyText="true" Display="None" ValidationGroup="UserNameResetPassword"></asp:CustomValidator>
-                    </div>
+                    <asp:Label ID="lblConfirmNewPassword" runat="server" Text="Confirm New Password: "></asp:Label>
+                    <asp:TextBox ID="txtConfirmNewPassword" CssClass="form-control" runat="server" placeholder="Password must be 7-12 nonblank characters." TextMode="Password"></asp:TextBox>
+                    <asp:CustomValidator ID="CompareValidator" runat="server" ControlToValidate="txtConfirmNewPassword" ErrorMessage="New Password text must match the Confirm New Password text." ClientValidationFunction="ComparePwd" ValidateEmptyText="true" Display="None" ValidationGroup="UserNameResetPassword"></asp:CustomValidator>
                 </div>
+
                 <div>
                     <asp:ValidationSummary ID="valSummUsername" CssClass="valSummary" ValidationGroup="UserNameResetPassword" runat="server" />
                 </div>

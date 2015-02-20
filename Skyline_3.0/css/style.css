@@ -42,7 +42,7 @@ img {
     border-color: White;
     border-radius: 4px;
     border-style: solid;
-    padding:5px;
+    padding: 5px;
 }
 
     .banner img {
@@ -70,6 +70,20 @@ img {
 
 .has-error {
     border-color: #d9230f;
+    background-color: #f2dede;
+}
+
+.has-error::-moz-placeholder {
+    color: #b94a48;
+    opacity: 1;
+}
+
+.has-error:-ms-input-placeholder {
+    color: #b94a48;
+}
+
+.has-error::-webkit-input-placeholder {
+    color: #b94a48;
 }
 
 .has-error:focus {
@@ -120,36 +134,35 @@ img {
 }
 
 .no-margin {
-    margin:0;
+    margin: 0;
 }
 
 .no-border {
-    border:none;
+    border: none;
 }
 
-.no-border>table {
-    border:none;
-}
+    .no-border > table {
+        border: none;
+    }
 
-.no-border>table>tbody {
-    border:none;
-}
+        .no-border > table > tbody {
+            border: none;
+        }
 
-.no-border>table>tbody>tr {
-    border:none;
-}
+            .no-border > table > tbody > tr {
+                border: none;
+            }
 
-.no-border>table>tbody>tr>td {
-    border:none;
-}
+                .no-border > table > tbody > tr > td {
+                    border: none;
+                }
 
 .input-group-small {
-    max-width:300px;
+    max-width: 300px;
 }
 
-span.valerror[style*="inline"]
-{
-    display:table-cell !Important;
+span.valerror[style*="inline"] {
+    display: table-cell !Important;
     color: #b94a48;
     background-color: #f2dede;
 }
@@ -160,5 +173,9 @@ span.valerror[style*="inline"]
 }
 
 .text-align-right {
-    text-align:right;
+    text-align: right;
+}
+
+.line-break {
+    border-bottom:1px solid #dddddd;
 }
