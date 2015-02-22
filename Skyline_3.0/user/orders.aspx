@@ -14,7 +14,7 @@
             <asp:Label ID="lblNoOrders" runat="server" Text="You do not have any previous website orders."></asp:Label>
         </asp:Panel>
         <div class="table-responsive">
-            <asp:GridView ID="grdOrder" runat="server" DataKeyNames="OrderID" CssClass="table table-striped table-condensed no-margin" OnPreRender="grdOrder_PreRender" AutoGenerateColumns="false" GridLines="None">
+            <asp:GridView ID="grdOrder" runat="server" DataKeyNames="OrderID" CssClass="table table-striped table-condensed table-hover no-margin" OnPreRender="grdOrder_PreRender" AutoGenerateColumns="false" GridLines="None" OnRowDataBound="grdOrder_RowDataBound" OnRowCommand="grdOrder_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="OrderNum" HeaderText="Order Number" ItemStyle-Width="120px" />
                     <asp:BoundField DataField="Company" HeaderText="Company" ItemStyle-Width="200px" />
@@ -40,7 +40,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden">
                         <ItemTemplate>
-                            <asp:Button ID="btnOrderInfo" runat="server" CommandName="OrderInfo" />
+                            <asp:Button ID="btnOrderInfo" runat="server" CommandName="OrderInfo" CommandArgument='<%# Eval("OrderID") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

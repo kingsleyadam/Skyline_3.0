@@ -38,8 +38,35 @@ namespace Skyline_3._0.user
 
         protected void grdOrder_PreRender(object sender, EventArgs e)
         {
-            if (grdOrder.Rows.Count > 0)
-                grdOrder.HeaderRow.TableSection = TableRowSection.TableHeader;
+            GridView gr = (GridView)sender;
+            if (gr.Rows.Count > 0)
+                gr.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+
+        protected void grdOrder_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Button selectButton = (Button)e.Row.FindControl("btnOrderInfo");
+                if (selectButton != null)
+                {
+                    e.Row.Attributes["OnClick"] = ClientScript.GetPostBackEventReference(selectButton, "");
+                }
+            }
+        }
+
+        protected void grdOrder_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "OrderInfo")
+            {
+                int orderID = Convert.ToInt32(e.CommandArgument);
+
+                if (orderID > 0)
+                {
+                    Response.Redirect("~/user/orders_info.aspx?o=" + orderID.ToString());
+                }
+
+            }
         }
     }
 }

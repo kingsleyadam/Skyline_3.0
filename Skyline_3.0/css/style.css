@@ -179,3 +179,11 @@ span.valerror[style*="inline"] {
 .line-break {
     border-bottom:1px solid #dddddd;
 }
+
+.panel .no-bottom-padding {
+    padding-bottom:0 !important;
+}
+
+.table-hover {
+    cursor:pointer;
+}

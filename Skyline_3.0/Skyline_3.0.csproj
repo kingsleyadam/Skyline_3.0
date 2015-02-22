@@ -78,6 +78,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="scripts\javascript.js" />
+    <Content Include="user\orders_info.aspx" />
     <Content Include="user\Web.config" />
     <Content Include="stores\Web.config" />
     <Content Include="admin\Web.config" />
@@ -999,6 +1000,13 @@
     </Compile>
     <Compile Include="user\orders.aspx.designer.cs">
       <DependentUpon>orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\orders_info.aspx.cs">
+      <DependentUpon>orders_info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\orders_info.aspx.designer.cs">
+      <DependentUpon>orders_info.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\sign_up.aspx.cs">
       <DependentUpon>sign_up.aspx</DependentUpon>
