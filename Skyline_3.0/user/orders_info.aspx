@@ -58,7 +58,7 @@
                 </Columns>
             </asp:GridView>
         </div>
-        <asp:Panel ID="pnlFooter" runat="server" class="panel-footer">
+        <asp:Panel ID="pnlFooter" runat="server" CssClass="panel-footer">
             <h3><small><asp:Label ID="lblTotalHeader" runat="server" Text="Total: " /></small><asp:Label ID="lblTotal" runat="server" /></h3>
         </asp:Panel>
     </div>

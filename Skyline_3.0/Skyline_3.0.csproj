@@ -850,7 +850,9 @@
     <Content Include="user\forgot_password.aspx" />
     <Content Include="user\orders.aspx" />
     <Content Include="user\sign_up.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about_us.aspx.cs">
@@ -1035,6 +1037,10 @@
     <ProjectReference Include="..\Glossary\Glossary.csproj">
       <Project>{44ae6da5-419a-49f3-9cf9-e65bf9cdefea}</Project>
       <Name>Glossary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductInfo\ProductInfo.csproj">
+      <Project>{365c1492-b83a-459b-a1e0-aaba71fa9ff8}</Project>
+      <Name>ProductInfo</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserInfo\UserInfo.csproj">
       <Project>{a95648fb-d599-41e7-84c6-ca5412958e57}</Project>
