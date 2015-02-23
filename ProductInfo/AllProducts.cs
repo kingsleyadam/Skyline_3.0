@@ -196,11 +196,12 @@ namespace ProductInfo
                     if (dr.HasRows)
                     {
                         dt.Load(dr);
+                        TotalProducts = (int)paramTotalProducts.Value;
+                        TotalPages = (int)paramTotalPages.Value;
                     }
                     ds.Tables.Add(dt);
 
-                    TotalProducts = (int)paramTotalProducts.Value;
-                    TotalPages = (int)paramTotalPages.Value;
+                    
                 }
             }
 
@@ -251,5 +252,37 @@ namespace ProductInfo
             ds.Tables.Add(pagerTable);
             return ds;
         }
+
+        public DataSet GetCategoryDataSet(bool includeAll)
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("prdGetCategoriesWNewProducts", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramIncludeAll = new SqlParameter("@IncludeAll", SqlDbType.Bit);
+
+                paramIncludeAll.Value = includeAll;
+
+                cmd.Parameters.Add(paramIncludeAll);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Categories");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
     }
+
 }

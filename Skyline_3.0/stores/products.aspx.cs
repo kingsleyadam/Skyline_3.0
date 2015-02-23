@@ -23,23 +23,26 @@ namespace Skyline_3._0.stores
                 ViewState["pageGrp"] = 1;
                 ViewState["itemsPerPage"] = 8;
                 ViewState["categoryID"] = 1;
+                ViewState["searchString"] = "";
+                ViewState["searchField"] = "AllFields";
+                ViewState["sortBy"] = "Default";
 
-                string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
-                AllProducts ap = new AllProducts((int)ViewState["categoryID"], (int)ViewState["pageNum"], (int)ViewState["itemsPerPage"], connectionString);
-                PopulateListView(ap);
+                AllProducts ap = PopulateListView();
+
+                //Load Category Dataset
+                DataSet catDS = ap.GetCategoryDataSet(false);
+                repCategories.DataSource = catDS;
+                repCategories.DataBind();
             }
         }
 
         protected void ChangePage(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
             LinkButton lnkBtn = (LinkButton)sender;
 
             if (lnkBtn.CommandName == "ChangePage")
             {
-                int catID = (int)ViewState["categoryID"];
                 int pageNum = (int)ViewState["pageNum"];
-                int perPage = (int)ViewState["itemsPerPage"];
                 int pageGrpSize = (int)ViewState["pageGrpSize"];
 
                 if (lnkBtn.CommandArgument == "FirstPage")
@@ -56,8 +59,7 @@ namespace Skyline_3._0.stores
                 ViewState["pageGrp"] = Convert.ToInt32(Math.Ceiling((decimal)pageNum / (decimal)pageGrpSize)); ;
                 ViewState["pageNum"] = pageNum;
 
-                AllProducts ap = new AllProducts(catID, pageNum, perPage, connectionString);
-                PopulateListView(ap);
+                PopulateListView();
             }
             else if (lnkBtn.CommandName == "ChangeGrp")
             {
@@ -78,13 +80,59 @@ namespace Skyline_3._0.stores
                 ViewState["pageGrp"] = pageGrp;
                 ViewState["pageNum"] = pageNum;
 
-                AllProducts ap = new AllProducts((int)ViewState["categoryID"], (int)ViewState["pageNum"], (int)ViewState["itemsPerPage"], connectionString);
-                PopulateListView(ap);
+                PopulateListView();
             }
         }
 
-        private void PopulateListView(AllProducts ap)
+        protected void SortSelected(object sender, EventArgs e)
         {
+            LinkButton lnkBtn = (LinkButton)sender;
+
+            string sortBy = lnkBtn.CommandArgument;
+            ViewState["sortBy"] = sortBy;
+            PopulateListView();
+
+            btnSortBy.Text = "Sort By: <strong>" + lnkBtn.Text + "</strong> <span class='caret'></span>";
+        }
+
+        protected void CategorySelected(object sender, EventArgs e)
+        {
+            LinkButton lnkBtn = (LinkButton)sender;
+            string categoryName;
+            int catID = Convert.ToInt32(lnkBtn.CommandArgument);
+
+            if (lnkBtn.Text.Length > 20)
+                categoryName = lnkBtn.Text.Substring(0, 20) + "...";
+            else
+                categoryName = lnkBtn.Text;
+
+            lnkCategories.Text = "Category: " + categoryName + " <span class='caret'>";
+
+            ViewState["categoryID"] = catID;
+            PopulateListView();
+        }
+
+        protected void SearchInSelected(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSearchCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private AllProducts PopulateListView()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
+            int catID = (int)ViewState["categoryID"];
+            int pageNum = (int)ViewState["pageNum"];
+            int itemsPerPage = (int)ViewState["itemsPerPage"];
+            string searchString = ViewState["searchString"].ToString();
+            string searchField = ViewState["searchField"].ToString();
+            string sortBy = ViewState["sortBy"].ToString();
+
+            AllProducts ap = new AllProducts(catID, searchString, searchField, sortBy, pageNum, itemsPerPage, connectionString);
             DataSet ds = ap.GetDataSet();
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -98,6 +146,8 @@ namespace Skyline_3._0.stores
                 lvProducts.DataBind();
             }
             PopulatePager(ap);
+
+            return ap;
         }
 
         private void PopulatePager(AllProducts ap)
@@ -143,23 +193,19 @@ namespace Skyline_3._0.stores
 
                 if (pageNum == 1)
                 {
-                    phPrevPage.Visible = false;
                     phFirstPage.Visible = false;
                 }
                 else
                 {
-                    phPrevPage.Visible = true;
                     phFirstPage.Visible = true;
                 }
 
                 if (pageNum == ap.TotalPages)
                 {
-                    phNextPage.Visible = false;
                     phLastPage.Visible = false;
                 }
                 else
                 {
-                    phNextPage.Visible = true;
                     phLastPage.Visible = true;
                 }
             }
@@ -167,6 +213,31 @@ namespace Skyline_3._0.stores
             {
                 pnlPageSelect.Visible = false;
             }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length > 0)
+                ViewState["searchString"] = txtSearch.Text;
+            else
+                ViewState["searchString"] = "";
+
+            ViewState["pageNum"] = 1;
+            ViewState["pageGrp"] = 1;
+            PopulateListView();
+        }
+
+        protected void lnkClear_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
+            ViewState["pageNum"] = 1;
+            ViewState["pageGrp"] = 1;
+            ViewState["categoryID"] = 1;
+            ViewState["searchString"] = "";
+            ViewState["searchField"] = "AllFields";
+            ViewState["sortBy"] = "Default";
+
+            PopulateListView();
         }
     }
 }

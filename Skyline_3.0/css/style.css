@@ -73,22 +73,22 @@ img {
     background-color: #f2dede;
 }
 
-.has-error::-moz-placeholder {
-    color: #b94a48;
-    opacity: 1;
-}
+    .has-error::-moz-placeholder {
+        color: #b94a48;
+        opacity: 1;
+    }
 
-.has-error:-ms-input-placeholder {
-    color: #b94a48;
-}
+    .has-error:-ms-input-placeholder {
+        color: #b94a48;
+    }
 
-.has-error::-webkit-input-placeholder {
-    color: #b94a48;
-}
+    .has-error::-webkit-input-placeholder {
+        color: #b94a48;
+    }
 
-.has-error:focus {
-    border-color: #d9230f;
-}
+    .has-error:focus {
+        border-color: #d9230f;
+    }
 
 .valSummary {
 }
@@ -177,22 +177,64 @@ span.valerror[style*="inline"] {
 }
 
 .line-break {
-    border-bottom:1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+
+.line-overline {
+    border-top: 1px solid #dddddd;
 }
 
 .panel .no-bottom-padding {
-    padding-bottom:0 !important;
+    padding-bottom: 0 !important;
 }
 
 .table-hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .panel-footer h3 {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 .order-items-description {
-    min-width:300px;
+    min-width: 300px;
 }
+
+.clear-results {
+    padding-top:5px;
+    padding-left:2px;
+}
+
+.filter-results {
+    padding-bottom:5px;
+    padding-left:2px;
+}
+
+
+/*Custom Button*/
+.btn-plain {
+    color: #777777;
+    background-color: #FCFCFC;
+    border-color: none;
+}
+
+    .btn-plain:hover, .btn-plain:focus, .btn-plain.focus, .btn-plain:active, .btn-plain.active, .open > .dropdown-toggle.btn-plain {
+        color: #D9230F;
+        background-color: #EAEAEA;
+        border-color: #C5C5C5;
+    }
+
+    .btn-plain:active, .btn-plain.active, .open > .dropdown-toggle.btn-plain {
+        background-image: none;
+    }
+
+    .btn-plain.disabled, .btn-plain[disabled], fieldset[disabled] .btn-plain, .btn-plain.disabled:hover, .btn-plain[disabled]:hover, fieldset[disabled] .btn-plain:hover, .btn-plain.disabled:focus, .btn-plain[disabled]:focus, fieldset[disabled] .btn-plain:focus, .btn-plain.disabled.focus, .btn-plain[disabled].focus, fieldset[disabled] .btn-plain.focus, .btn-plain.disabled:active, .btn-plain[disabled]:active, fieldset[disabled] .btn-plain:active, .btn-plain.disabled.active, .btn-plain[disabled].active, fieldset[disabled] .btn-plain.active {
+        background-color: #A7A7A7;
+        border-color: #474949;
+    }
+
+    .btn-plain .badge {
+        color: #FCFCFC;
+        background-color: #777777;
+    }
