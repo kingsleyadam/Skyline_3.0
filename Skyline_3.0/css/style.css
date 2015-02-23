@@ -187,3 +187,12 @@ span.valerror[style*="inline"] {
 .table-hover {
     cursor:pointer;
 }
+
+.panel-footer h3 {
+    margin:0;
+    padding:0;
+}
+
+.order-items-description {
+    min-width:300px;
+}

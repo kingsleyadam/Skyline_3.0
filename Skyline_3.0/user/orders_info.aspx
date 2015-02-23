@@ -41,11 +41,11 @@
             </div>
         </asp:Panel>
         <div class="table-responsive">
-            <asp:GridView ID="grdOrderItems" runat="server" DataKeyNames="ProductID" CssClass="table table-striped table-condensed no-margin" OnPreRender="grdOrder_PreRender" AutoGenerateColumns="false" GridLines="None" ShowFooter="true" OnRowDataBound="grdOrderItems_RowDataBound">
+            <asp:GridView ID="grdOrderItems" runat="server" DataKeyNames="ProductID" CssClass="table table-striped table-condensed no-margin" OnPreRender="grdOrder_PreRender" AutoGenerateColumns="false" GridLines="None" ShowFooter="false">
                 <Columns>
                     <asp:BoundField DataField="ProductNum" HeaderText="Product Number" ItemStyle-Width="120px" />
                     <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-Width="200px" />
-                    <asp:BoundField DataField="Description" HeaderText="Description" />
+                    <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-CssClass="order-items-description" />
                     <asp:BoundField DataField="Quantity" HeaderText="Quantity" ItemStyle-Width="120px" ItemStyle-CssClass="text-right" HeaderStyle-CssClass="text-right" />
                     <asp:TemplateField HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right" ItemStyle-Width="70px">
                         <HeaderTemplate>
@@ -58,6 +58,9 @@
                 </Columns>
             </asp:GridView>
         </div>
+        <asp:Panel ID="pnlFooter" runat="server" class="panel-footer">
+            <h3><small><asp:Label ID="lblTotalHeader" runat="server" Text="Total: " /></small><asp:Label ID="lblTotal" runat="server" /></h3>
+        </asp:Panel>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="JavaScriptContent" runat="server">

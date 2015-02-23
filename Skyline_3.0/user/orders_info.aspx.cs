@@ -12,7 +12,6 @@ namespace Skyline_3._0.user
 {
     public partial class orders_info : System.Web.UI.Page
     {
-        private decimal totalPrice = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -36,7 +35,7 @@ namespace Skyline_3._0.user
                     lblFullName.Text = uo.FirstName + " " + uo.LastName;
                     lblEmail.Text = uo.Email;
 
-                    totalPrice = uo.TotalPrice;
+                    lblTotal.Text = uo.TotalPrice.ToString("c");
 
                     //Order Items
                     DataSet itemDS = uo.GetItemDataSet();
@@ -47,6 +46,7 @@ namespace Skyline_3._0.user
                 {
                     pnlNoOrders.Visible = true;
                     pnlSiteOrders.Visible = false;
+                    pnlFooter.Visible = false;
                 }
             }
         }
@@ -57,15 +57,5 @@ namespace Skyline_3._0.user
             if (gr.Rows.Count > 0)
                 gr.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
-
-        protected void grdOrderItems_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                e.Row.Cells[0].Text = "<strong>Total: " + totalPrice.ToString("c") + "</strong>";
-            }
-        }
-
-
     }
 }
