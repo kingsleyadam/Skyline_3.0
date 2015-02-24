@@ -5,14 +5,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="form-group line-break filter-results">
-                <asp:Label ID="lblFilterResults" runat="server" Text="Filter Results" />
+            <div class="row line-break filter-results">
+                <div class="col-md-6 col-xs-6">
+                    <asp:Label ID="lblFilterResults" runat="server" Text="Filter Results" />
+                </div>
+                <div class="col-md-6 col-xs-6 text-right">
+                    <asp:LinkButton ID="lnkClear" runat="server" OnClick="lnkClear_Click">Clear Results</asp:LinkButton>
+                </div>
             </div>
             <div class="row">
-                <div class="col-md-3 col-lg-3">
-                    <div class="form-group">
-                        <div class="btn-group">
-                            <asp:LinkButton ID="lnkCategories" CssClass="btn btn-default dropdown-toggle" runat="server" data-toggle="dropdown" aria-expanded="false">Category: All Products<span class="caret"></span></asp:LinkButton>
+                <div class="col-lg-3 col-md-4 col-sm-5">
+                    <div class="filter-results-data">
+                        <div class="btn-group btn-fullwidth">
+                            <asp:LinkButton ID="lnkCategories" CssClass="btn btn-default btn-fullwidth dropdown-toggle" runat="server" data-toggle="dropdown" aria-expanded="false">Category: All Products <span class="caret"></span></asp:LinkButton>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="lnkCategories">
                                 <li role="presentation">
                                     <asp:LinkButton ID="lnkNewProducts" runat="server" role="menuitem" TabIndex="-1" Text="New Products" CommandArgument="-1" OnClick="CategorySelected" /></li>
@@ -31,11 +36,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9 col-lg-9">
-                    <div class="form-group">
+                <div class="col-lg-5 col-lg-offset-4 col-md-5 col-md-offset-3 col-sm-7">
+                    <div class="filter-results-data">
                         <div class="input-group">
-                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search for..." CssClass="form-control"></asp:TextBox>
-                            <span class="input-group-btn">
+
+                            <div class="input-group-btn">
                                 <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default" Text="Search: All Fields" OnClick="btnSearch_Click" />
                                 <asp:LinkButton ID="lnkSearchIn" CssClass="btn btn-default dropdown-toggle" runat="server" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></asp:LinkButton>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="lnkSearchIn">
@@ -49,18 +54,16 @@
                                     <li role="presentation">
                                         <asp:LinkButton ID="lnkSearchInProductNum" runat="server" role="menuitem" TabIndex="-1" Text="Product Number" CommandArgument="ProductNum" OnClick="SearchInSelected" /></li>
                                 </ul>
-                            </span>
+                            </div>
+                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search for..." CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group line-overline no-margin clear-results">
-                <asp:LinkButton ID="lnkClear" runat="server" OnClick="lnkClear_Click">Clear Results</asp:LinkButton>
-            </div>
         </div>
     </div>
     <div class="panel panel-default no-margin">
-        <div class="panel-heading">
+        <asp:Panel ID="pnlProductHeader" runat="server" CssClass="panel-heading">
             <div class="btn-group">
                 <asp:LinkButton ID="btnSortBy" runat="server" CssClass="btn btn-plain dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Sort By: <strong>Most Relevant</strong> <span class="caret"></span></asp:LinkButton>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="btnSortBy">
@@ -80,7 +83,7 @@
                         <asp:LinkButton ID="btnDateAddedASC" runat="server" role="menuitem" TabIndex="-1" Text="Date Added Oldest To Newest" CommandArgument="DateAdded ASC" OnClick="SortSelected" /></li>
                 </ul>
             </div>
-        </div>
+        </asp:Panel>
         <div class="panel-body">
             <asp:ListView ID="lvProducts" runat="server" GroupItemCount="4">
                 <LayoutTemplate>
@@ -101,10 +104,10 @@
                     <td runat="server" />
                 </EmptyItemTemplate>
                 <ItemTemplate>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="thumbnail">
                             <asp:LinkButton ID="btnSelectImage" runat="server" CommandName="ProductSelected" CommandArgument='<%# Eval("ProductID")%>'>
-                                <asp:Image ID="imgProduct" ImageUrl='<%# Eval("imgURL") %>' runat="server" CssClass="img-rounded" />
+                                <asp:Image ID="imgProduct" ImageUrl='<%# Eval("imgThumb") %>' runat="server" CssClass="img-rounded" />
                             </asp:LinkButton>
                             <div class="caption">
                                 <h4>
@@ -148,44 +151,27 @@
             </asp:ListView>
         </div>
         <asp:Panel ID="pnlPageSelect" runat="server" CssClass="panel-footer">
-            <nav>
-                <ul class="pagination pagination-sm no-margin">
-                    <asp:PlaceHolder ID="phFirstPage" runat="server">
-                        <li>
-                            <asp:LinkButton ID="lnkFirstPage" runat="server" CommandName="ChangePage" CommandArgument="FirstPage" Text="First" OnClick="ChangePage" /></li>
-                    </asp:PlaceHolder>
-
-                    <asp:PlaceHolder ID="phPrevPage" runat="server" Visible="false">
-                        <li>
-                            <asp:LinkButton ID="lnkPrevPage" runat="server" CommandName="ChangePage" CommandArgument="PreviousPage" Text="Previous" OnClick="ChangePage" /></li>
-                    </asp:PlaceHolder>
-                    <asp:PlaceHolder ID="phPagePrevGrp" runat="server">
-                        <li>
-                            <asp:LinkButton ID="lnkPagePrevGrp" runat="server" CommandName="ChangeGrp" CommandArgument="PrevGrp" Text="..." OnClick="ChangePage" /></li>
-                    </asp:PlaceHolder>
-                    <asp:Repeater ID="repPager" runat="server">
-                        <ItemTemplate>
-                            <li id="liPageNum" runat="server">
-                                <asp:LinkButton ID="lnkPageNum" runat="server" Text='<%# Eval("Page")%>' CommandArgument='<%# Eval("Page")%>' CommandName="ChangePage" OnClick="ChangePage" />
-                            </li>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                    <asp:PlaceHolder ID="phPageNextGrp" runat="server">
-                        <li>
-                            <asp:LinkButton ID="lnkPageNextGrp" runat="server" Text="..." CommandName="ChangeGrp" CommandArgument="NextGrp" OnClick="ChangePage" /></li>
-                    </asp:PlaceHolder>
-                    <asp:PlaceHolder ID="phNextPage" runat="server" Visible="false">
-                        <li>
-                            <asp:LinkButton ID="lnkNextPage" runat="server" Text="Next" CommandName="ChangePage" CommandArgument="NextPage" OnClick="ChangePage" /></li>
-                    </asp:PlaceHolder>
-                    <asp:PlaceHolder ID="phLastPage" runat="server">
-                        <li>
-                            <asp:LinkButton ID="lnkLastPage" runat="server" Text="Last" CommandName="ChangePage" CommandArgument="LastPage" OnClick="ChangePage" /></li>
-                    </asp:PlaceHolder>
-                </ul>
-            </nav>
+            <div class="row">
+                <div class="col-md-1 col-md-offset-1 col-sm-1 col-xs-6 text-center page-btn small page-row">
+                    <asp:LinkButton ID="lnkFirstPage" runat="server" CommandName="ChangePage" CommandArgument="FirstPage" Text="First" OnClick="ChangePage" />
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6 text-center page-btn page-row">
+                    <asp:LinkButton ID="lnkPrevPage" runat="server" CommandName="ChangePage" CommandArgument="PreviousPage" OnClick="ChangePage" CssClass="page-btn-primary"><span aria-hidden="true">&larr;</span> Previous</asp:LinkButton>
+                </div>
+                <div class="col-md-4 col-sm-3 col-xs-12 text-center page-info page-row">
+                    <asp:Label ID="lblPageInfo" runat="server" />
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6 text-center page-btn page-row">
+                    <asp:LinkButton ID="lnkNextPage" runat="server" CommandName="ChangePage" CommandArgument="NextPage" OnClick="ChangePage" CssClass="page-btn-primary">Next <span aria-hidden="true">&rarr;</span></asp:LinkButton>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-6 text-center page-btn small page-row">
+                    <asp:LinkButton ID="lnkLastPage" runat="server" Text="Last" CommandName="ChangePage" CommandArgument="LastPage" OnClick="ChangePage" />
+                </div>
+            </div>
         </asp:Panel>
     </div>
+
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="JavaScriptContent" runat="server">
 </asp:Content>

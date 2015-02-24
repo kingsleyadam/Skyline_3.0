@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email", "Email\Email.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInfo", "ProductInfo\ProductInfo.csproj", "{365C1492-B83A-459B-A1E0-AABA71FA9FF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Images", "Images\Images.csproj", "{B779BA3D-FE23-48D8-8F00-ED9BB866C91E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{365C1492-B83A-459B-A1E0-AABA71FA9FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{365C1492-B83A-459B-A1E0-AABA71FA9FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{365C1492-B83A-459B-A1E0-AABA71FA9FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B779BA3D-FE23-48D8-8F00-ED9BB866C91E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B779BA3D-FE23-48D8-8F00-ED9BB866C91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B779BA3D-FE23-48D8-8F00-ED9BB866C91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B779BA3D-FE23-48D8-8F00-ED9BB866C91E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

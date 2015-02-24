@@ -104,10 +104,10 @@
                                                     <asp:HyperLink ID="lnkProductList" runat="server" NavigateUrl="~/admin/products.aspx">List</asp:HyperLink>
                                                 </li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkProductImages" runat="server" NavigateUrl="~/admin/productsimage.aspx">Images</asp:HyperLink>
+                                                    <asp:HyperLink ID="lnkProductImages" runat="server" NavigateUrl="~/admin/products_image.aspx">Images</asp:HyperLink>
                                                 </li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkProductCategories" runat="server" NavigateUrl="~/admin/productscategory.aspx">Categories</asp:HyperLink>
+                                                    <asp:HyperLink ID="lnkProductCategories" runat="server" NavigateUrl="~/admin/products_category.aspx">Categories</asp:HyperLink>
                                                 </li>
                                                 <li class="divider"></li>
                                                 <li class="dropdown-header">Categories</li>

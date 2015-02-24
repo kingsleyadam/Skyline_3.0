@@ -202,21 +202,68 @@ span.valerror[style*="inline"] {
 }
 
 .clear-results {
-    padding-top:5px;
-    padding-left:2px;
+    padding-top: 5px;
+    padding-left: 2px;
 }
 
 .filter-results {
-    padding-bottom:5px;
-    padding-left:2px;
+    padding-bottom: 5px;
 }
 
+.filter-results-data {
+    margin-top: 10px;
+}
+
+.page-row {
+    margin-top: 5px;
+}
+
+.page-info {
+    margin-top:8px;
+}
+
+.btn-fullwidth {
+    width: 100%;
+}
+
+/*Custom .page-btn*/
+.page-btn > a, .page-btn > span {
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 15px;
+}
+
+    .page-btn > a:hover, .page-btn > a:focus {
+        text-decoration: none;
+        background-color: #d9230f;
+        color: #ffffff;
+        border: 1px solid #dddddd;
+    }
+
+    .page-btn .page-btn-primary {
+    background-color: #414343;
+    border: 1px solid #2e2f2f;
+    color:white;
+}
+
+.small > a, .page-btn > span {
+    padding: 2px 14px !important;
+    margin-top: 3px;
+}
+
+.page-btn .disabled, .page-btn .disabled:hover, .page-btn .disabled:focus, .page-btn .disabled > span {
+    color: #dddddd;
+    background-color: #ffffff;
+    cursor: not-allowed;
+}
 
 /*Custom Button*/
 .btn-plain {
     color: #777777;
-    background-color: #FCFCFC;
-    border-color: none;
+    background-color: #EAEAEA;
+    border-color: #C5C5C5;
 }
 
     .btn-plain:hover, .btn-plain:focus, .btn-plain.focus, .btn-plain:active, .btn-plain.active, .open > .dropdown-toggle.btn-plain {

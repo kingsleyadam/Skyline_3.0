@@ -22,6 +22,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.Label lblFilterResults;
         
         /// <summary>
+        /// lnkClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkClear;
+        
+        /// <summary>
         /// lnkCategories control.
         /// </summary>
         /// <remarks>
@@ -65,15 +74,6 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repCategories;
-        
-        /// <summary>
-        /// txtSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
         
         /// <summary>
         /// btnSearch control.
@@ -130,13 +130,22 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.LinkButton lnkSearchInProductNum;
         
         /// <summary>
-        /// lnkClear control.
+        /// txtSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkClear;
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        
+        /// <summary>
+        /// pnlProductHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlProductHeader;
         
         /// <summary>
         /// btnSortBy control.
@@ -229,15 +238,6 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.Panel pnlPageSelect;
         
         /// <summary>
-        /// phFirstPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phFirstPage;
-        
-        /// <summary>
         /// lnkFirstPage control.
         /// </summary>
         /// <remarks>
@@ -245,15 +245,6 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkFirstPage;
-        
-        /// <summary>
-        /// phPrevPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phPrevPage;
         
         /// <summary>
         /// lnkPrevPage control.
@@ -265,58 +256,13 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.LinkButton lnkPrevPage;
         
         /// <summary>
-        /// phPagePrevGrp control.
+        /// lblPageInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phPagePrevGrp;
-        
-        /// <summary>
-        /// lnkPagePrevGrp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkPagePrevGrp;
-        
-        /// <summary>
-        /// repPager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repPager;
-        
-        /// <summary>
-        /// phPageNextGrp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phPageNextGrp;
-        
-        /// <summary>
-        /// lnkPageNextGrp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkPageNextGrp;
-        
-        /// <summary>
-        /// phNextPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phNextPage;
+        protected global::System.Web.UI.WebControls.Label lblPageInfo;
         
         /// <summary>
         /// lnkNextPage control.
@@ -326,15 +272,6 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkNextPage;
-        
-        /// <summary>
-        /// phLastPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phLastPage;
         
         /// <summary>
         /// lnkLastPage control.

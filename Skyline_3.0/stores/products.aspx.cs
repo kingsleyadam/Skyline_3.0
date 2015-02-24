@@ -109,17 +109,21 @@ namespace Skyline_3._0.stores
             lnkCategories.Text = "Category: " + categoryName + " <span class='caret'>";
 
             ViewState["categoryID"] = catID;
+            ViewState["pageNum"] = 1;
+            ViewState["pageGrp"] = 1;
             PopulateListView();
         }
 
         protected void SearchInSelected(object sender, EventArgs e)
         {
+            LinkButton lnkBtn = (LinkButton)sender;
+            string searchField = lnkBtn.CommandArgument;
+            string searchText = lnkBtn.Text;
 
-        }
+            btnSearch.Text = "Search: " + searchText;
+            ViewState["searchField"] = searchField;
 
-        protected void btnSearchCancel_Click(object sender, EventArgs e)
-        {
-
+            PopulateListView();
         }
 
         private AllProducts PopulateListView()
@@ -160,58 +164,51 @@ namespace Skyline_3._0.stores
                 int pageGrp = (int)ViewState["pageGrp"];
                 int maxPageGrp = (int)Math.Ceiling((decimal)ap.TotalPages / (decimal)pageGrpSize);
 
-                DataSet pagerDS = ap.GetPagerDataSet(true, pageGrp, pageGrpSize);
-                repPager.DataSource = pagerDS;
-                repPager.DataBind();
-
-                foreach (RepeaterItem ri in repPager.Items)
-                {
-                    LinkButton lnkBtn = (LinkButton)ri.FindControl("lnkPageNum");
-                    HtmlGenericControl liPageNum = (HtmlGenericControl)ri.FindControl("liPageNum");
-
-                    if (lnkBtn != null && liPageNum != null)
-                    {
-                        if (pageNum == Convert.ToInt32(lnkBtn.CommandArgument))
-                        {
-                            liPageNum.Attributes.Add("class", "active");
-                            lnkBtn.Enabled = false;
-                        }
-                    }
-                }
+                lblPageInfo.Text = "Page: " + pageNum.ToString() + " of " + ap.TotalPages;
 
                 pnlPageSelect.Visible = true;
-
-                if (pageGrp == 1)
-                    phPagePrevGrp.Visible = false;
-                else
-                    phPagePrevGrp.Visible = true;
-
-                if (pageGrp == maxPageGrp)
-                    phPageNextGrp.Visible = false;
-                else
-                    phPageNextGrp.Visible = true;
-
-                if (pageNum == 1)
-                {
-                    phFirstPage.Visible = false;
-                }
-                else
-                {
-                    phFirstPage.Visible = true;
-                }
+                pnlProductHeader.Visible = true;
 
                 if (pageNum == ap.TotalPages)
                 {
-                    phLastPage.Visible = false;
+                    lnkLastPage.CssClass = "disabled";
+                    lnkLastPage.Enabled = false;
+
+                    lnkNextPage.CssClass = "disabled";
+                    lnkNextPage.Enabled = false;
+                } 
+                else
+                {
+                    lnkLastPage.CssClass = "";
+                    lnkLastPage.Enabled = true;
+
+                    lnkNextPage.CssClass = "page-btn-primary";
+                    lnkNextPage.Enabled = true;
+                }
+
+                if (pageNum == 1)
+                {
+                    lnkFirstPage.CssClass = "disabled";
+                    lnkFirstPage.Enabled = false;
+
+                    lnkPrevPage.CssClass = "disabled";
+                    lnkPrevPage.Enabled = false;
+
                 }
                 else
                 {
-                    phLastPage.Visible = true;
+                    lnkFirstPage.CssClass = "";
+                    lnkFirstPage.Enabled = true;
+
+                    lnkPrevPage.CssClass = "page-btn-primary";
+                    lnkPrevPage.Enabled = true;
                 }
+                    
             }
             else
             {
                 pnlPageSelect.Visible = false;
+                pnlProductHeader.Visible = false;
             }
         }
 
@@ -225,6 +222,7 @@ namespace Skyline_3._0.stores
             ViewState["pageNum"] = 1;
             ViewState["pageGrp"] = 1;
             PopulateListView();
+
         }
 
         protected void lnkClear_Click(object sender, EventArgs e)
@@ -236,6 +234,9 @@ namespace Skyline_3._0.stores
             ViewState["searchString"] = "";
             ViewState["searchField"] = "AllFields";
             ViewState["sortBy"] = "Default";
+
+            btnSearch.Text = "Search: All Fields";
+            lnkCategories.Text = "Category: All Products <span class='caret'>";
 
             PopulateListView();
         }
