@@ -131,6 +131,7 @@
                                 </div>
                                 <asp:HiddenField ID="hdnPrice" runat="server" Value='<%# Eval("Price") %>' />
                                 <asp:HiddenField ID="hdnIsBestSeller" runat="server" Value='<%# Eval("IsBestSeller") %>' />
+                                <asp:HiddenField ID="hdnImgThumb" runat="server" Value='<%# Eval("imgThumb") %>' />
                             </div>
                         </asp:Panel>
 

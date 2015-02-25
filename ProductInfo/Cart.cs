@@ -44,7 +44,7 @@ namespace ProductInfo
 
         public void AddItem(Product prod)
         {
-            CartItem newItem = new CartItem(prod.ProductID, prod.ProductNum, prod.Name, prod.Price);
+            CartItem newItem = new CartItem(prod.ProductID, prod.ProductNum, prod.Name, prod.Price, prod.Thumbnail);
 
             if (Items.Contains(newItem))
             {
@@ -66,16 +66,9 @@ namespace ProductInfo
 
         public void RemoveItem(Product prod)
         {
-            CartItem ri = new CartItem(prod.ProductID, prod.ProductNum, prod.Name, prod.Price);
+            CartItem crtItem = Cart.Instance.Items.Find(x => x.ProductID == prod.ProductID);
 
-            foreach (CartItem ci in Items)
-            {
-                if (ci.Equals(ri))
-                {
-                    Items.Remove(ri);
-                    break;
-                }
-            }
+            Items.Remove(crtItem);
         }
 
         public void SetItemQuantity(Product prod, int quantity)
@@ -85,15 +78,10 @@ namespace ProductInfo
                 RemoveItem(prod);
                 return;
             }
-
-            CartItem ui = new CartItem(prod.ProductID, prod.ProductNum, prod.Name, prod.Price);
-
-            foreach (CartItem ci in Items)
+            else
             {
-                if (ci.Equals(ui))
-                {
-                    ci.Quantity = quantity;
-                }
+                CartItem crtItem = Cart.Instance.Items.Find(x => x.ProductID == prod.ProductID);
+                crtItem.Quantity = quantity;
             }
         }
 
@@ -111,17 +99,7 @@ namespace ProductInfo
 
         public CartItem GetCartItem(Product prod)
         {
-            CartItem crtItem = null, fc = new CartItem(prod.ProductID, prod.ProductNum, prod.Name, prod.Price);
-
-            foreach (CartItem ci in Items)
-            {
-                if (ci.Equals(fc))
-                {
-                    crtItem = ci;
-                    break;
-                }
-            }
-
+            CartItem crtItem = Cart.Instance.Items.Find(x => x.ProductID == prod.ProductID);
             return crtItem;
         }
     }

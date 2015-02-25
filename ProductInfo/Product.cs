@@ -13,6 +13,7 @@ namespace ProductInfo
         private string _productNum;
         private string _name;
         private decimal _price;
+        private string _thumbNail;
 
         public Product(int m_productID, string m_productNum, string m_name, decimal m_price)
         {
@@ -20,6 +21,16 @@ namespace ProductInfo
             ProductNum = m_productNum;
             Name = m_name;
             Price = m_price;
+            Thumbnail = "";
+        }
+
+        public Product(int m_productID, string m_productNum, string m_name, decimal m_price, string m_thumbNail)
+        {
+            ProductID = m_productID;
+            ProductNum = m_productNum;
+            Name = m_name;
+            Price = m_price;
+            Thumbnail = m_thumbNail;
         }
 
         public int ProductID
@@ -44,6 +55,12 @@ namespace ProductInfo
         {
             get { return _price; }
             set { _price = value; }
+        }
+
+        public string Thumbnail
+        {
+            get { return _thumbNail; }
+            set { _thumbNail = value; }
         }
     }
 }

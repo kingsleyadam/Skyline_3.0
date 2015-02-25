@@ -175,10 +175,11 @@ namespace Skyline_3._0.stores
             {
                 TextBox txtQuantity = (TextBox)lvProducts.Items[lvIndex].FindControl("txtQuantity");
                 HiddenField hdnPrice = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnPrice");
+                HiddenField hdnImgThumb = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnImgThumb");
                 Label lblProductNum = (Label)lvProducts.Items[lvIndex].FindControl("lblProductNum");
                 LinkButton btnSelect = (LinkButton)lvProducts.Items[lvIndex].FindControl("btnSelect");
 
-                if (txtQuantity != null && hdnPrice != null && lblProductNum != null && btnSelect != null)
+                if (txtQuantity != null && hdnPrice != null && lblProductNum != null && btnSelect != null && hdnImgThumb != null)
                 {
                     if (!int.TryParse(txtQuantity.Text, out quantity))
                         quantity = 1;
@@ -186,8 +187,9 @@ namespace Skyline_3._0.stores
                     decimal price = Convert.ToDecimal(hdnPrice.Value);
                     string productNum = lblProductNum.Text;
                     string productName = btnSelect.Text;
+                    string imgThumb = hdnImgThumb.Value;
 
-                    Product prod = new Product(productID, productNum, productName, price);
+                    Product prod = new Product(productID, productNum, productName, price, imgThumb);
 
                     if (!Cart.Instance.Items.Contains(new CartItem(prod)))
                     {
@@ -347,7 +349,25 @@ namespace Skyline_3._0.stores
             if (isBestSeller)
             {
                 pnlThumnnail.CssClass = "thumbnail thumbnail-bestseller";
-            }            
+            }
+
+            TextBox txtQuantity = (TextBox)e.Item.FindControl("txtQuantity");
+            LinkButton btnAdd2Cart = (LinkButton)e.Item.FindControl("btnAdd2Cart");
+
+            if (txtQuantity != null && btnAdd2Cart != null)
+            {
+                int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument);
+                CartItem ci = Cart.Instance.Items.Find(x => x.ProductID == productID);
+
+                if (ci != null)
+                {
+                    txtQuantity.Text = ci.Quantity.ToString();
+                    btnAdd2Cart.Text = "Update Quantity";
+                }
+                else
+                    btnAdd2Cart.Text = "Add To Order";
+            }
+
         }
     }
 }

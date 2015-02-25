@@ -15,6 +15,7 @@ namespace ProductInfo
         private string _name;
         private decimal _price;
         private Product _prod;
+        private string _thumbNail;
 
         public CartItem(Product m_prod)
         {
@@ -22,6 +23,7 @@ namespace ProductInfo
             ProductNum = m_prod.ProductNum;
             Name = m_prod.Name;
             UnitPrice = m_prod.Price;
+            Thumbnail = m_prod.Thumbnail;
         }
 
         public CartItem(int m_productID, string m_productNum, string m_name, decimal m_price)
@@ -30,6 +32,15 @@ namespace ProductInfo
             ProductNum = m_productNum;
             Name = m_name;
             UnitPrice = m_price;
+        }
+
+        public CartItem(int m_productID, string m_productNum, string m_name, decimal m_price, string m_thumbNail)
+        {
+            ProductID = m_productID;
+            ProductNum = m_productNum;
+            Name = m_name;
+            UnitPrice = m_price;
+            Thumbnail = m_thumbNail;
         }
 
         public int Quantity
@@ -68,10 +79,16 @@ namespace ProductInfo
             {
                 if (_prod == null)
                 {
-                    _prod = new Product(ProductID, ProductNum, Name, UnitPrice);
+                    _prod = new Product(ProductID, ProductNum, Name, UnitPrice, Thumbnail);
                 }
                 return _prod;
             }
+        }
+
+        public string Thumbnail
+        {
+            get { return _thumbNail; }
+            set { _thumbNail = value; }
         }
 
         public decimal TotalPrice
