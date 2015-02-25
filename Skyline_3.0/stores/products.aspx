@@ -140,7 +140,7 @@
         </div>
         <asp:Panel ID="pnlPageSelect" runat="server" CssClass="panel-footer">
             <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-8 page-btn text-right">
+                <div class="col-md-4 col-sm-4 col-xs-12 page-btn text-center">
                     <asp:LinkButton ID="lnkFirstPage" runat="server" CommandName="ChangePage" CommandArgument="FirstPage" Text="First" OnClick="ChangePage" />
                     <asp:LinkButton ID="lnkPrevPage" runat="server" CommandName="ChangePage" CommandArgument="PreviousPage" OnClick="ChangePage" CssClass="page-btn-primary"><span aria-hidden="true">&larr;</span> Previous</asp:LinkButton></div><div class="col-md-4 col-sm-4 col-xs-12 page-row text-center">
                     <asp:Label ID="lblPageInfo1" runat="server" />
@@ -151,7 +151,7 @@
                                     <li id="liPage" runat="server" role="presentation">
                                         <asp:LinkButton ID="lnkPage" role="menuitem" TabIndex="-1" runat="server" OnClick="SelectPage" CommandArgument='<%# Eval("Page") %>' Text='<%# Eval("Page") %>'></asp:LinkButton></li></ItemTemplate></asp:Repeater></ul></div><asp:Label ID="lblPageInfo2" runat="server" />
                 </div>
-                <div class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-4 page-btn page-row text-left">
+                <div class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-12 col-xs-offset-0 page-btn page-row text-center">
                     <asp:LinkButton ID="lnkNextPage" runat="server" CommandName="ChangePage" CommandArgument="NextPage" OnClick="ChangePage" CssClass="page-btn-primary">Next <span aria-hidden="true">&rarr;</span></asp:LinkButton><asp:LinkButton ID="lnkLastPage" runat="server" Text="Last" CommandName="ChangePage" CommandArgument="LastPage" OnClick="ChangePage" />
                 </div>
             </div>
