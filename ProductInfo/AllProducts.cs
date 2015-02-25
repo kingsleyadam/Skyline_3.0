@@ -208,7 +208,7 @@ namespace ProductInfo
             return ds;
         }
 
-        public DataSet GetPagerDataSet(bool grpDataSet, int pageGrp = 0, int grpSize = 5)
+        public DataSet GetPagerDataSet(bool grpDataSet, bool reverseOrder, int pageGrp = 0, int grpSize = 5)
         {
             int totalPages = TotalPages;
             DataSet ds = new DataSet("Pager");
@@ -243,9 +243,19 @@ namespace ProductInfo
             }
             else
             {
-                for (int i = 1; i <= totalPages; i++)
+                if (!reverseOrder)
                 {
-                    pagerTable.Rows.Add(i);
+                    for (int i = 1; i <= totalPages; i++)
+                    {
+                        pagerTable.Rows.Add(i);
+                    }
+                }
+                else
+                {
+                    for (int i = totalPages; i > 0; i--)
+                    {
+                        pagerTable.Rows.Add(i);
+                    }
                 }
             }
 
@@ -253,36 +263,7 @@ namespace ProductInfo
             return ds;
         }
 
-        public DataSet GetCategoryDataSet(bool includeAll)
-        {
-            DataSet ds = new DataSet();
-            SqlConnection con = new SqlConnection(ConnectionString);
-
-            using (SqlCommand cmd = new SqlCommand("prdGetCategoriesWNewProducts", con))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter paramIncludeAll = new SqlParameter("@IncludeAll", SqlDbType.Bit);
-
-                paramIncludeAll.Value = includeAll;
-
-                cmd.Parameters.Add(paramIncludeAll);
-
-                con.Open();
-
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    DataTable dt = new DataTable("Categories");
-                    if (dr.HasRows)
-                    {
-                        dt.Load(dr);
-                    }
-                    ds.Tables.Add(dt);
-                }
-            }
-
-            return ds;
-        }
+        
     }
 
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProductInfo
 {
     [Serializable]
-    public class CartItem
+    public class CartItem : IEquatable<CartItem>
     {
         private int _quantity;
         private int _productID;
@@ -15,6 +15,14 @@ namespace ProductInfo
         private string _name;
         private decimal _price;
         private Product _prod;
+
+        public CartItem(Product m_prod)
+        {
+            ProductID = m_prod.ProductID;
+            ProductNum = m_prod.ProductNum;
+            Name = m_prod.Name;
+            UnitPrice = m_prod.Price;
+        }
 
         public CartItem(int m_productID, string m_productNum, string m_name, decimal m_price)
         {
@@ -74,9 +82,9 @@ namespace ProductInfo
             }
         }
 
-        public bool Equals(CartItem item)
+        public bool Equals(CartItem obj)
         {
-            return item.ProductID == this.ProductID;
+            return obj.ProductID == this.ProductID;
         }
     }
 }

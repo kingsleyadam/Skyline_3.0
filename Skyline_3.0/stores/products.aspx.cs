@@ -17,22 +17,49 @@ namespace Skyline_3._0.stores
         {
             if (!IsPostBack)
             {
+                string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
                 //Set Global Variables
                 ViewState["pageGrpSize"] = 5;
                 ViewState["pageNum"] = 1;
                 ViewState["pageGrp"] = 1;
                 ViewState["itemsPerPage"] = 8;
-                ViewState["categoryID"] = 1;
                 ViewState["searchString"] = "";
                 ViewState["searchField"] = "AllFields";
                 ViewState["sortBy"] = "Default";
 
-                AllProducts ap = PopulateListView();
 
+                Category cat = new Category(connectionString);
                 //Load Category Dataset
-                DataSet catDS = ap.GetCategoryDataSet(false);
+                int newProducts;
+                DataSet catDS = cat.GetCategoryDataSet(false, out newProducts);
+
                 repCategories.DataSource = catDS;
                 repCategories.DataBind();
+
+                if (newProducts == 0)
+                {
+                    lnkNewProducts.Visible = false;
+                    ViewState["categoryID"] = 1;
+                    lnkCategories.Text = "Category: All Products <span class='caret'></span>";
+                }
+                else
+                {
+                    ViewState["categoryID"] = -1;
+
+                }
+
+                //Populate Products
+                AllProducts ap = PopulateListView();
+
+                if (Cart.Instance.Items.Count == 0)
+                {
+                    pnlCartItemCount.Visible = false;
+                }
+                else
+                {
+                    pnlCartItemCount.Visible = true;
+                    lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
+                }
             }
         }
 
@@ -126,6 +153,70 @@ namespace Skyline_3._0.stores
             PopulateListView();
         }
 
+        protected void SelectPage(object sender, EventArgs e)
+        {
+            LinkButton lnkBtn = (LinkButton)sender;
+            int pageNum = Convert.ToInt32(lnkBtn.CommandArgument);
+            lnkPageDropDown.Text = pageNum.ToString() + " <span class='caret'></span>";
+
+            ViewState["pageNum"] = pageNum;
+            PopulateListView();
+        }
+
+        protected void Add2Cart(object sender, EventArgs e)
+        {
+            LinkButton btnAdd2Cart = (LinkButton)sender;
+            int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument);
+            Panel pnlThumnnail = (Panel)btnAdd2Cart.Parent;
+            ListViewDataItem lvDataitem = (ListViewDataItem)pnlThumnnail.Parent;
+            int lvIndex = lvDataitem.DisplayIndex, quantity;
+
+            if (productID > 0)
+            {
+                TextBox txtQuantity = (TextBox)lvProducts.Items[lvIndex].FindControl("txtQuantity");
+                HiddenField hdnPrice = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnPrice");
+                Label lblProductNum = (Label)lvProducts.Items[lvIndex].FindControl("lblProductNum");
+                LinkButton btnSelect = (LinkButton)lvProducts.Items[lvIndex].FindControl("btnSelect");
+
+                if (txtQuantity != null && hdnPrice != null && lblProductNum != null && btnSelect != null)
+                {
+                    if (!int.TryParse(txtQuantity.Text, out quantity))
+                        quantity = 1;
+
+                    decimal price = Convert.ToDecimal(hdnPrice.Value);
+                    string productNum = lblProductNum.Text;
+                    string productName = btnSelect.Text;
+
+                    Product prod = new Product(productID, productNum, productName, price);
+
+                    if (!Cart.Instance.Items.Contains(new CartItem(prod)))
+                    {
+                        Cart.Instance.AddItem(prod);
+                    }
+
+                    Cart.Instance.SetItemQuantity(prod, quantity);
+
+                    if (quantity > 0)
+                        btnAdd2Cart.Text = "Update Quantity";
+                    else
+                        btnAdd2Cart.Text = "Add To Order";
+
+                    if (Cart.Instance.Items.Count == 0)
+                    {
+                        pnlCartItemCount.Visible = false;
+                    }
+                    else
+                    {
+                        pnlCartItemCount.Visible = true;
+                        lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
+                    }
+                }
+
+                
+
+            }
+        }
+
         private AllProducts PopulateListView()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
@@ -164,7 +255,13 @@ namespace Skyline_3._0.stores
                 int pageGrp = (int)ViewState["pageGrp"];
                 int maxPageGrp = (int)Math.Ceiling((decimal)ap.TotalPages / (decimal)pageGrpSize);
 
-                lblPageInfo.Text = "Page: " + pageNum.ToString() + " of " + ap.TotalPages;
+                //Populate Pager
+                repPages.DataSource = ap.GetPagerDataSet(false, true);
+                repPages.DataBind();
+
+                lnkPageDropDown.Text = pageNum.ToString() + " <span class='caret'></span>";
+                lblPageInfo1.Text = "Page: ";
+                lblPageInfo2.Text = " of " + ap.TotalPages;
 
                 pnlPageSelect.Visible = true;
                 pnlProductHeader.Visible = true;
@@ -239,6 +336,18 @@ namespace Skyline_3._0.stores
             lnkCategories.Text = "Category: All Products <span class='caret'>";
 
             PopulateListView();
+        }
+
+        protected void lvProducts_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            Panel pnlThumnnail = (Panel)e.Item.FindControl("pnlThumnnail");
+            HiddenField hdnIsBestSeller = (HiddenField)e.Item.FindControl("hdnIsBestSeller");
+            bool isBestSeller = Convert.ToBoolean(hdnIsBestSeller.Value);
+
+            if (isBestSeller)
+            {
+                pnlThumnnail.CssClass = "thumbnail thumbnail-bestseller";
+            }            
         }
     }
 }

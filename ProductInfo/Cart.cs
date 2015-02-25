@@ -23,7 +23,7 @@ namespace ProductInfo
             set { _items = value; }
         }
 
-        public Cart Instance
+        public static Cart Instance
         {
             get
             {
@@ -73,6 +73,7 @@ namespace ProductInfo
                 if (ci.Equals(ri))
                 {
                     Items.Remove(ri);
+                    break;
                 }
             }
         }

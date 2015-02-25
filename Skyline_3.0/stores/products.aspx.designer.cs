@@ -13,6 +13,42 @@ namespace Skyline_3._0.stores {
     public partial class products {
         
         /// <summary>
+        /// pnlCartItemCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCartItemCount;
+        
+        /// <summary>
+        /// lnkFinishOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkFinishOrder;
+        
+        /// <summary>
+        /// lblFinishOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFinishOrder;
+        
+        /// <summary>
+        /// lblCartItemCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCartItemCount;
+        
+        /// <summary>
         /// lblFilterResults control.
         /// </summary>
         /// <remarks>
@@ -40,6 +76,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.LinkButton lnkCategories;
         
         /// <summary>
+        /// lnkAllProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkAllProducts;
+        
+        /// <summary>
         /// lnkNewProducts control.
         /// </summary>
         /// <remarks>
@@ -56,15 +101,6 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkBestSellers;
-        
-        /// <summary>
-        /// lnkAllProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAllProducts;
         
         /// <summary>
         /// repCategories control.
@@ -256,13 +292,40 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.LinkButton lnkPrevPage;
         
         /// <summary>
-        /// lblPageInfo control.
+        /// lblPageInfo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPageInfo;
+        protected global::System.Web.UI.WebControls.Label lblPageInfo1;
+        
+        /// <summary>
+        /// lnkPageDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkPageDropDown;
+        
+        /// <summary>
+        /// repPages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repPages;
+        
+        /// <summary>
+        /// lblPageInfo2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPageInfo2;
         
         /// <summary>
         /// lnkNextPage control.
