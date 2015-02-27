@@ -61,33 +61,26 @@ img {
             @include translateY(-50%);
         }
 
-.form-control:focus {
-    border-color: #6F94B8;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(191,191,191,0.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(191,191,191,0.6);
-}
-
 .has-error {
     border-color: #d9230f;
     background-color: #f2dede;
 }
 
     .has-error::-moz-placeholder {
-        color: #b94a48;
+        color: #AFA0A0;
         opacity: 1;
     }
 
     .has-error:-ms-input-placeholder {
-        color: #b94a48;
+        color: #AFA0A0;
     }
 
     .has-error::-webkit-input-placeholder {
-        color: #b94a48;
+        color: #AFA0A0;
     }
 
     .has-error:focus {
-        border-color: #d9230f;
+        border-color: #AFA0A0;
     }
 
 .valSummary {
@@ -219,27 +212,27 @@ span.valerror[style*="inline"] {
 }
 
 .page-info {
-    margin-top:8px;
+    margin-top: 8px;
 }
 
 .btn-fullwidth {
     width: 100%;
 }
 
-.thumbnail>img, .thumbnail a>img {
-    max-height:220px;
+.thumbnail > img, .thumbnail a > img {
+    max-height: 220px;
 }
 
 .thumbnail-bestseller {
-    border-color:#D9230F;
+    border-color: #D9230F;
 }
 
 .well-bestseller {
-    border-color:#D9230F;
+    border-color: #D9230F;
 }
 
 .finish-row {
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 .product-info-thumbnail {
@@ -251,38 +244,38 @@ span.valerror[style*="inline"] {
     display: inline-block;
 }
 
-.page-btn > a, .page-btn > span {
-    display: inline-block;
-    padding: 5px 14px;
-    margin:0 3px 0 3px;
-    background-color: #ffffff;
-    border: 1px solid #dddddd;
-    border-radius: 15px;
-}
-
-    .page-btn > a:hover, .page-btn > a:focus {
-        text-decoration: none;
-        background-color: #d9230f;
-        color: #ffffff;
+    .page-btn > a, .page-btn > span {
+        display: inline-block;
+        padding: 5px 14px;
+        margin: 0 3px 0 3px;
+        background-color: #ffffff;
         border: 1px solid #dddddd;
+        border-radius: 15px;
     }
 
+        .page-btn > a:hover, .page-btn > a:focus {
+            text-decoration: none;
+            background-color: #d9230f;
+            color: #ffffff;
+            border: 1px solid #dddddd;
+        }
+
     .page-btn .page-btn-primary {
-    background-color: #414343;
-    border: 1px solid #2e2f2f;
-    color:white;
-}
+        background-color: #414343;
+        border: 1px solid #2e2f2f;
+        color: white;
+    }
 
-.small > a, .page-btn > span {
-    padding: 2px 14px !important;
-    margin-top: 3px;
-}
+    .small > a, .page-btn > span {
+        padding: 2px 14px !important;
+        margin-top: 3px;
+    }
 
-.page-btn .disabled, .page-btn .disabled:hover, .page-btn .disabled:focus, .page-btn .disabled > span {
-    color: #dddddd;
-    background-color: #ffffff;
-    cursor: not-allowed;
-}
+    .page-btn .disabled, .page-btn .disabled:hover, .page-btn .disabled:focus, .page-btn .disabled > span {
+        color: #dddddd;
+        background-color: #ffffff;
+        cursor: not-allowed;
+    }
 
 /*Custom Button*/
 .btn-plain {
@@ -310,3 +303,12 @@ span.valerror[style*="inline"] {
         color: #FCFCFC;
         background-color: #777777;
     }
+
+
+/*Try To Get Rid Of That Blue Glow*/
+.form-control:focus {
+    border-color: #6F94B8;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(217,35,15,0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(217,35,15,0.6);
+}

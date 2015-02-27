@@ -34,15 +34,6 @@ namespace Skyline_3._0.stores
                 gr.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
-        protected void grdOrderItems_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            
-            
-
-
-
-        }
-
         protected void grdOrderItems_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "ProductSelected")

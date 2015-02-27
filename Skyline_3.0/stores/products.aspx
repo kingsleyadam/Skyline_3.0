@@ -11,14 +11,21 @@
                     <asp:Label ID="lblFinishOrder" runat="server" Text="Finish Order" />
                     <span class="badge">
                         <asp:Label ID="lblCartItemCount" runat="server" /></span>
-                </asp:HyperLink></asp:Panel></div></asp:Panel><asp:Panel runat="server" ID="pnlProductsFilter" CssClass="panel panel-default">
+                </asp:HyperLink>
+            </asp:Panel>
+        </div>
+    </asp:Panel>
+    <asp:Panel runat="server" ID="pnlProductsFilter" CssClass="panel panel-default">
         <div class="panel-body">
             <div class="row line-break filter-results">
                 <div class="col-md-6 col-xs-6">
                     <asp:Label ID="lblFilterResults" runat="server" Text="Filter Results" />
                 </div>
                 <div class="col-md-6 col-xs-6 text-right">
-                    <asp:LinkButton ID="lnkClear" runat="server" OnClick="lnkClear_Click">Clear Results</asp:LinkButton></div></div><div class="row">
+                    <asp:LinkButton ID="lnkClear" runat="server" OnClick="lnkClear_Click">Clear Results</asp:LinkButton>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
                     <div class="filter-results-data">
                         <div class="btn-group btn-fullwidth">
@@ -33,7 +40,14 @@
                                 <asp:Repeater ID="repCategories" runat="server">
                                     <ItemTemplate>
                                         <li id="liCategory" runat="server" role="presentation">
-                                            <asp:LinkButton ID="lnkMenuItem" role="menuitem" TabIndex="-1" runat="server" OnClick="CategorySelected" CommandArgument='<%# Eval("CategoryID") %>' Text='<%# Eval("Name") %>'></asp:LinkButton></li></ItemTemplate></asp:Repeater></ul></div></div></div><div class="col-lg-5 col-lg-offset-4 col-md-5 col-md-offset-3 col-sm-7">
+                                            <asp:LinkButton ID="lnkMenuItem" role="menuitem" TabIndex="-1" runat="server" OnClick="CategorySelected" CommandArgument='<%# Eval("CategoryID") %>' Text='<%# Eval("Name") %>'></asp:LinkButton></li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-lg-offset-4 col-md-5 col-md-offset-3 col-sm-7">
                     <div class="filter-results-data">
                         <div class="input-group">
 
@@ -51,7 +65,14 @@
                                         <asp:LinkButton ID="lnkSearchInProductNum" runat="server" role="menuitem" TabIndex="-1" Text="Product Number" CommandArgument="ProductNum" OnClick="SearchInSelected" /></li>
                                 </ul>
                             </div>
-                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search for..." CssClass="form-control"></asp:TextBox></div></div></div></div></div></asp:Panel><asp:Panel runat="server" ID="pnlProductsGrid" CssClass="panel panel-default no-margin">
+                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search for..." CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
+    <asp:Panel runat="server" ID="pnlProductsGrid" CssClass="panel panel-default no-margin">
         <asp:Panel ID="pnlProductHeader" runat="server" CssClass="panel-heading">
             <div class="row">
                 <div class="col-md-2">
@@ -93,7 +114,9 @@
                     </div>
                 </GroupTemplate>
                 <EmptyDataTemplate>
-                    <div class="form-group no-margin">There are no products found for this query.</div></EmptyDataTemplate><EmptyItemTemplate>
+                    <div class="form-group no-margin">There are no products found for this query.</div>
+                </EmptyDataTemplate>
+                <EmptyItemTemplate>
                     <td runat="server" />
                 </EmptyItemTemplate>
                 <ItemTemplate>
@@ -149,14 +172,21 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12 page-btn text-center">
                     <asp:LinkButton ID="lnkFirstPage" runat="server" CommandName="ChangePage" CommandArgument="FirstPage" Text="First" OnClick="ChangePage" />
-                    <asp:LinkButton ID="lnkPrevPage" runat="server" CommandName="ChangePage" CommandArgument="PreviousPage" OnClick="ChangePage" CssClass="page-btn-primary"><span aria-hidden="true">&larr;</span> Previous</asp:LinkButton></div><div class="col-md-4 col-sm-4 col-xs-12 page-row text-center">
+                    <asp:LinkButton ID="lnkPrevPage" runat="server" CommandName="ChangePage" CommandArgument="PreviousPage" OnClick="ChangePage" CssClass="page-btn-primary"><span aria-hidden="true">&larr;</span> Previous</asp:LinkButton>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 page-row text-center">
                     <asp:Label ID="lblPageInfo1" runat="server" />
                     <div class="page-btn dropup">
                         <asp:LinkButton ID="lnkPageDropDown" CssClass=" dropdown-toggle" runat="server" data-toggle="dropdown" aria-expanded="false">1 <span class="caret"></span></asp:LinkButton><ul class="dropdown-menu" role="menu" aria-labelledby="lnkPageDropDown">
                             <asp:Repeater ID="repPages" runat="server">
                                 <ItemTemplate>
                                     <li id="liPage" runat="server" role="presentation">
-                                        <asp:LinkButton ID="lnkPage" role="menuitem" TabIndex="-1" runat="server" OnClick="SelectPage" CommandArgument='<%# Eval("Page") %>' Text='<%# Eval("Page") %>'></asp:LinkButton></li></ItemTemplate></asp:Repeater></ul></div><asp:Label ID="lblPageInfo2" runat="server" />
+                                        <asp:LinkButton ID="lnkPage" role="menuitem" TabIndex="-1" runat="server" OnClick="SelectPage" CommandArgument='<%# Eval("Page") %>' Text='<%# Eval("Page") %>'></asp:LinkButton></li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </div>
+                    <asp:Label ID="lblPageInfo2" runat="server" />
                 </div>
                 <div class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-12 col-xs-offset-0 page-btn page-row text-center">
                     <asp:LinkButton ID="lnkNextPage" runat="server" CommandName="ChangePage" CommandArgument="NextPage" OnClick="ChangePage" CssClass="page-btn-primary">Next <span aria-hidden="true">&rarr;</span></asp:LinkButton><asp:LinkButton ID="lnkLastPage" runat="server" Text="Last" CommandName="ChangePage" CommandArgument="LastPage" OnClick="ChangePage" />
@@ -176,12 +206,14 @@
                     <div class="form-group">
                         <asp:HyperLink ID="lnkProductImage" runat="server" Target="_blank">
                             <asp:Image ID="imgProductImg" runat="server" CssClass="img-rounded" />
-                        </asp:HyperLink></div><h3>
+                        </asp:HyperLink>
+                    </div>
+                    <h3>
                         <asp:Label ID="lblProductInfoPrice" runat="server" />
                         <asp:HiddenField ID="hdnProductInfoPrice" runat="server" />
                     </h3>
                     <div class="form-group">
-                        <asp:Panel runat="server" ID="pnlProductInfoAdd2Order" CssClass="input-group">
+                        <asp:Panel runat="server" ID="pnlProductInfoAdd2Order" CssClass="input-group" DefaultButton="btnAdd2CartFromInfo">
                             <asp:TextBox ID="txtQuantityFromInfo" runat="server" CssClass="form-control" Text="1"></asp:TextBox><span class="input-group-btn"><asp:LinkButton ID="btnAdd2CartFromInfo" runat="server" CssClass="btn btn-default" CommandName="Add2CartFromInfo" Text="Add To Order" Width="130px" OnClick="Add2Cart" />
                             </span>
                         </asp:Panel>
@@ -206,7 +238,12 @@
                                 <div class="col-xs-6 col-md-3">
                                     <asp:HyperLink ID="lnkFullImage" runat="server" NavigateUrl='<%# Eval("imgFull") %>' CssClass="thumbnail product-info-thumbnail" Target="_blank">
                                         <asp:Image ID="imgOtherImages" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
-                                    </asp:HyperLink></div></ItemTemplate></asp:Repeater></div><asp:Panel ID="pnlBestSeller" runat="server" CssClass="well well-sm well-bestseller">
+                                    </asp:HyperLink>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                    <asp:Panel ID="pnlBestSeller" runat="server" CssClass="well well-sm well-bestseller">
                         <asp:Label ID="lblProductInfoBestSeller" runat="server" Text="This item is one of our best sellers." />
                     </asp:Panel>
                 </div>

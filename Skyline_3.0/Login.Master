@@ -23,10 +23,6 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-
-
-
-
         <asp:Literal ID="litJQueryRef" runat="server"></asp:Literal>
         <asp:Literal ID="litBootstrapJSRef" runat="server"></asp:Literal>
         <asp:Literal ID="litJavascriptRef" runat="server"></asp:Literal>

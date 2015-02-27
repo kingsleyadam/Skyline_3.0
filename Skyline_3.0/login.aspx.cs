@@ -24,7 +24,7 @@ namespace Skyline_3._0
             else if (user.IsLockedOut)
                 lgnForm.FailureText = "Account is locked. Please user forgot password.";
             else
-                lgnForm.FailureText = "Incorrect username of password. Please try again.";
+                lgnForm.FailureText = "Incorrect username or password. Please try again.";
 
             Panel pnlFailureText = (Panel)lgnForm.Controls[0].FindControl("pnlFailureText");
             if (pnlFailureText != null)

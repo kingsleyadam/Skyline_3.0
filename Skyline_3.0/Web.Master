@@ -153,7 +153,7 @@
         <asp:Panel ID="login" CssClass="loginwrapper modal fade" role="dialog" runat="server">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <asp:Login ID="lgnForm" runat="server" RenderOuterTable="False" OnLoginError="lgnForm_LoginError" OnPreRender="lgnForm_PreRender">
+                    <asp:Login ID="lgnForm" runat="server" RenderOuterTable="False" OnLoginError="lgnForm_LoginError" OnPreRender="lgnForm_PreRender" OnLoggedIn="lgnForm_LoggedIn">
                         <LayoutTemplate>
                             <div class="modal-header">
                                 <h4>Login</h4>
@@ -184,8 +184,8 @@
                                         <asp:HyperLink ID="lnkForgotPwd" runat="server" NavigateUrl="~/user/forgot_password.aspx">Forgot Password?</asp:HyperLink>
                                     </div>
                                 </div>
+                                <input type="text" name="loginSource" id="loginSource" value="" class="hidden" />
                             </div>
-                            <input type="text" name="loginSource" id="loginSource" value="" class="hidden" />
                             <div class="modal-footer">
                                 <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Login" ValidationGroup="ctl00$lgnForm" CssClass="btn btn-primary" />
                                 <asp:Button ID="LoginCancel" runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cancel" />
@@ -203,7 +203,7 @@
         <script type="text/javascript">
             $(document).on("click", ".open-Login", function () {
                 var loginFrom = $(this).data('id');
-                $(".modal-body #loginSource").val(loginFrom);
+                $(".modal #loginSource").val(loginFrom);
             });
         </script>
         <asp:ContentPlaceHolder ID="JavaScriptContent" runat="server"></asp:ContentPlaceHolder>

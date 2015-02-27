@@ -87,6 +87,8 @@ namespace Skyline_3._0.stores
                     lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
                 }
             }
+
+            txtSearch.Focus();
         }
 
         protected void ChangePage(object sender, EventArgs e)
@@ -513,6 +515,8 @@ namespace Skyline_3._0.stores
                 pnlProductInfo.Visible = true;
                 pnlProductsGrid.Visible = false;
                 pnlProductsFilter.Visible = false;
+
+                txtQuantityFromInfo.Focus();
             }
 
         }

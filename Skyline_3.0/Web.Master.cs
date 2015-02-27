@@ -128,5 +128,17 @@ namespace Skyline_3._0
             }
                 
         }
+
+        protected void lgnForm_LoggedIn(object sender, EventArgs e)
+        {
+            string loginSource = Request.Form["loginSource"].ToString();
+
+            if (loginSource == "product")
+            {
+                Response.Redirect("~/stores/products.aspx");
+            }
+
+
+        }
     }
 }

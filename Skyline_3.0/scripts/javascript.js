@@ -4,17 +4,9 @@
             try {
                 var control = document.getElementById(Page_Validators[i].controltovalidate);
                 if (!Page_Validators[i].isvalid) {
-                    if (control.id.toString().indexOf("txt") != -1)
-                        control.className = "form-control has-error";
-                    else
-                        control.className = "form-control has-error";
-
-                    HideLoadingModal();
+                    $("#" + control.id).addClass("has-error");
                 } else {
-                    if (control.id.toString().indexOf("txt") != -1)
-                        control.className = "form-control";
-                    else
-                        control.className = "form-control";
+                    $("#" + control.id).removeClass("has-error");
                 }
             } catch (e) { }
         }

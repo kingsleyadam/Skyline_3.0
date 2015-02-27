@@ -1,4 +1,30 @@
 ﻿body {
-    padding:40px 0 40px 0;
+    padding: 40px 0 40px 0;
     background-color: #eee;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin-heading {
+    margin-bottom: 10px;
+}
+
+.form-signin .form-group {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="username"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
