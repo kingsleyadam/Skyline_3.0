@@ -23,8 +23,6 @@ namespace Skyline_3._0.stores
                 ViewState["pageNum"] = 1;
                 ViewState["pageGrp"] = 1;
                 ViewState["itemsPerPage"] = 8;
-                ViewState["searchString"] = "";
-                ViewState["searchField"] = "AllFields";
                 ViewState["sortBy"] = "Default";
 
 
@@ -47,8 +45,26 @@ namespace Skyline_3._0.stores
                     ViewState["categoryID"] = -1;
                 }
 
-                //Populate Products
-                AllProducts ap = PopulateListView();
+                //Specific Item
+                int productID;
+                if (Request.QueryString["i"] != null && int.TryParse(Request.QueryString["i"], out productID))
+                {
+                    ViewState["searchString"] = productID.ToString();
+                    ViewState["searchField"] = "ProductID";
+
+                    PopulateListView();
+
+                    LinkButton btnSelect = (LinkButton)lvProducts.Items[0].FindControl("btnSelect");
+                    ProductSelected((object)btnSelect);
+                }
+                else //Normal
+                {
+                    ViewState["searchString"] = "";
+                    ViewState["searchField"] = "AllFields";
+
+                    //Populate Products
+                    PopulateListView();
+                }
 
                 if (Cart.Instance.Items.Count == 0)
                 {
@@ -58,14 +74,6 @@ namespace Skyline_3._0.stores
                 {
                     pnlCartItemCount.Visible = true;
                     lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
-                }
-
-                //Specific Item
-                if (Request.QueryString["i"] != null)
-                {
-                    int productID = Convert.ToInt32(Request.QueryString["i"]);
-                    btnAdd2CartFromInfo.CommandArgument = productID.ToString();
-                    ProductSelected((object)btnAdd2CartFromInfo);
                 }
             }
         }
@@ -175,7 +183,7 @@ namespace Skyline_3._0.stores
             LinkButton btnAdd2Cart = (LinkButton)sender;
             int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument), quantity = 1;
             Product prod = new Product();
-            
+
             if (btnAdd2Cart.CommandName == "Add2CartFromInfo")
             {
                 if (productID > 0)
@@ -239,7 +247,7 @@ namespace Skyline_3._0.stores
                 Cart.Instance.SetItemQuantity(prod, quantity);
 
                 if (btnAdd2Cart.CommandName == "Add2CartFromInfo")
-                    AdjustLVInfoByCartItem(new CartItem(prod));                
+                    AdjustLVInfoByCartItem(new CartItem(prod));
 
                 if (quantity > 0)
                     btnAdd2Cart.Text = "Update Quantity";
@@ -314,7 +322,7 @@ namespace Skyline_3._0.stores
 
                     lnkNextPage.CssClass = "disabled";
                     lnkNextPage.Enabled = false;
-                } 
+                }
                 else
                 {
                     lnkLastPage.CssClass = "";
@@ -341,7 +349,7 @@ namespace Skyline_3._0.stores
                     lnkPrevPage.CssClass = "page-btn-primary";
                     lnkPrevPage.Enabled = true;
                 }
-                    
+
             }
             else
             {
@@ -384,7 +392,7 @@ namespace Skyline_3._0.stores
             Panel pnlThumnnail = (Panel)e.Item.FindControl("pnlThumnnail");
             Panel pnlPrice = (Panel)e.Item.FindControl("pnlPrice");
             Panel pnlAdd2Order = (Panel)e.Item.FindControl("pnlAdd2Order");
-            
+
             HiddenField hdnIsBestSeller = (HiddenField)e.Item.FindControl("hdnIsBestSeller");
             HiddenField hdnSoldOut = (HiddenField)e.Item.FindControl("hdnSoldOut");
             bool isBestSeller = Convert.ToBoolean(hdnIsBestSeller.Value);
@@ -478,13 +486,13 @@ namespace Skyline_3._0.stores
                     btnAdd2CartFromInfo.Text = "Update Quantity";
                     txtQuantityFromInfo.Text = ci.Quantity.ToString();
                 }
-                    
+
 
                 //Populate Other Image
                 DataSet imgDataSet = prod.GetImagesDataSet(false, connectionString);
                 repProductImages.DataSource = imgDataSet;
                 repProductImages.DataBind();
-                    
+
                 pnlProductInfo.Visible = true;
                 pnlProductsGrid.Visible = false;
                 pnlProductsFilter.Visible = false;
@@ -584,6 +592,13 @@ namespace Skyline_3._0.stores
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
+            string searchField = ViewState["searchField"].ToString();
+            if (searchField == "ProductID")
+            {
+                ViewState["searchString"] = "";
+                ViewState["searchField"] = "AllFields";
+                PopulateListView();
+            }
             pnlProductInfo.Visible = false;
             pnlProductsGrid.Visible = true;
             pnlProductsFilter.Visible = true;
