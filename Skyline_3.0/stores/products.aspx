@@ -125,7 +125,7 @@
                                         <asp:Label ID="lblPrice" runat="server" Text='<%# Eval("Price", "{0:c}") %>' />
                                     </asp:Panel>
                                 </p>
-                                <asp:Panel runat="server" ID="pnlAdd2Order" CssClass="input-group">
+                                <asp:Panel runat="server" ID="pnlAdd2Order" CssClass="input-group" DefaultButton="btnAdd2Cart">
                                     <asp:TextBox ID="txtQuantity" runat="server" CssClass="form-control" Text="1"></asp:TextBox><span class="input-group-btn"><asp:LinkButton ID="btnAdd2Cart" runat="server" CssClass="btn btn-default" CommandName="Add2Cart" Text="Add To Order" Width="130px" OnClick="Add2Cart" CommandArgument='<%# Eval("ProductID")%>' />
                                     </span>
                                 </asp:Panel>

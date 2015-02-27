@@ -33,5 +33,23 @@ namespace Skyline_3._0.stores
             if (gr.Rows.Count > 0)
                 gr.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
+
+        protected void grdOrderItems_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            
+            
+
+
+
+        }
+
+        protected void grdOrderItems_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "ProductSelected")
+            {
+                int productID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("~/stores/products.aspx?i=" + productID.ToString());
+            }
+        }
     }
 }

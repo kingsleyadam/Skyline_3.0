@@ -54,8 +54,19 @@ namespace Skyline_3._0.stores
 
                     PopulateListView();
 
-                    LinkButton btnSelect = (LinkButton)lvProducts.Items[0].FindControl("btnSelect");
-                    ProductSelected((object)btnSelect);
+                    if (lvProducts.Items.Count == 1)
+                    {
+                        LinkButton btnSelect = (LinkButton)lvProducts.Items[0].FindControl("btnSelect");
+                        ProductSelected((object)btnSelect);
+                    }
+                    else
+                    {
+                        ViewState["searchString"] = "";
+                        ViewState["searchField"] = "AllFields";
+
+                        //Populate Products
+                        PopulateListView();
+                    }
                 }
                 else //Normal
                 {
@@ -201,6 +212,9 @@ namespace Skyline_3._0.stores
                     prod.Name = productName;
                     prod.Price = price;
                     prod.Thumbnail = imgThumb;
+
+                    if (quantity == 0)
+                        txtQuantityFromInfo.Text = "1";
                 }
             }
             else
@@ -233,6 +247,9 @@ namespace Skyline_3._0.stores
                         prod.Name = productName;
                         prod.Price = price;
                         prod.Thumbnail = imgThumb;
+
+                        if (quantity == 0)
+                            txtQuantity.Text = "1";
                     }
                 }
             }
