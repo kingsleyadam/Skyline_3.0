@@ -4,14 +4,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row finish-row">
+    <asp:Panel runat="server" ID="pnlFinishOrder" class="row finish-row">
         <div class="col-lg-2 col-lg-offset-10 col-md-2 col-md-offset-10 col-sm-3 col-sm-offset-9 col-xs-6 col-xs-offset-6">
             <asp:Panel runat="server" ID="pnlCartItemCount">
                 <asp:HyperLink ID="lnkFinishOrder" runat="server" NavigateUrl="~/stores/order.aspx" CssClass="btn btn-plain btn-fullwidth btn-sm">
                     <asp:Label ID="lblFinishOrder" runat="server" Text="Finish Order" />
                     <span class="badge">
                         <asp:Label ID="lblCartItemCount" runat="server" /></span>
-                </asp:HyperLink></asp:Panel></div></div><div class="panel panel-default">
+                </asp:HyperLink></asp:Panel></div></asp:Panel><asp:Panel runat="server" ID="pnlProductsFilter" CssClass="panel panel-default">
         <div class="panel-body">
             <div class="row line-break filter-results">
                 <div class="col-md-6 col-xs-6">
@@ -51,7 +51,7 @@
                                         <asp:LinkButton ID="lnkSearchInProductNum" runat="server" role="menuitem" TabIndex="-1" Text="Product Number" CommandArgument="ProductNum" OnClick="SearchInSelected" /></li>
                                 </ul>
                             </div>
-                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search for..." CssClass="form-control"></asp:TextBox></div></div></div></div></div></div><div class="panel panel-default no-margin">
+                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search for..." CssClass="form-control"></asp:TextBox></div></div></div></div></div></asp:Panel><asp:Panel runat="server" ID="pnlProductsGrid" CssClass="panel panel-default no-margin">
         <asp:Panel ID="pnlProductHeader" runat="server" CssClass="panel-heading">
             <div class="row">
                 <div class="col-md-2">
@@ -99,39 +99,45 @@
                 <ItemTemplate>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <asp:Panel ID="pnlThumnnail" runat="server" class="thumbnail">
-                            <asp:LinkButton ID="btnSelectImage" runat="server" CommandName="ProductSelected" CommandArgument='<%# Eval("ProductID")%>'>
+                            <asp:LinkButton ID="btnSelectImage" runat="server" CommandName="ProductSelected" CommandArgument='<%# Eval("ProductID")%>' OnClick="ProductSelected">
                                 <asp:Image ID="imgProduct" ImageUrl='<%# Eval("imgThumb") %>' runat="server" CssClass="img-rounded" />
-                            </asp:LinkButton><div class="caption">
+                            </asp:LinkButton>
+                            <div class="caption">
                                 <h4>
-                                    <asp:LinkButton ID="btnSelect" runat="server" Text='<%# Eval("Name") %>' CommandName="ProductSelected" CommandArgument='<%# Eval("ProductID")%>' />
+                                    <asp:LinkButton ID="btnSelect" runat="server" Text='<%# Eval("Name") %>' CommandName="ProductSelected" CommandArgument='<%# Eval("ProductID")%>' OnClick="ProductSelected" />
                                 </h4>
                                 <p>
                                     <div id="divProductNum" runat="server">
-                                        <asp:Label ID="lblProductNumLabel" runat="server">Product #:</asp:Label><asp:Label ID="lblProductNum" runat="server" Text='<%# Eval("ProductNum") %>' />
+                                        <asp:Label ID="lblProductNumLabel" runat="server">Product #: </asp:Label><asp:Label ID="lblProductNum" runat="server" Text='<%# Eval("ProductNum") %>' />
 
                                     </div>
 
                                     <div id="divImageCount" runat="server">
-                                        <asp:Label ID="lblImageCountLabel" runat="server">Number Of Images:</asp:Label><asp:Label ID="lblImageCount" runat="server" Text='<%# Eval("ImageCount") %>' />
+                                        <asp:Label ID="lblImageCountLabel" runat="server">Number Of Images: </asp:Label><asp:Label ID="lblImageCount" runat="server" Text='<%# Eval("ImageCount") %>' />
                                     </div>
 
                                     <div id="divAvailable" runat="server">
-                                        <asp:Label ID="lblAvailableLabel" runat="server" Text="Label">Availability:</asp:Label><asp:Label ID="lblAvailable" runat="server" Text='<%# Eval("Availability") %>' />
+                                        <asp:Label ID="lblAvailableLabel" runat="server" Text="Label">Availability: </asp:Label><asp:Label ID="lblAvailable" runat="server" Text='<%# Eval("Availability") %>' />
                                     </div>
 
-                                    <div id="divPrice" runat="server">
-                                        <asp:Label ID="lblPriceLabel" runat="server" Text="Price:" />
+                                    <asp:Panel runat="server" ID="pnlPrice">
+                                        <asp:Label ID="lblPriceLabel" runat="server" Text="Price: " />
                                         <asp:Label ID="lblPrice" runat="server" Text='<%# Eval("Price", "{0:c}") %>' />
-                                    </div>
+                                    </asp:Panel>
                                 </p>
-
-                                <div class="input-group">
+                                <asp:Panel runat="server" ID="pnlAdd2Order" CssClass="input-group">
                                     <asp:TextBox ID="txtQuantity" runat="server" CssClass="form-control" Text="1"></asp:TextBox><span class="input-group-btn"><asp:LinkButton ID="btnAdd2Cart" runat="server" CssClass="btn btn-default" CommandName="Add2Cart" Text="Add To Order" Width="130px" OnClick="Add2Cart" CommandArgument='<%# Eval("ProductID")%>' />
                                     </span>
-                                </div>
+                                </asp:Panel>
+                                <asp:HiddenField ID="hdnProductID" runat="server" Value='<%# Eval("ProductID") %>' />
                                 <asp:HiddenField ID="hdnPrice" runat="server" Value='<%# Eval("Price") %>' />
                                 <asp:HiddenField ID="hdnIsBestSeller" runat="server" Value='<%# Eval("IsBestSeller") %>' />
                                 <asp:HiddenField ID="hdnImgThumb" runat="server" Value='<%# Eval("imgThumb") %>' />
+                                <asp:HiddenField ID="hdnImgURL" runat="server" Value='<%# Eval("imgURL") %>' />
+                                <asp:HiddenField ID="hdnImgOrig" runat="server" Value='<%# Eval("imgOrig") %>' />
+                                <asp:HiddenField ID="hdnDescription" runat="server" Value='<%# Eval("Description") %>' />
+                                <asp:HiddenField ID="hdnBestSeller" runat="server" Value='<%# Eval("IsBestSeller") %>' />
+                                <asp:HiddenField ID="hdnSoldOut" runat="server" Value='<%# Eval("IsSoldOut") %>' />
                             </div>
                         </asp:Panel>
 
@@ -157,9 +163,59 @@
                 </div>
             </div>
         </asp:Panel>
-    </div>
+    </asp:Panel>
 
 
+    <asp:Panel ID="pnlProductInfo" runat="server" Visible="false" CssClass="panel panel-default">
+        <div class="panel-heading">
+            <asp:Label ID="lblProductInfo" runat="server" Text="Product Information" />
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <asp:HyperLink ID="lnkProductImage" runat="server" Target="_blank">
+                            <asp:Image ID="imgProductImg" runat="server" CssClass="img-rounded" />
+                        </asp:HyperLink></div><h3>
+                        <asp:Label ID="lblProductInfoPrice" runat="server" />
+                        <asp:HiddenField ID="hdnProductInfoPrice" runat="server" />
+                    </h3>
+                    <div class="form-group">
+                        <asp:Panel runat="server" ID="pnlProductInfoAdd2Order" CssClass="input-group">
+                            <asp:TextBox ID="txtQuantityFromInfo" runat="server" CssClass="form-control" Text="1"></asp:TextBox><span class="input-group-btn"><asp:LinkButton ID="btnAdd2CartFromInfo" runat="server" CssClass="btn btn-default" CommandName="Add2CartFromInfo" Text="Add To Order" Width="130px" OnClick="Add2Cart" />
+                            </span>
+                        </asp:Panel>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <asp:Panel runat="server" ID="pnlSoldOut" class="alert alert-danger" role="alert">
+                        <asp:Label ID="lblSoldOut" runat="server" Text="Sorry, this item is currently sold out." />
+                    </asp:Panel>
+                    <h3>
+                        <asp:Label ID="lblProductName" runat="server" />
+                    </h3>
+                    <h4>
+                        <asp:Label ID="lblProductNumLabel" runat="server" Text="Product #:" />
+                        <asp:Label ID="lblProductNum" runat="server" /></h4>
+                    <h4>
+                        <asp:Label ID="lblProductDescription" runat="server" /></h4>
+
+                    <div class="row">
+                        <asp:Repeater ID="repProductImages" runat="server">
+                            <ItemTemplate>
+                                <div class="col-xs-6 col-md-3">
+                                    <asp:HyperLink ID="lnkFullImage" runat="server" NavigateUrl='<%# Eval("imgFull") %>' CssClass="thumbnail product-info-thumbnail" Target="_blank">
+                                        <asp:Image ID="imgOtherImages" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
+                                    </asp:HyperLink></div></ItemTemplate></asp:Repeater></div><asp:Panel ID="pnlBestSeller" runat="server" CssClass="well well-sm well-bestseller">
+                        <asp:Label ID="lblProductInfoBestSeller" runat="server" Text="This item is one of our best sellers." />
+                    </asp:Panel>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-plain" OnClick="btnBack_Click" Text="Back To All Items" />
+        </div>
+    </asp:Panel>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="JavaScriptContent" runat="server">
 </asp:Content>

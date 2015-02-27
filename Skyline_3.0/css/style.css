@@ -234,8 +234,16 @@ span.valerror[style*="inline"] {
     border-color:#D9230F;
 }
 
+.well-bestseller {
+    border-color:#D9230F;
+}
+
 .finish-row {
     margin-bottom:5px;
+}
+
+.product-info-thumbnail {
+    margin-bottom: 9px;
 }
 
 /*Custom .page-btn*/

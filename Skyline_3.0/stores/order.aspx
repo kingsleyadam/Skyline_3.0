@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="panel panel-default no-margin">
+    <asp:Panel runat="server" ID="pnlProductsGrid" class="panel panel-default no-margin">
         <div class="panel-heading">
             <asp:Label ID="lblOrderHeader" runat="server" Text="Order Information"></asp:Label>
         </div>
@@ -42,7 +42,7 @@
                     DataFormatString="{0:C}"></asp:BoundField>
             </Columns>
         </asp:GridView>
-    </div>
+    </asp:Panel>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="JavaScriptContent" runat="server">

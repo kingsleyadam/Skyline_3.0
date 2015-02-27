@@ -45,7 +45,6 @@ namespace Skyline_3._0.stores
                 else
                 {
                     ViewState["categoryID"] = -1;
-
                 }
 
                 //Populate Products
@@ -59,6 +58,14 @@ namespace Skyline_3._0.stores
                 {
                     pnlCartItemCount.Visible = true;
                     lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
+                }
+
+                //Specific Item
+                if (Request.QueryString["i"] != null)
+                {
+                    int productID = Convert.ToInt32(Request.QueryString["i"]);
+                    btnAdd2CartFromInfo.CommandArgument = productID.ToString();
+                    ProductSelected((object)btnAdd2CartFromInfo);
                 }
             }
         }
@@ -166,56 +173,88 @@ namespace Skyline_3._0.stores
         protected void Add2Cart(object sender, EventArgs e)
         {
             LinkButton btnAdd2Cart = (LinkButton)sender;
-            int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument);
-            Panel pnlThumnnail = (Panel)btnAdd2Cart.Parent;
-            ListViewDataItem lvDataitem = (ListViewDataItem)pnlThumnnail.Parent;
-            int lvIndex = lvDataitem.DisplayIndex, quantity;
-
-            if (productID > 0)
+            int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument), quantity = 1;
+            Product prod = new Product();
+            
+            if (btnAdd2Cart.CommandName == "Add2CartFromInfo")
             {
-                TextBox txtQuantity = (TextBox)lvProducts.Items[lvIndex].FindControl("txtQuantity");
-                HiddenField hdnPrice = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnPrice");
-                HiddenField hdnImgThumb = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnImgThumb");
-                Label lblProductNum = (Label)lvProducts.Items[lvIndex].FindControl("lblProductNum");
-                LinkButton btnSelect = (LinkButton)lvProducts.Items[lvIndex].FindControl("btnSelect");
-
-                if (txtQuantity != null && hdnPrice != null && lblProductNum != null && btnSelect != null && hdnImgThumb != null)
+                if (productID > 0)
                 {
-                    if (!int.TryParse(txtQuantity.Text, out quantity))
+                    if (!int.TryParse(txtQuantityFromInfo.Text, out quantity))
                         quantity = 1;
 
-                    decimal price = Convert.ToDecimal(hdnPrice.Value);
+                    decimal price = Convert.ToDecimal(hdnProductInfoPrice.Value);
                     string productNum = lblProductNum.Text;
-                    string productName = btnSelect.Text;
-                    string imgThumb = hdnImgThumb.Value;
+                    string productName = lblProductName.Text;
+                    string imgThumb = imgProductImg.ImageUrl;
 
-                    Product prod = new Product(productID, productNum, productName, price, imgThumb);
+                    prod.ProductID = productID;
+                    prod.ProductNum = productNum;
+                    prod.Name = productName;
+                    prod.Price = price;
+                    prod.Thumbnail = imgThumb;
+                }
+            }
+            else
+            {
+                Panel pnlThumnnail = (Panel)btnAdd2Cart.Parent;
+                Panel pnlAdd2Order = (Panel)pnlThumnnail.Parent;
+                ListViewDataItem lvDataitem = (ListViewDataItem)pnlAdd2Order.Parent;
+                int lvIndex = lvDataitem.DisplayIndex;
 
-                    if (!Cart.Instance.Items.Contains(new CartItem(prod)))
+                if (productID > 0)
+                {
+                    TextBox txtQuantity = (TextBox)lvProducts.Items[lvIndex].FindControl("txtQuantity");
+                    HiddenField hdnPrice = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnPrice");
+                    HiddenField hdnImgThumb = (HiddenField)lvProducts.Items[lvIndex].FindControl("hdnImgThumb");
+                    Label lblProductNum = (Label)lvProducts.Items[lvIndex].FindControl("lblProductNum");
+                    LinkButton btnSelect = (LinkButton)lvProducts.Items[lvIndex].FindControl("btnSelect");
+
+                    if (txtQuantity != null && hdnPrice != null && lblProductNum != null && btnSelect != null && hdnImgThumb != null)
                     {
-                        Cart.Instance.AddItem(prod);
-                    }
+                        if (!int.TryParse(txtQuantity.Text, out quantity))
+                            quantity = 1;
 
-                    Cart.Instance.SetItemQuantity(prod, quantity);
+                        decimal price = Convert.ToDecimal(hdnPrice.Value);
+                        string productNum = lblProductNum.Text;
+                        string productName = btnSelect.Text;
+                        string imgThumb = hdnImgThumb.Value;
 
-                    if (quantity > 0)
-                        btnAdd2Cart.Text = "Update Quantity";
-                    else
-                        btnAdd2Cart.Text = "Add To Order";
-
-                    if (Cart.Instance.Items.Count == 0)
-                    {
-                        pnlCartItemCount.Visible = false;
-                    }
-                    else
-                    {
-                        pnlCartItemCount.Visible = true;
-                        lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
+                        prod.ProductID = productID;
+                        prod.ProductNum = productNum;
+                        prod.Name = productName;
+                        prod.Price = price;
+                        prod.Thumbnail = imgThumb;
                     }
                 }
+            }
 
-                
+            if (prod != null)
+            {
+                if (!Cart.Instance.Items.Contains(new CartItem(prod)))
+                {
+                    Cart.Instance.AddItem(prod);
+                }
 
+                Cart.Instance.SetItemQuantity(prod, quantity);
+
+                if (btnAdd2Cart.CommandName == "Add2CartFromInfo")
+                    AdjustLVInfoByCartItem(new CartItem(prod));                
+
+                if (quantity > 0)
+                    btnAdd2Cart.Text = "Update Quantity";
+                else
+                    btnAdd2Cart.Text = "Add To Order";
+
+                if (Cart.Instance.Items.Count == 0)
+                {
+                    pnlCartItemCount.Visible = false;
+                }
+                else
+                {
+                    pnlCartItemCount.Visible = true;
+                    lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
+                }
             }
         }
 
@@ -343,31 +382,245 @@ namespace Skyline_3._0.stores
         protected void lvProducts_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             Panel pnlThumnnail = (Panel)e.Item.FindControl("pnlThumnnail");
+            Panel pnlPrice = (Panel)e.Item.FindControl("pnlPrice");
+            Panel pnlAdd2Order = (Panel)e.Item.FindControl("pnlAdd2Order");
+            
             HiddenField hdnIsBestSeller = (HiddenField)e.Item.FindControl("hdnIsBestSeller");
+            HiddenField hdnSoldOut = (HiddenField)e.Item.FindControl("hdnSoldOut");
             bool isBestSeller = Convert.ToBoolean(hdnIsBestSeller.Value);
+            bool isSoldOut = Convert.ToBoolean(hdnSoldOut.Value);
 
             if (isBestSeller)
             {
                 pnlThumnnail.CssClass = "thumbnail thumbnail-bestseller";
             }
 
-            TextBox txtQuantity = (TextBox)e.Item.FindControl("txtQuantity");
-            LinkButton btnAdd2Cart = (LinkButton)e.Item.FindControl("btnAdd2Cart");
-
-            if (txtQuantity != null && btnAdd2Cart != null)
+            if (isSoldOut)
             {
-                int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument);
-                CartItem ci = Cart.Instance.Items.Find(x => x.ProductID == productID);
-
-                if (ci != null)
+                if (pnlAdd2Order != null)
                 {
-                    txtQuantity.Text = ci.Quantity.ToString();
-                    btnAdd2Cart.Text = "Update Quantity";
+                    pnlAdd2Order.Visible = false;
+                }
+            }
+            else
+            {
+                if (pnlAdd2Order != null)
+                {
+                    pnlAdd2Order.Visible = true;
+                }
+
+                TextBox txtQuantity = (TextBox)e.Item.FindControl("txtQuantity");
+                LinkButton btnAdd2Cart = (LinkButton)e.Item.FindControl("btnAdd2Cart");
+
+                if (txtQuantity != null && btnAdd2Cart != null)
+                {
+                    int productID = Convert.ToInt32(btnAdd2Cart.CommandArgument);
+                    CartItem ci = Cart.Instance.Items.Find(x => x.ProductID == productID);
+
+                    if (ci != null)
+                    {
+                        txtQuantity.Text = ci.Quantity.ToString();
+                        btnAdd2Cart.Text = "Update Quantity";
+                    }
+                    else
+                        btnAdd2Cart.Text = "Add To Order";
+                }
+            }
+        }
+
+        //Project Specific Info
+        protected void ProductSelected(object sender, EventArgs e = null)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
+            LinkButton lnkSelected = (LinkButton)sender;
+            int productID = Convert.ToInt32(lnkSelected.CommandArgument);
+            Panel pnlThumnnail = (Panel)lnkSelected.Parent;
+            ListViewDataItem lvDataItem = (ListViewDataItem)pnlThumnnail.Parent;
+
+            if (productID > 0 && pnlThumnnail != null && lvDataItem != null)
+            {
+                Product prod = GetProductFromLVItem(lvDataItem);
+
+                btnAdd2CartFromInfo.CommandArgument = prod.ProductID.ToString();
+                lblProductName.Text = prod.Name;
+                imgProductImg.ImageUrl = prod.FullImage;
+                lnkProductImage.NavigateUrl = prod.OriginalImage;
+                lblProductNum.Text = prod.ProductNum;
+                lblProductDescription.Text = prod.Description;
+
+                lblProductInfoPrice.Text = prod.Price.ToString("c");
+                hdnProductInfoPrice.Value = prod.Price.ToString();
+
+                if (prod.SoldOut)
+                {
+                    pnlSoldOut.Visible = true;
+                    pnlProductInfoAdd2Order.Visible = false;
                 }
                 else
-                    btnAdd2Cart.Text = "Add To Order";
+                {
+                    pnlSoldOut.Visible = false;
+                    pnlProductInfoAdd2Order.Visible = true;
+                }
+
+                if (prod.BestSeller)
+                    pnlBestSeller.Visible = true;
+                else
+                    pnlBestSeller.Visible = false;
+
+                if (!Cart.Instance.Items.Contains(new CartItem(prod)))
+                {
+                    btnAdd2CartFromInfo.Text = "Add To Cart";
+                    txtQuantityFromInfo.Text = "1";
+                }
+                else
+                {
+                    CartItem ci = Cart.Instance.Items.Find(x => x.ProductID == productID);
+                    btnAdd2CartFromInfo.Text = "Update Quantity";
+                    txtQuantityFromInfo.Text = ci.Quantity.ToString();
+                }
+                    
+
+                //Populate Other Image
+                DataSet imgDataSet = prod.GetImagesDataSet(false, connectionString);
+                repProductImages.DataSource = imgDataSet;
+                repProductImages.DataBind();
+                    
+                pnlProductInfo.Visible = true;
+                pnlProductsGrid.Visible = false;
+                pnlProductsFilter.Visible = false;
             }
 
+        }
+
+        private Product GetProductFromLVItem(ListViewDataItem lvDataItem)
+        {
+            Product prod = new Product();
+
+            HiddenField hdnProductID = (HiddenField)lvDataItem.FindControl("hdnProductID");
+            HiddenField hdnPrice = (HiddenField)lvDataItem.FindControl("hdnPrice");
+            HiddenField hdnImgThumb = (HiddenField)lvDataItem.FindControl("hdnImgThumb");
+            HiddenField hdnImgURL = (HiddenField)lvDataItem.FindControl("hdnImgURL");
+            HiddenField hdnImgOrig = (HiddenField)lvDataItem.FindControl("hdnImgOrig");
+            HiddenField hdnDescription = (HiddenField)lvDataItem.FindControl("hdnDescription");
+            HiddenField hdnBestSeller = (HiddenField)lvDataItem.FindControl("hdnBestSeller");
+            HiddenField hdnSoldOut = (HiddenField)lvDataItem.FindControl("hdnSoldOut");
+            Label lblProductNum = (Label)lvDataItem.FindControl("lblProductNum");
+            LinkButton btnSelect = (LinkButton)lvDataItem.FindControl("btnSelect");
+
+            if (hdnProductID != null)
+            {
+                int productID;
+                if (int.TryParse(hdnProductID.Value, out productID))
+                {
+                    prod.ProductID = productID;
+                }
+            }
+
+            if (btnSelect != null)
+            {
+                string name = btnSelect.Text;
+                prod.Name = name;
+            }
+
+            if (hdnImgThumb != null)
+            {
+                string productNum = lblProductNum.Text;
+                prod.ProductNum = productNum;
+            }
+
+            if (hdnPrice != null)
+            {
+                decimal price;
+                if (decimal.TryParse(hdnPrice.Value, out price))
+                {
+                    prod.Price = price;
+                }
+            }
+
+            if (hdnImgThumb != null)
+            {
+                string thumbNail = hdnImgThumb.Value;
+                prod.Thumbnail = thumbNail;
+            }
+
+            if (hdnImgURL != null)
+            {
+                string fullImage = hdnImgURL.Value;
+                prod.FullImage = fullImage;
+            }
+
+            if (hdnImgOrig != null)
+            {
+                string originalImage = hdnImgOrig.Value;
+                prod.OriginalImage = originalImage;
+            }
+
+            if (hdnDescription != null)
+            {
+                string description = hdnDescription.Value;
+                prod.Description = description;
+            }
+
+            if (hdnBestSeller != null)
+            {
+                bool bestSeller;
+                if (bool.TryParse(hdnBestSeller.Value, out bestSeller))
+                {
+                    prod.BestSeller = bestSeller;
+                }
+            }
+
+            if (hdnSoldOut != null)
+            {
+                bool soldOut;
+                if (bool.TryParse(hdnSoldOut.Value, out soldOut))
+                {
+                    prod.SoldOut = soldOut;
+                }
+            }
+
+            return prod;
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            pnlProductInfo.Visible = false;
+            pnlProductsGrid.Visible = true;
+            pnlProductsFilter.Visible = true;
+        }
+
+        private void AdjustLVInfoByCartItem(CartItem ci)
+        {
+            ListViewItem lvItem = null;
+
+            foreach (ListViewItem lv in lvProducts.Items)
+            {
+                HiddenField hdnProductID = (HiddenField)lv.FindControl("hdnProductID");
+                int lvProductID = Convert.ToInt32(hdnProductID.Value);
+
+                if (lvProductID == ci.ProductID)
+                {
+                    lvItem = lv;
+                    break;
+                }
+            }
+
+            if (lvItem != null)
+            {
+                LinkButton btnAdd2Cart = (LinkButton)lvItem.FindControl("btnAdd2Cart");
+                TextBox txtQuantity = (TextBox)lvItem.FindControl("txtQuantity");
+                if (!Cart.Instance.Items.Contains(ci))
+                {
+                    btnAdd2Cart.Text = "Add To Cart";
+                    txtQuantity.Text = "1";
+                }
+                else
+                {
+                    CartItem ci2 = Cart.Instance.Items.Find(x => x.ProductID == ci.ProductID);
+                    btnAdd2Cart.Text = "Update Quantity";
+                    txtQuantity.Text = ci2.Quantity.ToString();
+                }
+            }
         }
     }
 }
