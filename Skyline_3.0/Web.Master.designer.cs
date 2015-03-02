@@ -76,6 +76,24 @@ namespace Skyline_3._0 {
         protected global::System.Web.UI.WebControls.LinkButton lnkProducts;
         
         /// <summary>
+        /// liOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOrder;
+        
+        /// <summary>
+        /// lnkOrderForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkOrderForm;
+        
+        /// <summary>
         /// liAboutUs control.
         /// </summary>
         /// <remarks>
@@ -155,24 +173,6 @@ namespace Skyline_3._0 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lnkChangePassword;
-        
-        /// <summary>
-        /// liOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOrder;
-        
-        /// <summary>
-        /// lnkOrderForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkOrderForm;
         
         /// <summary>
         /// lgnView control.

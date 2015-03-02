@@ -277,6 +277,24 @@ span.valerror[style*="inline"] {
         cursor: not-allowed;
     }
 
+
+/*Order Page*/
+.table>tbody>tr>td>img {
+    min-width:40px;
+    min-height:20px;
+    max-height:75px;
+    max-width:100px;
+}
+
+.order-footer h3 {
+    margin-top:6px !important;
+}
+
+.order-body .line-break {
+    margin-bottom:15px;
+    padding-bottom:15px;
+}
+
 /*Custom Button*/
 .btn-plain {
     color: #777777;
@@ -308,7 +326,13 @@ span.valerror[style*="inline"] {
 /*Try To Get Rid Of That Blue Glow*/
 .form-control:focus {
     border-color: #6F94B8;
-    outline: 0;
+    outline: none;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(217,35,15,0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(217,35,15,0.6);
+}
+
+textarea:focus, input[type="text"]:focus, textarea[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus, .form-control:focus {
+    border-color: #6F94B8;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(217,35,15,0.6);
+    outline: white;
 }

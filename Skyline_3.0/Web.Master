@@ -34,6 +34,9 @@
                         <li id="liProducts" runat="server">
                             <asp:LinkButton ID="lnkProducts" runat="server" CssClass="open-Login">Products</asp:LinkButton>
                         </li>
+                        <li id="liOrder" runat="server">
+                            <asp:HyperLink ID="lnkOrderForm" runat="server" NavigateUrl="~/stores/order.aspx">Your Order</asp:HyperLink>
+                        </li>
                         <li id="liAboutUs" runat="server">
                             <asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/about_us.aspx">About Us</asp:HyperLink>
                         </li>
@@ -54,9 +57,6 @@
                                 <li>
                                     <asp:HyperLink ID="lnkChangePassword" runat="server" NavigateUrl="~/user/change_password.aspx">Change Password</asp:HyperLink></li>
                             </ul>
-                        </li>
-                        <li id="liOrder" runat="server">
-                            <asp:HyperLink ID="lnkOrderForm" runat="server" NavigateUrl="~/stores/order.aspx">Your Order</asp:HyperLink>
                         </li>
                     </ul>
 
