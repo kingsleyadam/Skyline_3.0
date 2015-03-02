@@ -68,6 +68,7 @@
                         <asp:Label ID="lblCompanyName" runat="server" Text="Company Name" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtCompanyName" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtCompanyName" runat="server" CssClass="form-control" placeholder="Company Name"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqCompanyName" runat="server" ErrorMessage="Company Name is required" ControlToValidate="txtCompanyName" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -75,6 +76,7 @@
                         <asp:Label ID="lblFirstName" runat="server" Text="First Name" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtFirstName" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" placeholder="First Name"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqFirstName" runat="server" ErrorMessage="First Name is required" ControlToValidate="txtFirstName" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -82,6 +84,7 @@
                         <asp:Label ID="lblLastName" runat="server" Text="Last Name" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtLastName" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" placeholder="Last Name"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqLastName" runat="server" ErrorMessage="Last Name is required" ControlToValidate="txtLastName" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -89,6 +92,7 @@
                         <asp:Label ID="lblPhoneNumber" runat="server" Text="Phone Number" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtPhoneNumber" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtPhoneNumber" runat="server" CssClass="form-control" placeholder="Phone Number (e.g. XXX-XXX-XXXX)"></asp:TextBox>
+                            <asp:CustomValidator ID="customPhoneValidation" runat="server" ErrorMessage="Phone Number is not in the correct format" ValidationGroup="ContactInfo" Display="None" ClientValidationFunction="validatePhoneField" ValidateEmptyText="true" ControlToValidate="txtPhoneNumber" />
                         </div>
                     </div>
 
@@ -96,6 +100,7 @@
                         <asp:Label ID="lblEmailAddress" runat="server" Text="Email Address" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtEmail" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email Address"></asp:TextBox>
+                            <asp:CustomValidator ID="customEmailValidation" runat="server" ErrorMessage="Email Address is not in the correct format" ValidationGroup="ContactInfo" Display="None" ClientValidationFunction="validateEmailField" ValidateEmptyText="true" ControlToValidate="txtEmail" />
                         </div>
                     </div>
 
@@ -103,6 +108,7 @@
                         <asp:Label ID="lblAddress1" runat="server" Text="Address 1" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtAddress1" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtAddress1" runat="server" CssClass="form-control" placeholder="Address 1"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqAddress1" runat="server" ErrorMessage="Address 1 is required" ControlToValidate="txtAddress1" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -117,6 +123,7 @@
                         <asp:Label ID="lblCity" runat="server" Text="City" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtCity" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" placeholder="City"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqCity" runat="server" ErrorMessage="City is required" ControlToValidate="txtCity" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -124,6 +131,7 @@
                         <asp:Label ID="lblState" runat="server" Text="State" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtState" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtState" runat="server" CssClass="form-control" placeholder="State"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqState" runat="server" ErrorMessage="State is required" ControlToValidate="txtState" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -131,6 +139,7 @@
                         <asp:Label ID="lblZipCode" runat="server" Text="Zip Code" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtZipCode" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtZipCode" runat="server" CssClass="form-control" placeholder="Zip Code"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqZipCode" runat="server" ErrorMessage="Zip Code is required" ControlToValidate="txtZipCode" Display="None" ValidationGroup="ContactInfo" />
                         </div>
                     </div>
 
@@ -138,6 +147,12 @@
                         <asp:Label ID="lblCountry" runat="server" Text="Country" CssClass="col-md-2 col-sm-3 control-label" AssociatedControlID="txtCountry" />
                         <div class="col-md-10 col-sm-9">
                             <asp:TextBox ID="txtCountry" runat="server" CssClass="form-control" placeholder="Country" Text="United States" disabled=""></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                        <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3">
+                            <asp:ValidationSummary ID="valSummary" runat="server" ValidationGroup="ContactInfo" CssClass="valSummary" />
                         </div>
                     </div>
                 </div>
@@ -153,7 +168,7 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group no-margin">
                     <address>
                         <strong>
                             <asp:Label ID="lblCompanyNameStep3" runat="server" /></strong><br />
@@ -162,13 +177,41 @@
                         <asp:Label ID="lblPhone" runat="server" />
                     </address>
 
-                    <address>
+                    <address class="no-margin">
                         <strong>
                             <asp:Label ID="lblFullName" runat="server" /></strong><br />
                         <asp:Label ID="lblEmail" runat="server" />
                     </address>
 
                 </div>
+            </div>
+
+            <div class="table-responsive">
+                <asp:GridView ID="grdProductsStep3" runat="server" CssClass="table table-striped table-condensed no-margin" AutoGenerateColumns="false" GridLines="None" DataKeyNames="ProductID" OnPreRender="grdOrderItems_PreRender" OnRowCommand="grdOrderItems_RowCommand">
+                    <Columns>
+                        <asp:TemplateField HeaderText="Name" ItemStyle-Width="200px" HeaderStyle-Width="200px">
+                            <ItemTemplate>
+                                <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Product Number" ItemStyle-Width="200px" HeaderStyle-Width="200px">
+                            <ItemTemplate>
+                                <asp:Label ID="lblName" runat="server" Text='<%# Eval("ProductNum") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Quantity" ItemStyle-Width="100px" HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right">
+                            <ItemTemplate>
+                                <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="UnitPrice" HeaderText="Price Per Unit"
+                            HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right"
+                            DataFormatString="{0:C}" ItemStyle-Width="100px"></asp:BoundField>
+                        <asp:BoundField DataField="TotalPrice" HeaderText="Total Price"
+                            HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right" ItemStyle-Width="100px"
+                            DataFormatString="{0:C}"></asp:BoundField>
+                    </Columns>
+                </asp:GridView>
             </div>
         </asp:Panel>
 
@@ -186,7 +229,7 @@
                 <asp:Panel runat="server" ID="pnlFooterStep2" CssClass="col-xs-6 text-right">
                     <div class="btn-group" role="group">
                         <asp:LinkButton ID="lnkBackStep2" runat="server" CssClass="btn btn-default" CommandArgument="1" OnClick="ChangeStep_Click">Back</asp:LinkButton>
-                        <asp:LinkButton ID="lnkStep2" runat="server" CssClass="btn btn-primary" CommandArgument="3" OnClick="ChangeStep_Click">Review Order</asp:LinkButton>
+                        <asp:LinkButton ID="lnkStep2" runat="server" CssClass="btn btn-primary" CommandArgument="3" OnClick="ChangeStep_Click" ValidationGroup="ContactInfo">Review Order</asp:LinkButton>
                     </div>
                 </asp:Panel>
 

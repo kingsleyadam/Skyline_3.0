@@ -112,6 +112,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.TextBox txtCompanyName;
         
         /// <summary>
+        /// reqCompanyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCompanyName;
+        
+        /// <summary>
         /// lblFirstName control.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
+        
+        /// <summary>
+        /// reqFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFirstName;
         
         /// <summary>
         /// lblLastName control.
@@ -148,6 +166,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
         
         /// <summary>
+        /// reqLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLastName;
+        
+        /// <summary>
         /// lblPhoneNumber control.
         /// </summary>
         /// <remarks>
@@ -164,6 +191,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhoneNumber;
+        
+        /// <summary>
+        /// customPhoneValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator customPhoneValidation;
         
         /// <summary>
         /// lblEmailAddress control.
@@ -184,6 +220,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
+        /// customEmailValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator customEmailValidation;
+        
+        /// <summary>
         /// lblAddress1 control.
         /// </summary>
         /// <remarks>
@@ -200,6 +245,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAddress1;
+        
+        /// <summary>
+        /// reqAddress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqAddress1;
         
         /// <summary>
         /// lblAddress2 control.
@@ -238,6 +292,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.TextBox txtCity;
         
         /// <summary>
+        /// reqCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCity;
+        
+        /// <summary>
         /// lblState control.
         /// </summary>
         /// <remarks>
@@ -254,6 +317,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtState;
+        
+        /// <summary>
+        /// reqState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqState;
         
         /// <summary>
         /// lblZipCode control.
@@ -274,6 +346,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.TextBox txtZipCode;
         
         /// <summary>
+        /// reqZipCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqZipCode;
+        
+        /// <summary>
         /// lblCountry control.
         /// </summary>
         /// <remarks>
@@ -290,6 +371,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCountry;
+        
+        /// <summary>
+        /// valSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary valSummary;
         
         /// <summary>
         /// pnlBodyStep3 control.
@@ -362,6 +452,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmail;
+        
+        /// <summary>
+        /// grdProductsStep3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdProductsStep3;
         
         /// <summary>
         /// pnlFooter control.

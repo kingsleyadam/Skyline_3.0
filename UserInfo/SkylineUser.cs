@@ -8,6 +8,147 @@ using System.Threading.Tasks;
 
 namespace UserInfo
 {
+    public class SkylineUserAddress
+    {
+        private SkylineUser _skylineUser;
+        private string _companyName;
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+        private string _address1;
+        private string _address2;
+        private string _city;
+        private string _state;
+        private string _zipCode;
+        private string _phoneNumber;
+        private string _connectionString;
+
+        public SkylineUserAddress(SkylineUser m_SkylineUser)
+        {
+            User = m_SkylineUser;
+            ConnectionString = m_SkylineUser.ConnectionString;
+
+            DataSet ds = GetDataSet();
+
+            if (ds.Tables["AddressInfo"].Rows.Count == 1)
+            {
+                CompanyName = ds.Tables["AddressInfo"].Rows[0]["Company"].ToString();
+                FirstName = ds.Tables["AddressInfo"].Rows[0]["FirstName"].ToString();
+                LastName = ds.Tables["AddressInfo"].Rows[0]["LastName"].ToString();
+                Email = ds.Tables["AddressInfo"].Rows[0]["Email"].ToString();
+                Address1 = ds.Tables["AddressInfo"].Rows[0]["Address1"].ToString();
+                Address2 = ds.Tables["AddressInfo"].Rows[0]["Address2"].ToString();
+                City = ds.Tables["AddressInfo"].Rows[0]["City"].ToString();
+                State = ds.Tables["AddressInfo"].Rows[0]["State"].ToString();
+                ZipCode = ds.Tables["AddressInfo"].Rows[0]["ZipCode"].ToString();
+                PhoneNumber = ds.Tables["AddressInfo"].Rows[0]["Phone"].ToString();
+            }
+        }
+
+        public SkylineUser User
+        {
+            get { return _skylineUser; }
+            set { _skylineUser = value; }
+        }
+
+        public string CompanyName
+        {
+            get { return _companyName; }
+            set { _companyName = value; }
+        }
+
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; }
+        }
+
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+
+        public string Address1
+        {
+            get { return _address1; }
+            set { _address1 = value; }
+        }
+
+        public string Address2
+        {
+            get { return _address2; }
+            set { _address2 = value; }
+        }
+
+        public string City
+        {
+            get { return _city; }
+            set { _city = value; }
+        }
+
+        public string State
+        {
+            get { return _state; }
+            set { _state = value; }
+        }
+
+        public string ZipCode
+        {
+            get { return _zipCode; }
+            set { _zipCode = value; }
+        }
+
+        public string PhoneNumber
+        {
+            get { return _phoneNumber; }
+            set { _phoneNumber = value; }
+        }
+
+        public string ConnectionString
+        {
+            get { return _connectionString; }
+            set { _connectionString = value; }
+        }
+
+        private DataSet GetDataSet()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("OrdGetLastShippingInfo", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramSkylineID = new SqlParameter("@SkylineID", SqlDbType.Int);
+                paramSkylineID.Direction = ParameterDirection.Input;
+
+                paramSkylineID.Value = User.SkylineID;
+
+                cmd.Parameters.Add(paramSkylineID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("AddressInfo");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+    }
     public class SkylineUser
     {
         private Guid _userID;

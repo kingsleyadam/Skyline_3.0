@@ -14,4 +14,27 @@
     }
     return true;
 }
+
+function validateEmailField(source, args) {
+    var expr = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
+    if (args.Value.length == 0 || !IsValidExpression(args.Value, expr)) {
+        args.IsValid = false;
+    } else {
+        args.IsValid = true;
+    };
+}
+
+function validatePhoneField(source, args) {
+    var expr = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/
+    if (args.Value.length == 0 || !IsValidExpression(args.Value, expr)) {
+        args.IsValid = false;
+    } else {
+        args.IsValid = true;
+    };
+}
+
+function IsValidExpression(fldValue, expr) {
+    return expr.test(fldValue);
+};
+
 function openModal() { $('#login').modal('show'); }

@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ProductInfo;
+using UserInfo;
+using System.Web.Security;
+using System.Configuration;
 
 namespace Skyline_3._0.stores
 {
@@ -17,9 +20,11 @@ namespace Skyline_3._0.stores
                 if (Cart.Instance.Items.Count > 0)
                 {
                     ChangeStep(1);
+
                     grdOrderItems.DataSource = Cart.Instance.Items;
-                    lblTotal.Text = Cart.Instance.GetSubTotal().ToString("c");
                     grdOrderItems.DataBind();
+
+                    lblTotal.Text = Cart.Instance.GetSubTotal().ToString("c");
                 }
                 else
                 {
@@ -115,7 +120,36 @@ namespace Skyline_3._0.stores
 
             ChangeStep(page2GoTo);
 
-            if (page2GoTo == 3)
+            if (page2GoTo == 2)
+            {
+                Guid userID = new Guid(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString());
+                string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
+                SkylineUser su = new SkylineUser(userID, connectionString);
+                SkylineUserAddress sua = new SkylineUserAddress(su);
+
+                if (sua.CompanyName.Length > 0)
+                    txtCompanyName.Text = sua.CompanyName;
+                if (sua.FirstName.Length > 0)
+                    txtFirstName.Text = sua.FirstName;
+                if (sua.LastName.Length > 0)
+                    txtLastName.Text = sua.LastName;
+                if (sua.PhoneNumber.Length > 0)
+                    txtPhoneNumber.Text = sua.PhoneNumber;
+                if (sua.Email.Length > 0)
+                    txtEmail.Text = sua.Email;
+                if (sua.Address1.Length > 0)
+                    txtAddress1.Text = sua.Address1;
+                if (sua.Address2.Length > 0)
+                    txtAddress2.Text = sua.Address2;
+                if (sua.City.Length > 0)
+                    txtCity.Text = sua.City;
+                if (sua.State.Length > 0)
+                    txtState.Text = sua.State;
+                if (sua.ZipCode.Length > 0)
+                    txtZipCode.Text = sua.ZipCode;
+
+            } 
+            else if (page2GoTo == 3)
             {
                 lblCompanyNameStep3.Text = txtCompanyName.Text;
                 lblStreetAddress.Text = txtAddress1.Text;
@@ -128,6 +162,9 @@ namespace Skyline_3._0.stores
 
                 lblFullName.Text = txtFirstName.Text + " " + txtLastName.Text;
                 lblEmail.Text = txtEmail.Text;
+
+                grdProductsStep3.DataSource = Cart.Instance.Items;
+                grdProductsStep3.DataBind();
             } 
         }
     }
