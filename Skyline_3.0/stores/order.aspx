@@ -39,7 +39,7 @@
                                 <div class="form-group form-inline no-margin">
                                     <div class="input-group">
                                         <asp:TextBox runat="server" ID="txtQuantity" Width="50px" Text='<%# Eval("Quantity") %>' CssClass="form-control"></asp:TextBox><div class="input-group-btn">
-                                            <asp:LinkButton runat="server" ID="btnUpdate" Text="Update" CommandName="Update" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-default"></asp:LinkButton><asp:LinkButton runat="server" ID="btnRemove" CommandName="Delete" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-default"><span class="glyphicon glyphicon-trash"></span></asp:LinkButton>
+                                            <asp:LinkButton runat="server" ID="btnUpdate" Text="Update" CommandName="UpdateItem" OnClick="UpdateQuantity_Click" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-default"></asp:LinkButton><asp:LinkButton runat="server" ID="btnRemove" CommandName="DeleteItem" OnClick="UpdateQuantity_Click" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-default"><span class="glyphicon glyphicon-trash"></span></asp:LinkButton>
                                         </div>
                                     </div>
                                 </div>

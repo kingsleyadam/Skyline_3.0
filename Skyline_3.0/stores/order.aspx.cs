@@ -167,5 +167,59 @@ namespace Skyline_3._0.stores
                 grdProductsStep3.DataBind();
             } 
         }
+
+        protected void UpdateQuantity_Click(object sender, EventArgs e)
+        {
+            LinkButton lnkBtn = (LinkButton)sender;
+            int rowIndex = Convert.ToInt32(lnkBtn.CommandArgument), quantity = 0;
+            int productID = (int)grdOrderItems.DataKeys[rowIndex].Value;
+
+            if (lnkBtn.CommandName == "UpdateItem")
+            {
+                GridViewRow gr = grdOrderItems.Rows[rowIndex];
+                TextBox txtQuantity = (TextBox)gr.Cells[2].FindControl("txtQuantity");
+
+                if (txtQuantity != null && productID > 0)
+                {
+                    CartItem ci = Cart.Instance.Items.Find(x => x.ProductID == productID);
+                    Product pr = new Product(ci.ProductID,ci.ProductNum,ci.Name,ci.UnitPrice);
+
+
+                    if (int.TryParse(txtQuantity.Text,out quantity) && ci != null)
+                        Cart.Instance.SetItemQuantity(pr,quantity);
+                }
+
+                if (Cart.Instance.Items.Count > 0)
+                {
+                    grdOrderItems.DataSource = Cart.Instance.Items;
+                    grdOrderItems.DataBind();
+                }
+                else
+                {
+                    ChangeStep(0);
+                }    
+            }
+            else if (lnkBtn.CommandName == "DeleteItem")
+            {
+                if (productID > 0)
+                {
+                    CartItem ci = Cart.Instance.Items.Find(x => x.ProductID == productID);
+                    Product pr = new Product(ci.ProductID,ci.ProductNum,ci.Name,ci.UnitPrice);
+
+                    if (ci != null)
+                        Cart.Instance.SetItemQuantity(pr, quantity);
+                }
+
+                if (Cart.Instance.Items.Count > 0)
+                {
+                    grdOrderItems.DataSource = Cart.Instance.Items;
+                    grdOrderItems.DataBind();
+                }
+                else
+                {
+                    ChangeStep(0);
+                }                
+            }
+        }
     }
 }
