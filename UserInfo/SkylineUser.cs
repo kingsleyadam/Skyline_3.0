@@ -45,6 +45,23 @@ namespace UserInfo
             }
         }
 
+        public SkylineUserAddress(SkylineUser m_SkylineUser, string companyName, string fname, string lname, string email, string address1, string address2, string city, string state, string zipcode, string phonenumber)
+        {
+            User = m_SkylineUser;
+            ConnectionString = m_SkylineUser.ConnectionString;
+
+            CompanyName = companyName;
+            FirstName = fname;
+            LastName = lname;
+            Email = email;
+            Address1 = address1;
+            Address2 = address2;
+            City = city;
+            State = state;
+            ZipCode = zipcode;
+            PhoneNumber = phonenumber;
+        }
+
         public SkylineUser User
         {
             get { return _skylineUser; }

@@ -49,6 +49,11 @@ namespace Skyline_3._0.user
                     pnlFooter.Visible = false;
                 }
             }
+
+            if (Request.QueryString["s"] == "y")
+            {
+                pnlSuccess.Visible = true;
+            }
         }
 
         protected void grdOrder_PreRender(object sender, EventArgs e)

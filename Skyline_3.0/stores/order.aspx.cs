@@ -221,5 +221,38 @@ namespace Skyline_3._0.stores
                 }                
             }
         }
+
+        protected void lnkStep3_Click(object sender, EventArgs e)
+        {
+            Guid userID = new Guid(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString());
+            string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
+            SkylineUser su = new SkylineUser(userID, connectionString);
+
+            string companyName = txtCompanyName.Text;
+            string fName = txtFirstName.Text;
+            string lName = txtLastName.Text;
+            string email = txtEmail.Text;
+            string address1 = txtAddress1.Text;
+            string address2 = txtAddress2.Text;
+            string city = txtCity.Text;
+            string state = txtState.Text;
+            string zipCode = txtZipCode.Text;
+            string phone = txtPhoneNumber.Text;
+
+            SkylineUserAddress sua = new SkylineUserAddress(su, companyName, fName, lName, email, address1, address2, city, state, zipCode, phone);
+
+            try
+            {
+                int orderid;
+                Cart.Instance.SubmitCart(sua, out orderid, connectionString);
+
+                Response.Redirect("~/user/orders_info.aspx?o=" + orderid.ToString() + "&s=y");
+            }
+            catch (Exception ex)
+            {
+                pnlFailed.Visible = true;
+                lblFailed.Text = "It looks as though something went wrong. Please go back to your order page and try again. Short Message: " + ex.Message;
+            }
+        }
     }
 }

@@ -3,6 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Panel runat="server" ID="pnlSuccess" class="panel panel-success" Visible="false">
+        <div class="panel-heading">
+            <asp:Label ID="lblSuccessHeaader" runat="server" Text="Success!"></asp:Label>
+        </div>
+        <div class="panel-body">
+            <asp:Label ID="lblSuccess" runat="server" Text="You've successfully submited your order. See below for your order number and information. If you ever need to see a previous order go to Account>Orders from the top menu."></asp:Label>
+        </div>
+    </asp:Panel>
     <div class="panel panel-default no-margin">
         <div class="panel-heading">Order Information</div>
         <asp:Panel ID="pnlNoOrders" runat="server" CssClass="panel-body" Visible="false">
@@ -59,7 +67,8 @@
             </asp:GridView>
         </div>
         <asp:Panel ID="pnlFooter" runat="server" CssClass="panel-footer">
-            <h3><small><asp:Label ID="lblTotalHeader" runat="server" Text="Total: " /></small><asp:Label ID="lblTotal" runat="server" /></h3>
+            <h3><small>
+                <asp:Label ID="lblTotalHeader" runat="server" Text="Total: " /></small><asp:Label ID="lblTotal" runat="server" /></h3>
         </asp:Panel>
     </div>
 </asp:Content>
