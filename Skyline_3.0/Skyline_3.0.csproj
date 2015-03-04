@@ -1179,6 +1179,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Admin\Admin.csproj">
+      <Project>{e17afc21-2d98-41ec-8089-606b2531f145}</Project>
+      <Name>Admin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Email\Email.csproj">
       <Project>{75fffcda-6f37-4a55-8989-016ab126cc32}</Project>
       <Name>Email</Name>
