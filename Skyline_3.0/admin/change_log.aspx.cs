@@ -275,6 +275,8 @@ namespace Skyline_3._0.admin
                 pnlAddUpdateButtons.Visible = false;
 
                 grdChangeLog.CssClass = "table no-margin";
+
+                pnlChangeLogInfo.CssClass = "row top-margin-row form-group no-margin";
             }
         }
     }

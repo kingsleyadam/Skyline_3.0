@@ -14,13 +14,13 @@
                     <div class="col-md-11 col-sm-10">
                         <div class="form-inline form-group-nested" role="group">
                             <asp:DropDownList ID="ddAllVersions" runat="server" AutoPostBack="true" DataValueField="IterationID" DataTextField="Name" CssClass="form-control" OnSelectedIndexChanged="ddAllVersions_SelectedIndexChanged"></asp:DropDownList>
-                            <asp:LinkButton ID="btnMakeCurrent" runat="server" CssClass="btn btn-plain" OnClientClick = "Confirm()" OnClick="btnMakeCurrent_Click">Make Current</asp:LinkButton>
+                            <asp:LinkButton ID="btnMakeCurrent" runat="server" CssClass="btn btn-plain" OnClientClick="Confirm()" OnClick="btnMakeCurrent_Click">Make Current</asp:LinkButton>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row top-margin-row form-group line-break">
+            <asp:Panel ID="pnlChangeLogInfo" runat="server" CssClass="row top-margin-row form-group line-break">
                 <div class="col-md-2">
                     <div class="form-group">
                         <strong>
@@ -51,7 +51,7 @@
                         <asp:HyperLink ID="lnkRepo" runat="server" Target="_blank" />
                         <asp:Label ID="lblRepo" runat="server" CssClass="control-label" />
                     </div>
-                    <asp:Panel ID="pnlEditIteration" runat="server" CSSClass="form-group">
+                    <asp:Panel ID="pnlEditIteration" runat="server" CssClass="form-group">
                         <asp:LinkButton ID="lnkEditIteration" runat="server" OnClick="lnkEditIteration_Click">Edit</asp:LinkButton>
                     </asp:Panel>
                 </div>
@@ -86,68 +86,72 @@
                         </asp:GridView>
                     </div>
                 </div>
-            </div>
+            </asp:Panel>
 
-            <asp:Panel ID="pnlChangeLogID" runat="server" CssClass="form-horizontal line-break form-group" Visible="false">
-                <div class="form-group">
-                    <asp:Label ID="lblChangeType" runat="server" Text="Change Type" CssClass="col-sm-2 control-label" AssociatedControlID="ddChangeType" />
-                    <div class="col-sm-10">
-                        <asp:DropDownList ID="ddChangeType" runat="server" CssClass="form-control" DataTextField="ChangeType" DataValueField="ChangeTypeID" />
+            <asp:Panel ID="pnlChangeLogID" runat="server" CssClass="form-horizontal line-break form-group row" Visible="false">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <asp:Label ID="lblChangeType" runat="server" Text="Change Type" CssClass="col-sm-2 control-label" AssociatedControlID="ddChangeType" />
+                        <div class="col-sm-10">
+                            <asp:DropDownList ID="ddChangeType" runat="server" CssClass="form-control" DataTextField="ChangeType" DataValueField="ChangeTypeID" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <asp:Label ID="lblChangeTypeDescription" runat="server" Text="Description" CssClass="col-sm-2 control-label" AssociatedControlID="txtDescription"></asp:Label>
-                    <div class="col-sm-10">
+                    <div class="form-group">
+                        <asp:Label ID="lblChangeTypeDescription" runat="server" Text="Description" CssClass="col-sm-2 control-label" AssociatedControlID="txtDescription"></asp:Label>
+                        <div class="col-sm-10">
 
-                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" Rows="5" TextMode="MultiLine" placeholder="Change Description" />
+                            <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" Rows="5" TextMode="MultiLine" placeholder="Change Description" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="btn-group">
-                            <asp:LinkButton ID="lnkUpdate" runat="server" CssClass="btn btn-primary" CommandName="Update" OnClick="lnkUpdate_Click">Update</asp:LinkButton>
-                            <asp:LinkButton ID="lnkCancel" runat="server" CssClass="btn btn-plain" OnClick="lnkCancel_Click">Cancel</asp:LinkButton>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="btn-group">
+                                <asp:LinkButton ID="lnkUpdate" runat="server" CssClass="btn btn-primary" CommandName="Update" OnClick="lnkUpdate_Click">Update</asp:LinkButton>
+                                <asp:LinkButton ID="lnkCancel" runat="server" CssClass="btn btn-plain" OnClick="lnkCancel_Click">Cancel</asp:LinkButton>
+                            </div>
                         </div>
                     </div>
                 </div>
             </asp:Panel>
 
-            <asp:Panel ID="pnlAddUpdateInteration" runat="server" CssClass="form-horizontal line-break form-group" Visible="false">
-                <div class="form-group">
-                    <asp:Label ID="lblAddVersionNumber" runat="server" Text="Version Number" CssClass="col-sm-2 control-label" AssociatedControlID="txtVersionNumber" />
-                    <div class="col-sm-10">
-                        <asp:TextBox ID="txtVersionNumber" runat="server" CssClass="form-control" placeholder="Version #" />
+            <asp:Panel ID="pnlAddUpdateInteration" runat="server" CssClass="form-horizontal line-break form-group row" Visible="false">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <asp:Label ID="lblAddVersionNumber" runat="server" Text="Version Number" CssClass="col-sm-2 control-label" AssociatedControlID="txtVersionNumber" />
+                        <div class="col-sm-10">
+                            <asp:TextBox ID="txtVersionNumber" runat="server" CssClass="form-control" placeholder="Version #" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <asp:Label ID="lblAddFramework" runat="server" Text="Framework" CssClass="col-sm-2 control-label" AssociatedControlID="txtFramework"></asp:Label>
-                    <div class="col-sm-10">
-                        <asp:TextBox ID="txtFramework" runat="server" CssClass="form-control" placeholder=".NET Framework Version" />
+                    <div class="form-group">
+                        <asp:Label ID="lblAddFramework" runat="server" Text="Framework" CssClass="col-sm-2 control-label" AssociatedControlID="txtFramework"></asp:Label>
+                        <div class="col-sm-10">
+                            <asp:TextBox ID="txtFramework" runat="server" CssClass="form-control" placeholder=".NET Framework Version" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <asp:Label ID="lblAddLanguage" runat="server" Text="Design Language" CssClass="col-sm-2 control-label" AssociatedControlID="txtLanguage"></asp:Label>
-                    <div class="col-sm-10">
-                        <asp:TextBox ID="txtLanguage" runat="server" CssClass="form-control" placeholder="Programming Language" />
+                    <div class="form-group">
+                        <asp:Label ID="lblAddLanguage" runat="server" Text="Design Language" CssClass="col-sm-2 control-label" AssociatedControlID="txtLanguage"></asp:Label>
+                        <div class="col-sm-10">
+                            <asp:TextBox ID="txtLanguage" runat="server" CssClass="form-control" placeholder="Programming Language" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <asp:Label ID="lblAddRepository" runat="server" Text="Repository" CssClass="col-sm-2 control-label" AssociatedControlID="txtRepository"></asp:Label>
-                    <div class="col-sm-10">
-                        <asp:TextBox ID="txtRepository" runat="server" CssClass="form-control" placeholder="Repository Link" />
+                    <div class="form-group">
+                        <asp:Label ID="lblAddRepository" runat="server" Text="Repository" CssClass="col-sm-2 control-label" AssociatedControlID="txtRepository"></asp:Label>
+                        <div class="col-sm-10">
+                            <asp:TextBox ID="txtRepository" runat="server" CssClass="form-control" placeholder="Repository Link" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="btn-group">
-                            <asp:LinkButton ID="lnkUpdateIteration" runat="server" CssClass="btn btn-primary" CommandName="Update" OnClick="lnkUpdateIteration_Click">Update</asp:LinkButton>
-                            <asp:LinkButton ID="lnkCancelIteration" runat="server" CssClass="btn btn-plain" OnClick="lnkCancelIteration_Click">Cancel</asp:LinkButton>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="btn-group">
+                                <asp:LinkButton ID="lnkUpdateIteration" runat="server" CssClass="btn btn-primary" CommandName="Update" OnClick="lnkUpdateIteration_Click">Update</asp:LinkButton>
+                                <asp:LinkButton ID="lnkCancelIteration" runat="server" CssClass="btn btn-plain" OnClick="lnkCancelIteration_Click">Cancel</asp:LinkButton>
+                            </div>
                         </div>
                     </div>
                 </div>
             </asp:Panel>
 
-            <asp:Panel ID="pnlAddUpdateButtons" runat="server" CSSClass="btn-group" role="group">
+            <asp:Panel ID="pnlAddUpdateButtons" runat="server" CssClass="btn-group" role="group">
                 <asp:LinkButton ID="btnAddNewVersion" runat="server" CssClass="btn btn-plain" OnClick="btnAddNewVersion_Click">Add New Version</asp:LinkButton>
                 <asp:LinkButton ID="btnAddToChangeLog" runat="server" CssClass="btn btn-plain" OnClick="btnAddToChangeLog_Click">Add to Change Log</asp:LinkButton>
             </asp:Panel>
@@ -158,7 +162,7 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="JavaScriptContent" runat="server">
-    <script type = "text/javascript">
+    <script type="text/javascript">
         function Confirm() {
             var confirm_value = document.createElement("INPUT");
             confirm_value.type = "hidden";

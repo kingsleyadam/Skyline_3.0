@@ -40,6 +40,15 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.LinkButton btnMakeCurrent;
         
         /// <summary>
+        /// pnlChangeLogInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlChangeLogInfo;
+        
+        /// <summary>
         /// lblVersionHeader control.
         /// </summary>
         /// <remarks>
