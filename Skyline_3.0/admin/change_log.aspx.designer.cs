@@ -139,6 +139,15 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.Label lblRepo;
         
         /// <summary>
+        /// pnlEditIteration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlEditIteration;
+        
+        /// <summary>
         /// lnkEditIteration control.
         /// </summary>
         /// <remarks>
@@ -317,6 +326,15 @@ namespace Skyline_3._0.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkCancelIteration;
+        
+        /// <summary>
+        /// pnlAddUpdateButtons control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAddUpdateButtons;
         
         /// <summary>
         /// btnAddNewVersion control.

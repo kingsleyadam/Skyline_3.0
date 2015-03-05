@@ -51,9 +51,9 @@
                         <asp:HyperLink ID="lnkRepo" runat="server" Target="_blank" />
                         <asp:Label ID="lblRepo" runat="server" CssClass="control-label" />
                     </div>
-                    <div class="form-group">
+                    <asp:Panel ID="pnlEditIteration" runat="server" CSSClass="form-group">
                         <asp:LinkButton ID="lnkEditIteration" runat="server" OnClick="lnkEditIteration_Click">Edit</asp:LinkButton>
-                    </div>
+                    </asp:Panel>
                 </div>
                 <div class="col-md-10">
                     <div class="table-responsive table-responsive-nested">
@@ -147,10 +147,10 @@
                 </div>
             </asp:Panel>
 
-            <div class="btn-group" role="group">
+            <asp:Panel ID="pnlAddUpdateButtons" runat="server" CSSClass="btn-group" role="group">
                 <asp:LinkButton ID="btnAddNewVersion" runat="server" CssClass="btn btn-plain" OnClick="btnAddNewVersion_Click">Add New Version</asp:LinkButton>
                 <asp:LinkButton ID="btnAddToChangeLog" runat="server" CssClass="btn btn-plain" OnClick="btnAddToChangeLog_Click">Add to Change Log</asp:LinkButton>
-            </div>
+            </asp:Panel>
 
         </div>
     </div>

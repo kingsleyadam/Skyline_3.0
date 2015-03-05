@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Admin;
 using System.Configuration;
+using System.Web.Security;
 
 namespace Skyline_3._0.admin
 {
@@ -17,6 +18,7 @@ namespace Skyline_3._0.admin
             if (!IsPostBack)
             {
                 PopulateAllObjects();
+                SuppressBasedOnUser();
             }
         }
 
@@ -74,7 +76,7 @@ namespace Skyline_3._0.admin
 
         protected void grdChangeLog_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            if (e.Row.RowType == DataControlRowType.DataRow && Roles.IsUserInRole("SuperAdmin"))
             {
                 Button selectButton = (Button)e.Row.FindControl("SelectButton");
                 if (selectButton != null)
@@ -262,6 +264,18 @@ namespace Skyline_3._0.admin
             cl.UpdataeCurrent(updateDate);
 
             PopulateAllObjects(iterationID);
+        }
+
+        private void SuppressBasedOnUser()
+        {
+            if (!Roles.IsUserInRole("SuperAdmin"))
+            {
+                btnMakeCurrent.Visible = false;
+                pnlEditIteration.Visible = false;
+                pnlAddUpdateButtons.Visible = false;
+
+                grdChangeLog.CssClass = "table no-margin";
+            }
         }
     }
 }
