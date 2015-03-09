@@ -15,6 +15,12 @@ namespace Glossary
         private string _location;
         private string _connectionString;
 
+        public GlossaryDataSet(int pageNum, string connectionStr)
+        {
+            Page = pageNum;
+            ConnectionString = connectionStr;
+        }
+
         public GlossaryDataSet(int pageNum, string pageLocation, string connectionStr)
         {
             Page = pageNum;
@@ -63,6 +69,63 @@ namespace Glossary
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     DataTable dt = new DataTable("Glossary");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
+        public DataSet GetDataSetByPage()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetGlossaryByPage", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramPageID = new SqlParameter("@PageID", SqlDbType.Int);
+                paramPageID.Direction = ParameterDirection.Input;
+
+                paramPageID.Value = Page;
+
+                cmd.Parameters.Add(paramPageID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Glossary");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
+        public static DataSet GetPagesDataSet(string ConnectionString)
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetPages", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Pages");
                     if (dr.HasRows)
                     {
                         dt.Load(dr);

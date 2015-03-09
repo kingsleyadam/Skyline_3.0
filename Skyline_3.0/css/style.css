@@ -187,6 +187,10 @@ span.valerror[style*="inline"] {
     cursor: pointer;
 }
 
+.table-hover .no-pointer {
+    cursor:auto;
+}
+
 .panel-footer h3 {
     margin: 0;
     padding: 0;
@@ -308,11 +312,18 @@ span.valerror[style*="inline"] {
     color:white;
 }
 
+.table-select-row>td>a {
+    /*background-color:#EAEAEA;*/
+    background-color:black;
+    color:white;
+    font-weight:bold;
+}
+
 .table-responsive-nested {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-right-radius: 3px;
-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
 }
 
 .form-group-nested>select, .form-group-nested>a {
