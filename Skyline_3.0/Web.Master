@@ -93,7 +93,7 @@
                                                 <li class="divider"></li>
                                                 <li class="dropdown-header">User Info</li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkUserList" runat="server" NavigateUrl="~/admin/userlist.aspx">User List</asp:HyperLink>
+                                                    <asp:HyperLink ID="lnkUserList" runat="server" NavigateUrl="~/admin/user_list.aspx">User List</asp:HyperLink>
                                                 </li>
                                                 <li>
                                                     <asp:HyperLink ID="lnkOrders" runat="server" NavigateUrl="~/admin/order.aspx">Orders</asp:HyperLink>
