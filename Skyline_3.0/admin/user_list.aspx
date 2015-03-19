@@ -56,13 +56,13 @@
                         </EditItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="LastLoginDate" HeaderText="Last Login On"
-                        SortExpression="LastLoginDate" ReadOnly="True" />
+                        SortExpression="LastLoginDate" ReadOnly="True" HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right" />
                     <asp:BoundField DataField="LastPasswordChangedDate"
                         HeaderText="Password Changed On"
-                        SortExpression="LastPasswordChangedDate" ReadOnly="True" />
+                        SortExpression="LastPasswordChangedDate" ReadOnly="True" HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right" />
                     <asp:BoundField DataField="FailedPasswordAttemptCount"
                         HeaderText="Failed Logins"
-                        SortExpression="FailedPasswordAttemptCount" ReadOnly="True" ItemStyle-Width="100px" />
+                        SortExpression="FailedPasswordAttemptCount" ReadOnly="True" ItemStyle-Width="100px" HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right" />
                     <asp:TemplateField HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden">
                         <ItemTemplate>
                             <asp:Button runat="server" ID="EditButton" CommandName="Edit" />
@@ -70,7 +70,7 @@
                     </asp:TemplateField>
                 </Columns>
                 <PagerStyle HorizontalAlign="Center" CssClass="table-pager" />
-                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SelectedRowStyle CssClass="table-select-row" />
             </asp:GridView>
         </div>
     </asp:Panel>

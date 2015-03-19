@@ -86,7 +86,7 @@
 
                                                 <li class="dropdown-header">Website Info</li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkChangeLog" runat="server" NavigateUrl="~/admin/change_log.aspx" Text="Site Change Log" /></li>
+                                                    <asp:HyperLink ID="lnkChangeLog" runat="server" NavigateUrl="~/admin/change_log.aspx" Text="Change Log" /></li>
                                                 <li>
                                                     <asp:HyperLink ID="lnkWebSiteText" runat="server" NavigateUrl="~/admin/glossary.aspx">Website Text</asp:HyperLink>
                                                 </li>
@@ -96,23 +96,15 @@
                                                     <asp:HyperLink ID="lnkUserList" runat="server" NavigateUrl="~/admin/user_list.aspx">User List</asp:HyperLink>
                                                 </li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkOrders" runat="server" NavigateUrl="~/admin/order.aspx">Orders</asp:HyperLink>
+                                                    <asp:HyperLink ID="lnkOrders" runat="server" NavigateUrl="~/admin/orders.aspx">Orders</asp:HyperLink>
                                                 </li>
                                                 <li class="divider"></li>
-                                                <li class="dropdown-header">Products</li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkProductList" runat="server" NavigateUrl="~/admin/products.aspx">List</asp:HyperLink>
-                                                </li>
-                                                <li>
-                                                    <asp:HyperLink ID="lnkProductImages" runat="server" NavigateUrl="~/admin/products_image.aspx">Images</asp:HyperLink>
-                                                </li>
-                                                <li>
-                                                    <asp:HyperLink ID="lnkProductCategories" runat="server" NavigateUrl="~/admin/products_category.aspx">Categories</asp:HyperLink>
+                                                    <asp:HyperLink ID="lnkProductList" runat="server" NavigateUrl="~/admin/products.aspx">Products</asp:HyperLink>
                                                 </li>
                                                 <li class="divider"></li>
-                                                <li class="dropdown-header">Categories</li>
                                                 <li>
-                                                    <asp:HyperLink ID="lnkCategories" runat="server" NavigateUrl="~/admin/category.aspx">List</asp:HyperLink>
+                                                    <asp:HyperLink ID="lnkCategories" runat="server" NavigateUrl="~/admin/category.aspx">Categories</asp:HyperLink>
                                                 </li>
 
                                             </ul>

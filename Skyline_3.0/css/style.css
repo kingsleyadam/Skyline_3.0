@@ -3,7 +3,10 @@
     @include box-sizing(border-box);
 }
 
-a.disabled { text-decoration:none; color:#bbb; }
+a.disabled {
+    text-decoration: none;
+    color: #bbb;
+}
 
 .wrapper {
     margin: 60px 0 60px 0;
@@ -187,9 +190,9 @@ span.valerror[style*="inline"] {
     cursor: pointer;
 }
 
-.table-hover .no-pointer {
-    cursor:auto;
-}
+    .table-hover .no-pointer {
+        cursor: auto;
+    }
 
 .panel-footer h3 {
     margin: 0;
@@ -285,39 +288,41 @@ span.valerror[style*="inline"] {
 
 
 /*Order Page*/
-.table>tbody>tr>td>img {
-    min-width:40px;
-    min-height:20px;
-    max-height:75px;
-    max-width:100px;
+.table > tbody > tr > td > img {
+    min-width: 40px;
+    min-height: 20px;
+    max-height: 75px;
+    max-width: 100px;
 }
 
 .order-footer h3 {
-    margin-top:6px !important;
+    margin-top: 6px !important;
 }
 
 .order-body .line-break {
-    margin-bottom:15px;
-    padding-bottom:15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 /*Admin*/
 .top-margin-row {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
-.table-select-row>td {
-    /*background-color:#EAEAEA;*/
-    background-color:black;
-    color:white;
+.table-select-row > td {
+    background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%);
+    background-repeat: repeat-x;
+    background-color: black;
+    color: white;
+    cursor:auto;
 }
 
-.table-select-row>td>a {
-    /*background-color:#EAEAEA;*/
-    background-color:black;
-    color:white;
-    font-weight:bold;
-}
+    .table-select-row > td > a {
+        /*background-color:#EAEAEA;*/
+        background-color: black;
+        color: white;
+        font-weight: bold;
+    }
 
 .table-responsive-nested {
     border-bottom-right-radius: 3px;
@@ -326,8 +331,8 @@ span.valerror[style*="inline"] {
     border-top-left-radius: 3px;
 }
 
-.form-group-nested>select, .form-group-nested>a {
-    margin-bottom:15px;
+.form-group-nested > select, .form-group-nested > a {
+    margin-bottom: 15px;
 }
 
 /*Custom Button*/
@@ -373,14 +378,14 @@ textarea:focus, input[type="text"]:focus, textarea[type="text"]:focus, input[typ
 }
 
 /*Table Footer - Remove Hover*/
-.table-hover tbody>tr:last-child {
-   background-color:white;
-   cursor:auto;
+.table-hover-paged tbody > tr:last-child {
+    background-color: white;
+    cursor: auto;
 }
 
-.table-hover tbody>tr:last-child:hover {
-   background-color:white;
-}
+    .table-hover-paged tbody > tr:last-child:hover {
+        background-color: white;
+    }
 
 .table-pager {
     /*display: inline-block;*/
@@ -389,68 +394,68 @@ textarea:focus, input[type="text"]:focus, textarea[type="text"]:focus, input[typ
     border-radius: 4px;
 }
 
-.table-pager table > tbody > tr > td {
-    display: inline;
-}
+    .table-pager table > tbody > tr > td {
+        display: inline;
+    }
 
-.table-pager table > tbody > tr > td > a,
-.table-pager table > tbody > tr > td > span {
-    position: relative;
-    float: left;
-    padding: 5px 10px;
-    line-height: 1.42857143;
-    text-decoration: none;
-    color: #dd4814;
-    background-color: #ffffff;
-    border: 1px solid #dddddd;
-    margin-left: -1px;
-}
+        .table-pager table > tbody > tr > td > a,
+        .table-pager table > tbody > tr > td > span {
+            position: relative;
+            float: left;
+            padding: 5px 10px;
+            line-height: 1.42857143;
+            text-decoration: none;
+            color: #dd4814;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            margin-left: -1px;
+        }
 
-.table-pager table > tbody > tr > td > span {
-    position: relative;
-    float: left;
-    padding: 5px 10px;
-    line-height: 1.42857143;
-    text-decoration: none;    
-    margin-left: -1px;
-    z-index: 2;
-    color: #aea79f;
-    background-color: #f5f5f5;
-    border-color: #dddddd;
-    cursor:no-drop;
-}
+        .table-pager table > tbody > tr > td > span {
+            position: relative;
+            float: left;
+            padding: 5px 10px;
+            line-height: 1.42857143;
+            text-decoration: none;
+            margin-left: -1px;
+            z-index: 2;
+            color: #aea79f;
+            background-color: #f5f5f5;
+            border-color: #dddddd;
+            cursor: no-drop;
+        }
 
-.table-pager table > tbody > tr > td > span:hover {
-    background-color: #f5f5f5;
-}
+            .table-pager table > tbody > tr > td > span:hover {
+                background-color: #f5f5f5;
+            }
 
-.table-pager table > tbody > tr > td:first-child > a,
-.table-pager table > tbody > tr > td:first-child > span {
-    margin-left: 0;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px;
-}
+        .table-pager table > tbody > tr > td:first-child > a,
+        .table-pager table > tbody > tr > td:first-child > span {
+            margin-left: 0;
+            border-bottom-left-radius: 4px;
+            border-top-left-radius: 4px;
+        }
 
-.table-pager table > tbody > tr > td:last-child > a,
-.table-pager table > tbody > tr > td:last-child > span {
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-}
+        .table-pager table > tbody > tr > td:last-child > a,
+        .table-pager table > tbody > tr > td:last-child > span {
+            border-bottom-right-radius: 4px;
+            border-top-right-radius: 4px;
+        }
 
-.table-pager table > tbody > tr > td > a:hover,
-.table-pager table > tbody > tr > td > a:focus,
-.table-pager table > tbody > tr > td > span:focus {
-    color: #97310e;
-    background-color: #eeeeee;
-    border-color: #dddddd;
-}
+        .table-pager table > tbody > tr > td > a:hover,
+        .table-pager table > tbody > tr > td > a:focus,
+        .table-pager table > tbody > tr > td > span:focus {
+            color: #97310e;
+            background-color: #eeeeee;
+            border-color: #dddddd;
+        }
 
 .table .form-control {
-    padding:2px 5px 2px 5px;
-    height:auto;
+    padding: 2px 5px 2px 5px;
+    height: auto;
 }
 
 .table .btn {
-    padding:2px 7px 2px 7px;
-    height:auto;
+    padding: 2px 7px 2px 7px;
+    height: auto;
 }

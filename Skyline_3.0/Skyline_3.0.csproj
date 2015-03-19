@@ -1220,6 +1220,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\WebsitePics\Home Page\Big_Red_1.jpg" />
+    <Content Include="images\WebsitePics\Home Page\family_photo.jpg" />
+    <Content Include="images\WebsitePics\Home Page\HomePage.png" />
+    <Content Include="images\WebsitePics\Home Page\House.jpg" />
     <Content Include="scripts\javascript.js" />
     <Content Include="user\orders_info.aspx" />
     <Content Include="user\Web.config" />
@@ -1253,8 +1257,6 @@
     <Content Include="admin\glossary.aspx" />
     <Content Include="admin\orders.aspx" />
     <Content Include="admin\products.aspx" />
-    <Content Include="admin\products_category.aspx" />
-    <Content Include="admin\products_image.aspx" />
     <Content Include="admin\user_list.aspx" />
     <Content Include="contact_us.aspx" />
     <Content Include="css\bootstrap.min.css" />
@@ -1323,20 +1325,6 @@
     </Compile>
     <Compile Include="admin\products.aspx.designer.cs">
       <DependentUpon>products.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\products_category.aspx.cs">
-      <DependentUpon>products_category.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\products_category.aspx.designer.cs">
-      <DependentUpon>products_category.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\products_image.aspx.cs">
-      <DependentUpon>products_image.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\products_image.aspx.designer.cs">
-      <DependentUpon>products_image.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\user_list.aspx.cs">
       <DependentUpon>user_list.aspx</DependentUpon>

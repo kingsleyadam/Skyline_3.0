@@ -37,12 +37,14 @@ namespace Skyline_3._0.admin
         protected void grdUsers_RowEditing(object sender, GridViewEditEventArgs e)
         {
             grdUsers.EditIndex = e.NewEditIndex;
+            grdUsers.SelectedIndex = e.NewEditIndex;
             PopulateGridView();
         }
 
         protected void grdUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             grdUsers.EditIndex = -1;
+            grdUsers.SelectedIndex = -1;
             PopulateGridView();
         }
 
@@ -52,7 +54,7 @@ namespace Skyline_3._0.admin
 
             if (ds.Tables["UserList"].Rows.Count > 0)
             {
-                grdUsers.CssClass = grdUsers.CssClass + " table-hover";
+                grdUsers.CssClass = grdUsers.CssClass + " table-hover table-hover-paged";
                 grdUsers.DataSource = ds;
             }
             else
@@ -96,6 +98,7 @@ namespace Skyline_3._0.admin
                     su.UpdateAdminDataBase(email, isLockedOut);
 
                     gr.EditIndex = -1;
+                    gr.SelectedIndex = -1;
                     PopulateGridView();
                 }
             }
