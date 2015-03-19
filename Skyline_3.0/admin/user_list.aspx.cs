@@ -74,8 +74,6 @@ namespace Skyline_3._0.admin
                 else
                     gr.Columns[0].Visible = false;
             }
-                
-
         }
 
         protected void grdUsers_RowUpdating(object sender, GridViewUpdateEventArgs e)

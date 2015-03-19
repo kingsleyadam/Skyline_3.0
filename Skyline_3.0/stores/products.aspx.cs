@@ -296,7 +296,7 @@ namespace Skyline_3._0.stores
             string sortBy = ViewState["sortBy"].ToString();
 
             AllProducts ap = new AllProducts(catID, searchString, searchField, sortBy, pageNum, itemsPerPage, connectionString);
-            DataSet ds = ap.GetDataSet();
+            DataSet ds = ap.GetPagedDataSet();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 lvProducts.DataSource = ds;

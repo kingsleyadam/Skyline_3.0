@@ -142,7 +142,7 @@ namespace ProductInfo
             set { _connectionString = value; }
         }
 
-        public DataSet GetDataSet()
+        public DataSet GetPagedDataSet()
         {
             DataSet ds = new DataSet();
             SqlConnection con = new SqlConnection(ConnectionString);
@@ -202,6 +202,53 @@ namespace ProductInfo
                     ds.Tables.Add(dt);
 
                     
+                }
+            }
+
+            return ds;
+        }
+
+        public DataSet GetAllProductsDataSet()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("idxIndexSearchPaged", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramCategoryID = new SqlParameter("@CategoryID", SqlDbType.Int);
+                paramCategoryID.Direction = ParameterDirection.Input;
+                SqlParameter paramSearchString = new SqlParameter("@SearchString", SqlDbType.NVarChar, 2000);
+                paramSearchString.Direction = ParameterDirection.Input;
+                SqlParameter paramSearchField = new SqlParameter("@SearchField", SqlDbType.NVarChar, 50);
+                paramSearchField.Direction = ParameterDirection.Input;
+                SqlParameter paramSortExpression = new SqlParameter("@SortExpression", SqlDbType.NVarChar, 50);
+                paramSortExpression.Direction = ParameterDirection.Input;
+                SqlParameter paramTopNum = new SqlParameter("@TopNum", SqlDbType.Int);
+
+                paramCategoryID.Value = CategoryID;
+                paramSearchString.Value = SearchString;
+                paramSearchField.Value = SearchField;
+                paramSortExpression.Value = SortExpression;
+                paramTopNum.Value = TopNum;
+
+                cmd.Parameters.Add(paramCategoryID);
+                cmd.Parameters.Add(paramSearchString);
+                cmd.Parameters.Add(paramSearchField);
+                cmd.Parameters.Add(paramSortExpression);
+                cmd.Parameters.Add(paramTopNum);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Products");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
                 }
             }
 
