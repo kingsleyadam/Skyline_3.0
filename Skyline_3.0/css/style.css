@@ -371,3 +371,86 @@ textarea:focus, input[type="text"]:focus, textarea[type="text"]:focus, input[typ
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(70,72,72,0.6);
     outline: white;
 }
+
+/*Table Footer - Remove Hover*/
+.table-hover tbody>tr:last-child {
+   background-color:white;
+   cursor:auto;
+}
+
+.table-hover tbody>tr:last-child:hover {
+   background-color:white;
+}
+
+.table-pager {
+    /*display: inline-block;*/
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.table-pager table > tbody > tr > td {
+    display: inline;
+}
+
+.table-pager table > tbody > tr > td > a,
+.table-pager table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 5px 10px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #dd4814;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-left: -1px;
+}
+
+.table-pager table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 5px 10px;
+    line-height: 1.42857143;
+    text-decoration: none;    
+    margin-left: -1px;
+    z-index: 2;
+    color: #aea79f;
+    background-color: #f5f5f5;
+    border-color: #dddddd;
+    cursor:no-drop;
+}
+
+.table-pager table > tbody > tr > td > span:hover {
+    background-color: #f5f5f5;
+}
+
+.table-pager table > tbody > tr > td:first-child > a,
+.table-pager table > tbody > tr > td:first-child > span {
+    margin-left: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.table-pager table > tbody > tr > td:last-child > a,
+.table-pager table > tbody > tr > td:last-child > span {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.table-pager table > tbody > tr > td > a:hover,
+.table-pager table > tbody > tr > td > a:focus,
+.table-pager table > tbody > tr > td > span:focus {
+    color: #97310e;
+    background-color: #eeeeee;
+    border-color: #dddddd;
+}
+
+.table .form-control {
+    padding:2px 5px 2px 5px;
+    height:auto;
+}
+
+.table .btn {
+    padding:2px 7px 2px 7px;
+    height:auto;
+}

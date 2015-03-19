@@ -166,6 +166,7 @@ namespace UserInfo
             return ds;
         }
     }
+
     public class SkylineUser
     {
         private Guid _userID;
@@ -317,6 +318,34 @@ namespace UserInfo
             }
         }
 
+        public void UpdateAdminDataBase(string email, bool isLockedOut)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admUpdateUser", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramSkylineID = new SqlParameter("@SkylineID", SqlDbType.Int);
+                paramSkylineID.Direction = ParameterDirection.Input;
+                SqlParameter paramEmail = new SqlParameter("@Email", SqlDbType.NVarChar, 600);
+                paramEmail.Direction = ParameterDirection.Input;
+                SqlParameter paramIsLockedOut = new SqlParameter("@IsLockedOut", SqlDbType.Bit);
+                paramIsLockedOut.Direction = ParameterDirection.Input;
+
+                paramSkylineID.Value = SkylineID;
+                paramEmail.Value = email;
+                paramIsLockedOut.Value = isLockedOut;
+
+                cmd.Parameters.Add(paramSkylineID);
+                cmd.Parameters.Add(paramEmail);
+                cmd.Parameters.Add(paramIsLockedOut);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public DataSet GetWebSiteOrders()
         {
             DataSet ds = new DataSet();
@@ -402,6 +431,31 @@ namespace UserInfo
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     DataTable dt = new DataTable("UserInfo");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
+        public static DataSet GetAllUsers(string connectionString)
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(connectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetUsers", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("UserList");
                     if (dr.HasRows)
                     {
                         dt.Load(dr);
