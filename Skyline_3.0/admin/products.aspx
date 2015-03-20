@@ -71,7 +71,7 @@
         <div class="table-responsive">
             <asp:GridView ID="grdProducts" runat="server" AllowPaging="True"
                 AutoGenerateColumns="False" DataKeyNames="ProductID" GridLines="None" Width="100%"
-                EnableModelValidation="True" CssClass="table table-striped table-condensed table-hover table-hover-paged no-margin " OnPageIndexChanging="grdProducts_PageIndexChanging" OnPreRender="grdProducts_PreRender" OnRowDataBound="grdProducts_RowDataBound">
+                EnableModelValidation="True" CssClass="table table-striped table-condensed table-hover table-hover-paged no-margin " OnPageIndexChanging="grdProducts_PageIndexChanging" OnPreRender="grdProducts_PreRender" OnRowDataBound="grdProducts_RowDataBound" OnSelectedIndexChanged="grdProducts_SelectedIndexChanged">
                 <Columns>
                     <asp:TemplateField ShowHeader="False">
                         <ItemTemplate>
@@ -95,7 +95,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Description" SortExpression="Description">
                         <ItemTemplate>
-                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
+                            <asp:Label ID="lblDescription" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Price" SortExpression="Price">
@@ -132,6 +132,66 @@
                     <div class="alert alert-danger noMargin">There are no products found for your search.</div>
                 </EmptyDataTemplate>
             </asp:GridView>
+        </div>
+    </asp:Panel>
+
+    <%--Specific Product Information--%>
+
+    <asp:Panel runat="server" ID="pnlProductInfo" CssClass="panel panel-default no-margin" Visible="false">
+        <div class="panel-heading">
+            <asp:Label ID="lblProductName" runat="server" />
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <asp:Label ID="lblProductNameHeader" runat="server" Text="Name" CssClass="col-sm-2 control-label" AssociatedControlID="txtProductName"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtProductName" runat="server" placeholder="Product Name" CssClass="form-control"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="lblProductNumHeader" runat="server" Text="Number" CssClass="col-sm-2 control-label" AssociatedControlID="txtProductNum"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtProductNum" runat="server" placeholder="Product Number" CssClass="form-control"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="lblDescriptionHeader" runat="server" Text="Description" CssClass="col-sm-2 control-label" AssociatedControlID="txtDescription"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtDescription" runat="server" placeholder="Product Description" CssClass="form-control" TextMode="MultiLine" Height="100px"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="lblPriceHeader" runat="server" Text="Price" CssClass="col-sm-2 control-label" AssociatedControlID="txtPrice"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtPrice" runat="server" placeholder="Product Price" CssClass="form-control"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="lblQuantityHeader" runat="server" Text="Quantity" CssClass="col-sm-2 control-label" AssociatedControlID="txtQuantity"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="txtQuantity" runat="server" placeholder="Product Quantity" CssClass="form-control"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox checkbox-inline">
+                            <asp:CheckBox ID="chkSoldOut" runat="server" Text="Is Sold Out?" />
+                        </div>
+                        <div class="checkbox checkbox-inline">
+                            <asp:CheckBox ID="chkBestSeller" runat="server" Text="Is Best Seller?" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group no-margin">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="btn-group">
+                            <asp:LinkButton ID="lbtnUpdate" runat="server" CommandName="Update" CssClass="btn btn-plain">Update</asp:LinkButton>
+                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="btn btn-plain" OnClick="lbtnCancel_Click">Cancel</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </asp:Panel>
 

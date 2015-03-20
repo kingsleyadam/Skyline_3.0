@@ -459,3 +459,7 @@ textarea:focus, input[type="text"]:focus, textarea[type="text"]:focus, input[typ
     padding: 2px 7px 2px 7px;
     height: auto;
 }
+
+.checkbox-inline label {
+    padding-left:0;
+}

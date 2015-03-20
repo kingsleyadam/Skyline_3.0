@@ -12,6 +12,8 @@ namespace Skyline_3._0.admin
 {
     public partial class products : System.Web.UI.Page
     {
+        string _connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -109,13 +111,12 @@ namespace Skyline_3._0.admin
 
         private void PopulateProductsGrid()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["skylinebigredConnectionString"].ConnectionString;
             int catID = (int)ViewState["categoryID"];
             string searchString = ViewState["searchString"].ToString();
             string searchField = ViewState["searchField"].ToString();
             string sortBy = ViewState["sortBy"].ToString();
 
-            AllProducts ap = new AllProducts(connectionString);
+            AllProducts ap = new AllProducts(_connectionString);
 
             ap.CategoryID = catID;
             ap.SearchString = searchString;
@@ -154,6 +155,15 @@ namespace Skyline_3._0.admin
                 {
                     e.Row.Cells[i].Attributes["OnClick"] = ClientScript.GetPostBackEventReference(selectButton, "");
                 }
+
+                //Shorten Description
+                Label lblDescription = (Label)e.Row.Cells[4].FindControl("lblDescription");
+                if (lblDescription != null)
+                {
+                    if (lblDescription.Text.Length > 70)
+                        lblDescription.Text = lblDescription.Text.Substring(0, 69).TrimEnd() + "...";
+                    
+                }
             }
         }
 
@@ -162,6 +172,35 @@ namespace Skyline_3._0.admin
             GridView gr = (GridView)sender;
             gr.PageIndex = e.NewPageIndex;
             PopulateProductsGrid();
+        }
+
+        protected void grdProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int productID = (int)grdProducts.DataKeys[grdProducts.SelectedIndex].Value;
+
+            if (productID > 0)
+            {
+                Product pr = new Product(productID, _connectionString);
+
+                lblProductName.Text = pr.Name;
+                txtProductName.Text = pr.Name;
+                txtProductNum.Text = pr.ProductNum;
+                txtDescription.Text = pr.Description;
+                txtPrice.Text = pr.Price.ToString("0.00");
+                txtQuantity.Text = pr.Quantity.ToString();
+
+                pnlProductInfo.Visible = true;
+                pnlProducts.Visible = false;
+                pnlProductsFilter.Visible = false;
+            }
+        }
+
+        protected void lbtnCancel_Click(object sender, EventArgs e)
+        {
+            pnlProductInfo.Visible = false;
+            pnlProducts.Visible = true;
+            pnlProductsFilter.Visible = true;
+            grdProducts.SelectedIndex = -1;
         }
     }
 }

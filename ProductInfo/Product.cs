@@ -21,10 +21,33 @@ namespace ProductInfo
         private string _originalImage;
         private bool _bestSeller;
         private bool _soldOut;
+        private int _quantity;
+        private string _connectionString;
 
         public Product()
         {
 
+        }
+
+        public Product(int m_productID, string connectionString)
+        {
+            ProductID = m_productID;
+            ConnectionString = connectionString;
+            DataSet ds = GetDataSet();
+
+            if (ds.Tables["Product"].Rows.Count > 0)
+            {
+                ProductNum = ds.Tables["Product"].Rows[0]["ProductNum"].ToString();
+                Name = ds.Tables["Product"].Rows[0]["Name"].ToString();
+                Description = ds.Tables["Product"].Rows[0]["Description"].ToString();
+                Price = Convert.ToDecimal(ds.Tables["Product"].Rows[0]["Price"].ToString());
+                FullImage = ds.Tables["Product"].Rows[0]["imgURL"].ToString();
+                Thumbnail = ds.Tables["Product"].Rows[0]["imgThumb"].ToString();
+                OriginalImage = ds.Tables["Product"].Rows[0]["imgOrig"].ToString();
+                BestSeller = (bool)ds.Tables["Product"].Rows[0]["IsBestSeller"];
+                SoldOut = (bool)ds.Tables["Product"].Rows[0]["IsSoldOut"];
+                Quantity = Convert.ToInt32(ds.Tables["Product"].Rows[0]["Quantity"].ToString());
+            }
         }
 
         public Product(int m_productID, string m_productNum, string m_name, decimal m_price)
@@ -122,6 +145,50 @@ namespace ProductInfo
         {
             get { return _soldOut; }
             set { _soldOut = value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value; }
+        }
+
+        public string ConnectionString
+        {
+            get { return _connectionString; }
+            set { _connectionString = value; }
+        }
+
+        private DataSet GetDataSet()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetProductInfoDataset", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramUserID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramUserID.Direction = ParameterDirection.Input;
+
+                paramUserID.Value = ProductID;
+
+                cmd.Parameters.Add(paramUserID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Product");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
         }
 
         public DataSet GetImagesDataSet(bool showDefault, string dbConnection)
