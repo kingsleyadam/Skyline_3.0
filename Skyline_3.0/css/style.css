@@ -450,12 +450,12 @@ textarea:focus, input[type="text"]:focus, textarea[type="text"]:focus, input[typ
             border-color: #dddddd;
         }
 
-.table .form-control {
+.table .form-control-small {
     padding: 2px 5px 2px 5px;
     height: auto;
 }
 
-.table .btn {
+.table .btn-small {
     padding: 2px 7px 2px 7px;
     height: auto;
 }

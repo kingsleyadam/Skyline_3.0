@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-10">
                     <div class="table-responsive table-responsive-nested">
-                        <asp:GridView ID="grdChangeLog" runat="server" AutoGenerateColumns="False" DataKeyNames="ChangeLogID" CssClass="table table-hover no-margin" BorderStyle="None" GridLines="None" OnPreRender="grdChangeLog_PreRender" OnRowDataBound="grdChangeLog_RowDataBound" OnSelectedIndexChanged="grdChangeLog_SelectedIndexChanged">
+                        <asp:GridView ID="grdChangeLog" runat="server" AutoGenerateColumns="False" DataKeyNames="ChangeLogID" CssClass="table table-hover" BorderStyle="None" GridLines="None" OnPreRender="grdChangeLog_PreRender" OnRowDataBound="grdChangeLog_RowDataBound" OnSelectedIndexChanged="grdChangeLog_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="IterationID" HeaderText="IterationID"
                                     InsertVisible="False" ReadOnly="True" SortExpression="IterationID"
@@ -107,6 +107,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="btn-group">
                                 <asp:LinkButton ID="lnkUpdate" runat="server" CssClass="btn btn-primary" CommandName="Update" OnClick="lnkUpdate_Click">Update</asp:LinkButton>
+                                <asp:LinkButton ID="lnkDelete" runat="server" CssClass="btn btn-plain" CommandName="Delete" OnClick="lnkUpdate_Click">Delete</asp:LinkButton>
                                 <asp:LinkButton ID="lnkCancel" runat="server" CssClass="btn btn-plain" OnClick="lnkCancel_Click">Cancel</asp:LinkButton>
                             </div>
                         </div>

@@ -21,8 +21,8 @@
                     <asp:TemplateField ItemStyle-Width="99px">
                         <EditItemTemplate>
                             <div class="btn-group">
-                                <asp:LinkButton ID="lbtnUpdate" runat="server" CssClass="btn btn-plain" CommandName="Update">Update</asp:LinkButton>
-                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="btn btn-plain" CommandName="Cancel"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></asp:LinkButton>
+                                <asp:LinkButton ID="lbtnUpdate" runat="server" CssClass="btn btn-plain btn-small" CommandName="Update">Update</asp:LinkButton>
+                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="btn btn-plain btn-small" CommandName="Cancel"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></asp:LinkButton>
                             </div>
                         </EditItemTemplate>
                     </asp:TemplateField>
@@ -41,7 +41,7 @@
                             <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtEmail" runat="server" Text='<%# Eval("Email") %>' CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" Text='<%# Eval("Email") %>' CssClass="form-control form-control-small"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField ShowHeader="true" SortExpression="IsLockedOut" ItemStyle-Width="50px">

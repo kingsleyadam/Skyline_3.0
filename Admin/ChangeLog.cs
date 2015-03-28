@@ -148,6 +148,28 @@ namespace Admin
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void RemoveFromDataBase()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ChLog.ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admRemoveFromChangeLog", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramChangeLogID = new SqlParameter("@ChangeLogID", SqlDbType.Int);
+                paramChangeLogID.Direction = ParameterDirection.Input;
+
+                paramChangeLogID.Value = ChangeLogID;
+
+                cmd.Parameters.Add(paramChangeLogID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 
     public class ChangeLog

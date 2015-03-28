@@ -103,6 +103,12 @@ namespace Skyline_3._0.admin
 
             txtDescription.Text = cli.Description;
 
+            if (lnkUpdate.CommandName != "Update")
+            {
+                lnkUpdate.CommandName = "Update";
+                lnkUpdate.Text = "Update";
+            }
+
             pnlChangeLogID.Visible = true;
         }
 
@@ -117,10 +123,25 @@ namespace Skyline_3._0.admin
 
         protected void lnkUpdate_Click(object sender, EventArgs e)
         {
+            LinkButton btn = (LinkButton)sender;
             int iterationID = Convert.ToInt32(ddAllVersions.SelectedValue);
             ChangeLog cl = new ChangeLog(iterationID, connectionString);
 
-            if (lnkUpdate.CommandName == "Update")
+            if (btn.CommandName == "Delete")
+            {
+                int changeLogID = Convert.ToInt32(grdChangeLog.SelectedValue);
+                ChangeLogEntry cli = new ChangeLogEntry(cl, changeLogID);
+
+                cli.RemoveFromDataBase();
+
+                grdChangeLog.SelectedIndex = -1;
+
+                grdChangeLog.DataSource = ChangeLog.GetVersionChangeLogDataSet(iterationID, connectionString);
+                grdChangeLog.DataBind();
+
+                pnlChangeLogID.Visible = false;
+            }
+            else if (btn.CommandName == "Update")
             {
                 int changeLogID = Convert.ToInt32(grdChangeLog.SelectedValue);
                 ChangeLogEntry cli = new ChangeLogEntry(cl, changeLogID);
@@ -133,7 +154,7 @@ namespace Skyline_3._0.admin
                 grdChangeLog.DataSource = ChangeLog.GetVersionChangeLogDataSet(iterationID, connectionString);
                 grdChangeLog.DataBind();
             }
-            else if (lnkUpdate.CommandName == "Add")
+            else if (btn.CommandName == "Add")
             {
                 if (ddChangeType.SelectedIndex > 0 && txtDescription.Text.Length > 0)
                 {
