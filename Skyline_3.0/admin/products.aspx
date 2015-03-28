@@ -137,8 +137,9 @@
 
     <%--Specific Product Information--%>
 
-    <asp:Panel runat="server" ID="pnlProductInfo" CssClass="panel panel-default no-margin" Visible="false">
+    <asp:Panel runat="server" ID="pnlProductInfo" CssClass="panel panel-default" Visible="false">
         <div class="panel-heading">
+            <asp:Label ID="lblProductInformation" runat="server" Text="Product Information: "></asp:Label>
             <asp:Label ID="lblProductName" runat="server" />
         </div>
         <div class="panel-body">
@@ -183,6 +184,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="form-horizontal">
                 <div class="form-group no-margin">
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="btn-group">
@@ -192,6 +197,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </asp:Panel>
+
+
+    <asp:Panel runat="server" ID="pnlProductImages" CssClass="panel panel-default" Visible="false">
+        <div class="panel-heading">
+            <asp:Label ID="lblImageHeader" runat="server" Text="Images"></asp:Label>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <asp:Repeater ID="repImages" runat="server">
+                    <ItemTemplate>
+                        <div class="col-xs-4 col-sm-3 col-md-2">
+                            <asp:LinkButton ID="lnkImage" runat="server" CssClass="thumbnail">
+                                <asp:Image ID="imgProductImage" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
+                            </asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+    </asp:Panel>
+
+    <asp:Panel runat="server" ID="pnlProductCategories" CssClass="panel panel-default no-margin" Visible="false">
+        <div class="panel-heading">
+            <asp:Label ID="lblCategoryHeader" runat="server" Text="Categories"></asp:Label>
+        </div>
+        <div class="panel-body">
         </div>
     </asp:Panel>
 

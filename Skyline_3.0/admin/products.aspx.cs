@@ -189,7 +189,13 @@ namespace Skyline_3._0.admin
                 txtPrice.Text = pr.Price.ToString("0.00");
                 txtQuantity.Text = pr.Quantity.ToString();
 
+                //Populate Images Repeater
+                repImages.DataSource = pr.GetImagesDataSet(true, _connectionString);
+                repImages.DataBind();
+
                 pnlProductInfo.Visible = true;
+                pnlProductImages.Visible = true;
+                pnlProductCategories.Visible = true;
                 pnlProducts.Visible = false;
                 pnlProductsFilter.Visible = false;
             }
@@ -198,6 +204,8 @@ namespace Skyline_3._0.admin
         protected void lbtnCancel_Click(object sender, EventArgs e)
         {
             pnlProductInfo.Visible = false;
+            pnlProductImages.Visible = false;
+            pnlProductCategories.Visible = false;
             pnlProducts.Visible = true;
             pnlProductsFilter.Visible = true;
             grdProducts.SelectedIndex = -1;
