@@ -226,5 +226,93 @@ namespace ProductInfo
 
             return ds;
         }
+
+        public DataSet GetCategoriesDataSet()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetProductCategories", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+
+                paramProductID.Value = ProductID;
+
+                cmd.Parameters.Add(paramProductID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Categories");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
+        public void AddToCatagory(int categoryID)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admAddCategories", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+                SqlParameter paramCategoryID = new SqlParameter("@CategoryID", SqlDbType.Int);
+                paramCategoryID.Direction = ParameterDirection.Input;
+
+                paramProductID.Value = ProductID;
+                paramCategoryID.Value = categoryID;
+
+                cmd.Parameters.Add(paramProductID);
+                cmd.Parameters.Add(paramCategoryID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+
+
+        }
+
+        public void RemoveFromCatagory(int categoryID)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admRemoveCategories", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+                SqlParameter paramCategoryID = new SqlParameter("@CategoryID", SqlDbType.Int);
+                paramCategoryID.Direction = ParameterDirection.Input;
+
+                paramProductID.Value = ProductID;
+                paramCategoryID.Value = categoryID;
+
+                cmd.Parameters.Add(paramProductID);
+                cmd.Parameters.Add(paramCategoryID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
     }
 }

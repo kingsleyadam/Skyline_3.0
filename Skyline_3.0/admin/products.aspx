@@ -225,6 +225,15 @@
             <asp:Label ID="lblCategoryHeader" runat="server" Text="Categories"></asp:Label>
         </div>
         <div class="panel-body">
+            <div class="list-group no-margin">
+                <asp:Repeater ID="repProductCategories" runat="server" OnItemDataBound="repProductCategories_ItemDataBound" OnItemCommand="repProductCategories_ItemCommand">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hdnAssigned" runat="server" Value='<%# Eval("Assigned") %>' Visible="false" />
+                        <asp:HiddenField ID="hdnProductID" runat="server" Value='<%# Eval("ProductID") %>' Visible="false" />
+                        <asp:LinkButton ID="lbtnCategory" runat="server" CssClass="list-group-item" Text='<%# Eval("Name") %>' CommandArgument='<%# Eval("CategoryID") %>'></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
         </div>
     </asp:Panel>
 

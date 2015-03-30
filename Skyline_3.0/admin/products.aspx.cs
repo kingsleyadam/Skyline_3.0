@@ -193,6 +193,10 @@ namespace Skyline_3._0.admin
                 repImages.DataSource = pr.GetImagesDataSet(true, _connectionString);
                 repImages.DataBind();
 
+                //Populate Categories Repeater
+                repProductCategories.DataSource = pr.GetCategoriesDataSet();
+                repProductCategories.DataBind();
+
                 pnlProductInfo.Visible = true;
                 pnlProductImages.Visible = true;
                 pnlProductCategories.Visible = true;
@@ -209,6 +213,44 @@ namespace Skyline_3._0.admin
             pnlProducts.Visible = true;
             pnlProductsFilter.Visible = true;
             grdProducts.SelectedIndex = -1;
+        }
+
+        protected void repProductCategories_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            HiddenField hf = (HiddenField)e.Item.FindControl("hdnAssigned");
+            LinkButton lbtnCategory = (LinkButton)e.Item.FindControl("lbtnCategory");
+
+            bool isAssigned = Convert.ToBoolean(hf.Value.ToString());
+
+            if (isAssigned)
+            {
+                lbtnCategory.CssClass = lbtnCategory.CssClass + " list-group-item-success";
+                lbtnCategory.Text = lbtnCategory.Text + "<span class='badge'>Remove</span>";
+                lbtnCategory.CommandName = "Remove";
+            }
+            else
+            {
+                lbtnCategory.Text = lbtnCategory.Text + "<span class='badge'>Add</span>";
+                lbtnCategory.CommandName = "Add";
+            }
+        }
+
+        protected void repProductCategories_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            LinkButton lbtnCategory = (LinkButton)e.Item.FindControl("lbtnCategory");
+            HiddenField hf = (HiddenField)e.Item.FindControl("hdnProductID");
+
+            int productID = Convert.ToInt32(hf.Value);
+            int categoryID = Convert.ToInt32(lbtnCategory.CommandArgument);
+            Product pr = new Product(productID, _connectionString);
+
+            if (lbtnCategory.CommandName == "Add")
+                pr.AddToCatagory(categoryID);
+            else
+                pr.RemoveFromCatagory(categoryID);
+
+            repProductCategories.DataSource = pr.GetCategoriesDataSet();
+            repProductCategories.DataBind();
         }
     }
 }
