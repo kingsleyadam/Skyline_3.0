@@ -38,8 +38,6 @@
                     </asp:Panel>
                     
                 </div>
-
-
                 <div class="panel-footer">
                     <asp:Button ID="ChangePasswordPushButton" runat="server" Text="Change Password" CssClass="btn btn-primary" CommandName="ChangePassword" ValidationGroup="ChangePassword1" />
                 </div>

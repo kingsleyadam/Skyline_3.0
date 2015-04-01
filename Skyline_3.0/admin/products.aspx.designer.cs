@@ -220,6 +220,15 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.TextBox txtProductName;
         
         /// <summary>
+        /// reqProductName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqProductName;
+        
+        /// <summary>
         /// lblProductNumHeader control.
         /// </summary>
         /// <remarks>
@@ -238,6 +247,15 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.TextBox txtProductNum;
         
         /// <summary>
+        /// reqProductNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqProductNum;
+        
+        /// <summary>
         /// lblDescriptionHeader control.
         /// </summary>
         /// <remarks>
@@ -254,6 +272,15 @@ namespace Skyline_3._0.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        
+        /// <summary>
+        /// reqProductDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqProductDescription;
         
         /// <summary>
         /// lblPriceHeader control.
@@ -310,6 +337,33 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.CheckBox chkBestSeller;
         
         /// <summary>
+        /// valSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary valSummary;
+        
+        /// <summary>
+        /// pnlUpdateSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlUpdateSuccess;
+        
+        /// <summary>
+        /// lblSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSuccess;
+        
+        /// <summary>
         /// lbtnUpdate control.
         /// </summary>
         /// <remarks>
@@ -353,6 +407,15 @@ namespace Skyline_3._0.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repImages;
+        
+        /// <summary>
+        /// fileUploadImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileUploadImage;
         
         /// <summary>
         /// pnlProductCategories control.

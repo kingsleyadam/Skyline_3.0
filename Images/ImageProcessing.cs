@@ -88,6 +88,10 @@ namespace Images
 
                 //Adjust Quality and Save
                 AdjustQualityLevel(bmp);
+
+                //Dispose these so we can re-use the images later
+                img.Dispose();
+                bmp.Dispose();
             }
             catch (Exception ex)
             {

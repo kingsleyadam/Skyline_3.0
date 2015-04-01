@@ -85,8 +85,7 @@ namespace ProductInfo
             BestSeller = m_bestSeller;
             SoldOut = m_soldOut;
         }
-
-
+        
         public int ProductID
         {
             get { return _id; }
@@ -227,6 +226,38 @@ namespace ProductInfo
             return ds;
         }
 
+        public DataSet GetAdminImagesDataSet()
+        {
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admGetProductImages", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+
+                paramProductID.Value = ProductID;
+
+                cmd.Parameters.Add(paramProductID);
+
+                con.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable("Images");
+                    if (dr.HasRows)
+                    {
+                        dt.Load(dr);
+                    }
+                    ds.Tables.Add(dt);
+                }
+            }
+
+            return ds;
+        }
+
         public DataSet GetCategoriesDataSet()
         {
             DataSet ds = new DataSet();
@@ -284,8 +315,6 @@ namespace ProductInfo
 
                 con.Close();
             }
-
-
         }
 
         public void RemoveFromCatagory(int categoryID)
@@ -306,6 +335,146 @@ namespace ProductInfo
 
                 cmd.Parameters.Add(paramProductID);
                 cmd.Parameters.Add(paramCategoryID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
+
+        public string AddImage(bool isDefault, string fileExt)
+        {
+            string imgName = "";
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admAddProductImage", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+                SqlParameter paramDefault = new SqlParameter("@IsDefault", SqlDbType.Bit);
+                paramDefault.Direction = ParameterDirection.Input;
+                SqlParameter paramFileExt = new SqlParameter("@fileExt", SqlDbType.VarChar, 10);
+                paramFileExt.Direction = ParameterDirection.Input;
+                SqlParameter paramImgName = new SqlParameter("@imgName", SqlDbType.VarChar, 200);
+                paramImgName.Direction = ParameterDirection.Output;
+
+                paramProductID.Value = ProductID;
+                paramDefault.Value = isDefault;
+                paramFileExt.Value = fileExt;
+
+                cmd.Parameters.Add(paramProductID);
+                cmd.Parameters.Add(paramDefault);
+                cmd.Parameters.Add(paramFileExt);
+                cmd.Parameters.Add(paramImgName);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                imgName = paramImgName.Value.ToString();
+
+                con.Close();
+
+                return imgName;
+            }
+        }
+
+        public void DeleteImage(int imageID)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admDeleteImage", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramImageID = new SqlParameter("@ImageID", SqlDbType.Int);
+                paramImageID.Direction = ParameterDirection.Input;
+
+                paramImageID.Value = imageID;
+
+                cmd.Parameters.Add(paramImageID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
+
+        public void SetDefaultImage(int imageID)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admUpdateProductImageDefault", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramImageID = new SqlParameter("@ImageID", SqlDbType.Int);
+                paramImageID.Direction = ParameterDirection.Input;
+
+                paramImageID.Value = imageID;
+
+                cmd.Parameters.Add(paramImageID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
+
+        public void UpdateDatabase()
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admUpdateProduct", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+                SqlParameter paramName = new SqlParameter("@Name", SqlDbType.NVarChar, 500);
+                paramName.Direction = ParameterDirection.Input;
+                SqlParameter paramProductNum = new SqlParameter("@ProductNum", SqlDbType.NVarChar, 50);
+                paramProductNum.Direction = ParameterDirection.Input;
+                SqlParameter paramDescription = new SqlParameter("@Description", SqlDbType.NVarChar, 2000);
+                paramDescription.Direction = ParameterDirection.Input;
+                SqlParameter paramPrice = new SqlParameter("@Price", SqlDbType.SmallMoney);
+                paramPrice.Direction = ParameterDirection.Input;
+                SqlParameter paramQuantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                paramQuantity.Direction = ParameterDirection.Input;
+                SqlParameter paramimgURL = new SqlParameter("@imgURL", SqlDbType.NVarChar, 100);
+                paramimgURL.Direction = ParameterDirection.Input;
+                SqlParameter paramIsSoldOut = new SqlParameter("@IsSoldOut", SqlDbType.Bit);
+                paramIsSoldOut.Direction = ParameterDirection.Input;
+                SqlParameter paramIsBestSeller = new SqlParameter("@IsBestSeller", SqlDbType.Bit);
+                paramIsBestSeller.Direction = ParameterDirection.Input;
+                
+                paramProductID.Value = ProductID;
+                paramName.Value = Name;
+                paramProductNum.Value = ProductNum;
+                paramDescription.Value = Description;
+                paramPrice.Value = Price;
+                paramQuantity.Value = Quantity;
+                paramimgURL.Value = "";
+                paramIsSoldOut.Value = SoldOut;
+                paramIsBestSeller.Value = BestSeller;
+
+                cmd.Parameters.Add(paramProductID);
+                cmd.Parameters.Add(paramName);
+                cmd.Parameters.Add(paramProductNum);
+                cmd.Parameters.Add(paramDescription);
+                cmd.Parameters.Add(paramPrice);
+                cmd.Parameters.Add(paramQuantity);
+                cmd.Parameters.Add(paramimgURL);
+                cmd.Parameters.Add(paramIsSoldOut);
+                cmd.Parameters.Add(paramIsBestSeller);
 
                 con.Open();
 

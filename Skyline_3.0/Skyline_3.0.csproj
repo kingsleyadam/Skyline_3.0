@@ -331,6 +331,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\add_product.png" />
     <Content Include="images\product_images\compressed\20100809000123000274.jpg" />
     <Content Include="images\product_images\compressed\20100809000123000275.jpg" />
     <Content Include="images\product_images\compressed\20100809000161000302.jpg" />
@@ -537,7 +538,6 @@
     <Content Include="images\product_images\compressed\20150115000539000697.jpg" />
     <Content Include="images\product_images\compressed\20150115000540000696.jpg" />
     <Content Include="images\product_images\compressed\20150115000541000699.jpg" />
-    <Content Include="images\product_images\compressed\20150224000007000005.jpg" />
     <Content Include="images\product_images\compressed\20150224000008000006.jpg" />
     <Content Include="images\product_images\compressed\20150224000009000007.jpg" />
     <Content Include="images\product_images\compressed\20150224000010000008.jpg" />
@@ -629,6 +629,7 @@
     <Content Include="images\product_images\compressed\20150224000239000220.jpg" />
     <Content Include="images\product_images\compressed\20150224000240000221.jpg" />
     <Content Include="images\product_images\compressed\20150224000241000222.jpg" />
+    <Content Include="images\product_images\compressed\20150401000007000710.jpg" />
     <Content Include="images\product_images\orig\20100809000123000274.jpg" />
     <Content Include="images\product_images\orig\20100809000123000275.jpg" />
     <Content Include="images\product_images\orig\20100809000161000302.jpg" />
@@ -835,7 +836,6 @@
     <Content Include="images\product_images\orig\20150115000539000697.jpg" />
     <Content Include="images\product_images\orig\20150115000540000696.jpg" />
     <Content Include="images\product_images\orig\20150115000541000699.jpg" />
-    <Content Include="images\product_images\orig\20150224000007000005.jpg" />
     <Content Include="images\product_images\orig\20150224000008000006.jpg" />
     <Content Include="images\product_images\orig\20150224000009000007.jpg" />
     <Content Include="images\product_images\orig\20150224000010000008.jpg" />
@@ -927,6 +927,7 @@
     <Content Include="images\product_images\orig\20150224000239000220.jpg" />
     <Content Include="images\product_images\orig\20150224000240000221.jpg" />
     <Content Include="images\product_images\orig\20150224000241000222.jpg" />
+    <Content Include="images\product_images\orig\20150401000007000710.jpg" />
     <Content Include="images\product_images\thumb\20100809000123000274.jpg" />
     <Content Include="images\product_images\thumb\20100809000123000275.jpg" />
     <Content Include="images\product_images\thumb\20100809000161000302.jpg" />
@@ -1133,7 +1134,6 @@
     <Content Include="images\product_images\thumb\20150115000539000697.jpg" />
     <Content Include="images\product_images\thumb\20150115000540000696.jpg" />
     <Content Include="images\product_images\thumb\20150115000541000699.jpg" />
-    <Content Include="images\product_images\thumb\20150224000007000005.jpg" />
     <Content Include="images\product_images\thumb\20150224000008000006.jpg" />
     <Content Include="images\product_images\thumb\20150224000009000007.jpg" />
     <Content Include="images\product_images\thumb\20150224000010000008.jpg" />
@@ -1225,6 +1225,7 @@
     <Content Include="images\product_images\thumb\20150224000239000220.jpg" />
     <Content Include="images\product_images\thumb\20150224000240000221.jpg" />
     <Content Include="images\product_images\thumb\20150224000241000222.jpg" />
+    <Content Include="images\product_images\thumb\20150401000007000710.jpg" />
     <Content Include="images\WebsitePics\Home Page\Big_Red_1.jpg" />
     <Content Include="images\WebsitePics\Home Page\family_photo.jpg" />
     <Content Include="images\WebsitePics\Home Page\HomePage.png" />

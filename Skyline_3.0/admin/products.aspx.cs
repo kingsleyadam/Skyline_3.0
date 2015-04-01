@@ -1,4 +1,5 @@
-﻿using ProductInfo;
+﻿using Images;
+using ProductInfo;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,6 +45,36 @@ namespace Skyline_3._0.admin
                 }
 
                 PopulateProductsGrid();
+            }
+            else
+            {
+                if (fileUploadImage.PostedFile != null)
+                {
+                    try
+                    {
+                        string fileExt = System.IO.Path.GetExtension(fileUploadImage.FileName);
+                        if (fileExt.ToUpper() == ".JPG" || fileExt.ToUpper() == ".JPEG" || fileExt.ToUpper() == ".PNG" || fileExt.ToUpper() == ".GIF" || fileExt.ToUpper() == ".BMP")
+                        {
+                            int productID = (int)grdProducts.DataKeys[grdProducts.SelectedIndex].Value;
+                            Product pr = new Product(productID, _connectionString);
+                            string imgName = pr.AddImage(false, fileExt.ToLower());
+                            string origPath = Server.MapPath("~/images/product_images/orig/");
+
+                            fileUploadImage.SaveAs(origPath + imgName + fileExt.ToLower());
+
+                            ImageProcessing ip = new ImageProcessing(imgName + fileExt.ToLower());
+                            ip.ProcessImage();
+
+                            //Populate Images Repeater
+                            repImages.DataSource = pr.GetAdminImagesDataSet();
+                            repImages.DataBind();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
             }
 
             txtSearch.Focus();
@@ -162,7 +193,7 @@ namespace Skyline_3._0.admin
                 {
                     if (lblDescription.Text.Length > 70)
                         lblDescription.Text = lblDescription.Text.Substring(0, 69).TrimEnd() + "...";
-                    
+
                 }
             }
         }
@@ -189,8 +220,11 @@ namespace Skyline_3._0.admin
                 txtPrice.Text = pr.Price.ToString("0.00");
                 txtQuantity.Text = pr.Quantity.ToString();
 
+                chkBestSeller.Checked = pr.BestSeller;
+                chkSoldOut.Checked = pr.SoldOut;
+
                 //Populate Images Repeater
-                repImages.DataSource = pr.GetImagesDataSet(true, _connectionString);
+                repImages.DataSource = pr.GetAdminImagesDataSet();
                 repImages.DataBind();
 
                 //Populate Categories Repeater
@@ -210,6 +244,7 @@ namespace Skyline_3._0.admin
             pnlProductInfo.Visible = false;
             pnlProductImages.Visible = false;
             pnlProductCategories.Visible = false;
+            pnlUpdateSuccess.Visible = false;
             pnlProducts.Visible = true;
             pnlProductsFilter.Visible = true;
             grdProducts.SelectedIndex = -1;
@@ -224,13 +259,13 @@ namespace Skyline_3._0.admin
 
             if (isAssigned)
             {
-                lbtnCategory.CssClass = lbtnCategory.CssClass + " list-group-item-success";
-                lbtnCategory.Text = lbtnCategory.Text + "<span class='badge'>Remove</span>";
+                lbtnCategory.CssClass = lbtnCategory.CssClass + " list-group-item-danger";
+                lbtnCategory.Text = lbtnCategory.Text + "<span class='glyphicon glyphicon-minus-sign float-right'></span>";
                 lbtnCategory.CommandName = "Remove";
             }
             else
             {
-                lbtnCategory.Text = lbtnCategory.Text + "<span class='badge'>Add</span>";
+                lbtnCategory.Text = lbtnCategory.Text + "<span class='glyphicon glyphicon-plus-sign float-right'></span>";
                 lbtnCategory.CommandName = "Add";
             }
         }
@@ -251,6 +286,112 @@ namespace Skyline_3._0.admin
 
             repProductCategories.DataSource = pr.GetCategoriesDataSet();
             repProductCategories.DataBind();
+        }
+
+        protected void repImages_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            HiddenField hdn = (HiddenField)e.Item.FindControl("hdnImageID");
+            HiddenField hdnIsDefault = (HiddenField)e.Item.FindControl("hdnIsDefault");
+            LinkButton lbtnMakeDefault = (LinkButton)e.Item.FindControl("lbtnMakeDefault");
+            bool isDefault = false;
+
+            if (hdnIsDefault.Value == "1")
+                isDefault = true;
+
+            if (hdn.Value == "-1")
+            {
+                LinkButton lnkImage = (LinkButton)e.Item.FindControl("lnkImage");
+                LinkButton lbtnUploadImage = (LinkButton)e.Item.FindControl("lbtnUploadImage");
+
+                if (lnkImage != null && lbtnMakeDefault != null && lbtnUploadImage != null)
+                {
+                    lnkImage.OnClientClick = "OpenFileUpload();return false;";
+                    lnkImage.CssClass = "image-upload";
+
+                    lbtnMakeDefault.Visible = false;
+
+                    lbtnUploadImage.OnClientClick = "OpenFileUpload();return false;";
+                    lbtnUploadImage.Visible = true;
+                }
+            }
+            else if (isDefault)
+            {
+                lbtnMakeDefault.Enabled = false;
+                lbtnMakeDefault.Text = "Default Image";
+                lbtnMakeDefault.CssClass = "btn btn-primary btn-fullwidth";
+                lbtnMakeDefault.Attributes.Add("disabled","");
+            }
+        }
+
+        protected void repImages_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            HiddenField hdnProductID = (HiddenField)e.Item.FindControl("hdnProductID");
+            HiddenField hdn = (HiddenField)e.Item.FindControl("hdnImageID");
+
+            int imgID = Convert.ToInt32(hdn.Value), productID = Convert.ToInt32(hdnProductID.Value);
+            Product pr = new Product(productID, _connectionString);
+
+            if (e.CommandName == "Delete")
+            {
+                if (hdn.Value != "-1")
+                {
+                    HiddenField hdnImageName = (HiddenField)e.Item.FindControl("hdnImageName");
+                    string imageName = hdnImageName.Value;
+                    
+                    if (imgID > 0 && productID > 0)
+                    {
+                        ImageProcessing ip = new ImageProcessing(imageName);
+
+                        System.IO.File.Delete(ip.OriginalPath + ip.ImageName + ip.FileExtension);
+                        System.IO.File.Delete(ip.CompressedPath + ip.ImageName + ip.FileExtension);
+                        System.IO.File.Delete(ip.ThumbnailPath + ip.ImageName + ip.FileExtension);
+                        pr.DeleteImage(imgID);
+                    }
+                }
+            }
+            else if (e.CommandName == "MakeDefault")
+            {
+                if (imgID > 0 && productID > 0)
+                {
+                    pr.SetDefaultImage(imgID);
+                }
+            }
+
+            //Populate Images Repeater
+            repImages.DataSource = pr.GetAdminImagesDataSet();
+            repImages.DataBind();
+        }
+
+        protected void lbtnUpdate_Click(object sender, EventArgs e)
+        {
+            int productID = (int)grdProducts.DataKeys[grdProducts.SelectedIndex].Value;
+
+            if (productID > 0)
+            {
+                Product pr = new Product(productID, _connectionString);
+
+                pr.Name = txtProductName.Text;
+                pr.ProductNum = txtProductNum.Text;
+                pr.Description = txtDescription.Text;
+                pr.Price = decimal.Parse(txtPrice.Text);
+                pr.Quantity = int.Parse(txtQuantity.Text);
+                pr.SoldOut = chkSoldOut.Checked;
+                pr.BestSeller = chkBestSeller.Checked;
+
+                pr.UpdateDatabase();
+
+                pnlUpdateSuccess.Visible = true;
+            }
+        }
+
+        protected void grdProducts_DataBound(object sender, EventArgs e)
+        {
+            if (grdProducts.Rows.Count == 0)
+                grdProducts.CssClass = "table table-condensed no-margin";
+            else if (grdProducts.PageCount > 1)
+                grdProducts.CssClass = "table table-striped table-condensed table-hover no-margin table-hover-paged";
+            else
+                grdProducts.CssClass = "table table-striped table-condensed table-hover no-margin";
         }
     }
 }

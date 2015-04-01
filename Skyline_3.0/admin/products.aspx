@@ -71,7 +71,7 @@
         <div class="table-responsive">
             <asp:GridView ID="grdProducts" runat="server" AllowPaging="True"
                 AutoGenerateColumns="False" DataKeyNames="ProductID" GridLines="None" Width="100%"
-                EnableModelValidation="True" CssClass="table table-striped table-condensed table-hover table-hover-paged no-margin " OnPageIndexChanging="grdProducts_PageIndexChanging" OnPreRender="grdProducts_PreRender" OnRowDataBound="grdProducts_RowDataBound" OnSelectedIndexChanged="grdProducts_SelectedIndexChanged">
+                EnableModelValidation="True" CssClass="table table-striped table-condensed table-hover no-margin" OnPageIndexChanging="grdProducts_PageIndexChanging" OnPreRender="grdProducts_PreRender" OnRowDataBound="grdProducts_RowDataBound" OnSelectedIndexChanged="grdProducts_SelectedIndexChanged" OnDataBound="grdProducts_DataBound">
                 <Columns>
                     <asp:TemplateField ShowHeader="False">
                         <ItemTemplate>
@@ -129,7 +129,7 @@
                 <PagerStyle HorizontalAlign="Center" CssClass="table-pager" />
                 <SelectedRowStyle CssClass="table-select-row" />
                 <EmptyDataTemplate>
-                    <div class="alert alert-danger noMargin">There are no products found for your search.</div>
+                    <div class="alert alert-danger no-margin">There are no products found for your search.</div>
                 </EmptyDataTemplate>
             </asp:GridView>
         </div>
@@ -148,18 +148,21 @@
                     <asp:Label ID="lblProductNameHeader" runat="server" Text="Name" CssClass="col-sm-2 control-label" AssociatedControlID="txtProductName"></asp:Label>
                     <div class="col-sm-10">
                         <asp:TextBox ID="txtProductName" runat="server" placeholder="Product Name" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqProductName" runat="server" ErrorMessage="Name Required" ControlToValidate="txtProductName" Display="None" ValidationGroup="UpdateInfo" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="lblProductNumHeader" runat="server" Text="Number" CssClass="col-sm-2 control-label" AssociatedControlID="txtProductNum"></asp:Label>
                     <div class="col-sm-10">
                         <asp:TextBox ID="txtProductNum" runat="server" placeholder="Product Number" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqProductNum" runat="server" ErrorMessage="Number Required" ControlToValidate="txtProductNum" Display="None" ValidationGroup="UpdateInfo" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="lblDescriptionHeader" runat="server" Text="Description" CssClass="col-sm-2 control-label" AssociatedControlID="txtDescription"></asp:Label>
                     <div class="col-sm-10">
                         <asp:TextBox ID="txtDescription" runat="server" placeholder="Product Description" CssClass="form-control" TextMode="MultiLine" Height="100px"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqProductDescription" runat="server" ErrorMessage="Description Required" ControlToValidate="txtDescription" Display="None" ValidationGroup="UpdateInfo" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -185,13 +188,24 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <asp:ValidationSummary ID="valSummary" CssClass="valSummary" ValidationGroup="UpdateInfo" runat="server" />
+                </div>
+                <asp:Panel ID="pnlUpdateSuccess" runat="server" CssClass="col-xs-12" Visible="false">
+                    <div class="alert alert-success no-margin">
+                        <asp:Label ID="lblSuccess" runat="server"><strong>Success!</strong> The project has been successfully updated.</asp:Label>
+                    </div>
+                </asp:Panel>
+            </div>
         </div>
+
         <div class="panel-footer">
             <div class="form-horizontal">
                 <div class="form-group no-margin">
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="btn-group">
-                            <asp:LinkButton ID="lbtnUpdate" runat="server" CommandName="Update" CssClass="btn btn-plain">Update</asp:LinkButton>
+                            <asp:LinkButton ID="lbtnUpdate" runat="server" CommandName="Update" CssClass="btn btn-plain" OnClick="lbtnUpdate_Click" ValidationGroup="UpdateInfo">Update</asp:LinkButton>
                             <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="btn btn-plain" OnClick="lbtnCancel_Click">Cancel</asp:LinkButton>
                         </div>
                     </div>
@@ -207,15 +221,29 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <asp:Repeater ID="repImages" runat="server">
+                <asp:Repeater ID="repImages" runat="server" OnItemDataBound="repImages_ItemDataBound" OnItemCommand="repImages_ItemCommand">
                     <ItemTemplate>
                         <div class="col-xs-4 col-sm-3 col-md-2">
-                            <asp:LinkButton ID="lnkImage" runat="server" CssClass="thumbnail">
-                                <asp:Image ID="imgProductImage" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
-                            </asp:LinkButton>
+                            <asp:HiddenField ID="hdnProductID" runat="server" Visible="false" Value='<%# Eval("ProductID") %>' />
+                            <asp:HiddenField ID="hdnImageID" runat="server" Visible="false" Value='<%# Eval("ImageID") %>' />
+                            <asp:HiddenField ID="hdnImageName" runat="server" Visible="false" Value='<%# Eval("imgName") %>' />
+                            <asp:HiddenField ID="hdnIsDefault" runat="server" Visible="false" Value='<%# Eval("IsDefault") %>' />
+                            <div class="thumbnail">
+                                <asp:LinkButton ID="lnkImage" runat="server" CommandName="Delete">
+                                    <asp:Image ID="imgProductImage" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
+                                </asp:LinkButton>
+                                <div class="caption">
+                                    <p class="no-margin">
+                                        <asp:LinkButton ID="lbtnUploadImage" runat="server" CssClass="btn btn-plain btn-fullwidth" Visible="false">Upload Image</asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnMakeDefault" runat="server" CssClass="btn btn-plain btn-fullwidth" CommandName="MakeDefault">Make Default</asp:LinkButton>
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
+                <asp:FileUpload ID="fileUploadImage" runat="server" type="file" EnableTheming="true" CssClass="hide-object" OnChange="UploadFileNow()" />
             </div>
         </div>
     </asp:Panel>
@@ -240,4 +268,19 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="JavaScriptContent" runat="server">
+    <script type="text/javascript">
+        function OpenFileUpload() {
+            var ctlFileUpload = document.getElementById('<%=fileUploadImage.ClientID %>');
+            ctlFileUpload.click();
+        }
+        function UploadFileNow() {
+            var value = document.getElementById('<%=fileUploadImage.ClientID %>').valueOf;
+            if (value != '') {
+                $("#form1").submit();
+            }
+        };
+    </script>
+    <script type="text/javascript">
+
+    </script>
 </asp:Content>
