@@ -359,17 +359,24 @@ namespace Skyline_3._0.admin
             {
                 if (hdn.Value != "-1")
                 {
-                    HiddenField hdnImageName = (HiddenField)e.Item.FindControl("hdnImageName");
-                    string imageName = hdnImageName.Value;
-                    
-                    if (imgID > 0 && productID > 0)
+                    string confirmValue = Request.Form["confirm_value"];
+                    if (confirmValue == "Yes")
                     {
-                        ImageProcessing ip = new ImageProcessing(imageName);
+                        HiddenField hdnImageName = (HiddenField)e.Item.FindControl("hdnImageName");
+                        string imageName = hdnImageName.Value;
 
-                        System.IO.File.Delete(ip.OriginalPath + ip.ImageName + ip.FileExtension);
-                        System.IO.File.Delete(ip.CompressedPath + ip.ImageName + ip.FileExtension);
-                        System.IO.File.Delete(ip.ThumbnailPath + ip.ImageName + ip.FileExtension);
-                        pr.DeleteImage(imgID);
+                        if (imgID > 0 && productID > 0)
+                        {
+                            ImageProcessing ip = new ImageProcessing(imageName);
+
+                            System.IO.File.Delete(ip.OriginalPath + ip.ImageName + ip.FileExtension);
+                            System.IO.File.Delete(ip.CompressedPath + ip.ImageName + ip.FileExtension);
+                            System.IO.File.Delete(ip.ThumbnailPath + ip.ImageName + ip.FileExtension);
+                            pr.DeleteImage(imgID);
+                        }
+
+                        repImages.DataSource = pr.GetAdminImagesDataSet();
+                        repImages.DataBind();
                     }
                 }
             }
@@ -379,11 +386,10 @@ namespace Skyline_3._0.admin
                 {
                     pr.SetDefaultImage(imgID);
                 }
-            }
 
-            //Populate Images Repeater
-            repImages.DataSource = pr.GetAdminImagesDataSet();
-            repImages.DataBind();
+                repImages.DataSource = pr.GetAdminImagesDataSet();
+                repImages.DataBind();
+            }
         }
 
         protected void lbtnUpdate_Click(object sender, EventArgs e)

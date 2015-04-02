@@ -234,13 +234,12 @@
                             <asp:HiddenField ID="hdnImageName" runat="server" Visible="false" Value='<%# Eval("imgName") %>' />
                             <asp:HiddenField ID="hdnIsDefault" runat="server" Visible="false" Value='<%# Eval("IsDefault") %>' />
                             <div class="thumbnail">
-                                <asp:LinkButton ID="lnkImage" runat="server" CommandName="Delete">
+                                <asp:LinkButton ID="lnkImage" runat="server" CommandName="Delete" OnClientClick="Confirm()">
                                     <div class="image">
                                         <asp:Image ID="imgProductImage" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
                                         <asp:Panel ID="pnlOverlay" runat="server" CssClass="overlay"><span class="glyphicon glyphicon-remove"></span></asp:Panel>
                                     </div>
                                 </asp:LinkButton>
-
                                 <div class="caption">
                                     <p class="no-margin">
                                         <asp:LinkButton ID="lbtnUploadImage" runat="server" CssClass="btn btn-plain btn-fullwidth" Visible="false">Upload Image</asp:LinkButton>
@@ -295,6 +294,17 @@
                 $("#form1").submit();
             }
         };
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Are you sure you want to delete that photo?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
     </script>
     <script type="text/javascript">
 
