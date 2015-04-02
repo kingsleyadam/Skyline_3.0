@@ -60,10 +60,31 @@ namespace Skyline_3._0.admin
                             string imgName = pr.AddImage(false, fileExt.ToLower());
                             string origPath = Server.MapPath("~/images/product_images/orig/");
 
-                            fileUploadImage.SaveAs(origPath + imgName + fileExt.ToLower());
+                            try
+                            {
+                                fileUploadImage.SaveAs(origPath + imgName + fileExt.ToLower());
 
-                            ImageProcessing ip = new ImageProcessing(imgName + fileExt.ToLower());
-                            ip.ProcessImage();
+                                ImageProcessing ip = new ImageProcessing(imgName + fileExt.ToLower());
+                                string statusMessage;
+                                ip.ProcessImage(out statusMessage);
+
+                                if (statusMessage.Length > 0)
+                                {
+                                    lblImageUploadMessage.Text = "<strong>Error!</strong> " + statusMessage;
+                                    pnlImageUploadStatus.Visible = true;
+                                }
+                                else
+                                {
+                                    pnlImageUploadStatus.Visible = false;
+                                }
+                            } catch (Exception ex)
+                            {
+                                pnlImageUploadStatus.Visible = true;
+                                lblImageUploadMessage.Text = "<strong>Error!</strong> " + ex.Message + ex.StackTrace;
+                            }
+                            
+
+
 
                             //Populate Images Repeater
                             repImages.DataSource = pr.GetAdminImagesDataSet();
@@ -302,6 +323,7 @@ namespace Skyline_3._0.admin
             {
                 LinkButton lnkImage = (LinkButton)e.Item.FindControl("lnkImage");
                 LinkButton lbtnUploadImage = (LinkButton)e.Item.FindControl("lbtnUploadImage");
+                Panel pnlOverlay = (Panel)e.Item.FindControl("pnlOverlay");
 
                 if (lnkImage != null && lbtnMakeDefault != null && lbtnUploadImage != null)
                 {
@@ -312,6 +334,8 @@ namespace Skyline_3._0.admin
 
                     lbtnUploadImage.OnClientClick = "OpenFileUpload();return false;";
                     lbtnUploadImage.Visible = true;
+
+                    pnlOverlay.Visible = false;
                 }
             }
             else if (isDefault)

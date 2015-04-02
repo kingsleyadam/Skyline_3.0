@@ -221,17 +221,26 @@
         </div>
         <div class="panel-body">
             <div class="row">
+                <div class="col-xs-12">
+                    <asp:Label ID="lblImageInfo" runat="server" Text="Tap or click an image to delete it." CssClass="help-text"></asp:Label>
+                </div>
+            </div>
+            <div class="row">
                 <asp:Repeater ID="repImages" runat="server" OnItemDataBound="repImages_ItemDataBound" OnItemCommand="repImages_ItemCommand">
                     <ItemTemplate>
-                        <div class="col-xs-4 col-sm-3 col-md-2">
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
                             <asp:HiddenField ID="hdnProductID" runat="server" Visible="false" Value='<%# Eval("ProductID") %>' />
                             <asp:HiddenField ID="hdnImageID" runat="server" Visible="false" Value='<%# Eval("ImageID") %>' />
                             <asp:HiddenField ID="hdnImageName" runat="server" Visible="false" Value='<%# Eval("imgName") %>' />
                             <asp:HiddenField ID="hdnIsDefault" runat="server" Visible="false" Value='<%# Eval("IsDefault") %>' />
                             <div class="thumbnail">
                                 <asp:LinkButton ID="lnkImage" runat="server" CommandName="Delete">
-                                    <asp:Image ID="imgProductImage" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
+                                    <div class="image">
+                                        <asp:Image ID="imgProductImage" runat="server" ImageUrl='<%# Eval("imgThumb") %>' />
+                                        <asp:Panel ID="pnlOverlay" runat="server" CssClass="overlay"><span class="glyphicon glyphicon-remove"></span></asp:Panel>
+                                    </div>
                                 </asp:LinkButton>
+
                                 <div class="caption">
                                     <p class="no-margin">
                                         <asp:LinkButton ID="lbtnUploadImage" runat="server" CssClass="btn btn-plain btn-fullwidth" Visible="false">Upload Image</asp:LinkButton>
@@ -239,12 +248,19 @@
                                     </p>
                                 </div>
                             </div>
-
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
+
                 <asp:FileUpload ID="fileUploadImage" runat="server" type="file" EnableTheming="true" CssClass="hide-object" OnChange="UploadFileNow()" />
             </div>
+            <asp:Panel ID="pnlImageUploadStatus" runat="server" CssClass="row" Visible="false">
+                <div class="col-xs-12">
+                    <div class="alert alert-danger no-margin">
+                        <asp:Label ID="lblImageUploadMessage" runat="server"><strong>Error!</strong></asp:Label>
+                    </div>
+                </div>
+            </asp:Panel>
         </div>
     </asp:Panel>
 

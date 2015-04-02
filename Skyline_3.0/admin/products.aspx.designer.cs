@@ -400,6 +400,15 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.Label lblImageHeader;
         
         /// <summary>
+        /// lblImageInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblImageInfo;
+        
+        /// <summary>
         /// repImages control.
         /// </summary>
         /// <remarks>
@@ -416,6 +425,24 @@ namespace Skyline_3._0.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileUploadImage;
+        
+        /// <summary>
+        /// pnlImageUploadStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlImageUploadStatus;
+        
+        /// <summary>
+        /// lblImageUploadMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblImageUploadMessage;
         
         /// <summary>
         /// pnlProductCategories control.

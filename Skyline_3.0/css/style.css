@@ -490,5 +490,51 @@ a.list-group-item-danger:hover, a.list-group-item-danger:focus {
 }
 
 .image-upload:hover {
-    text-decoration:none !important;
+    text-decoration: none !important;
+}
+
+.image {
+    position: relative;
+    width: 100%; /* for IE 6 */
+}
+
+.image .overlay {
+    display:none;
+    position: absolute;
+    color:white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    border-radius: 4px;
+}
+
+    .image:hover .overlay {
+        display:block;
+    }
+
+.thumbnail a > .image > img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thumbnail a > .image > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.image .overlay .glyphicon {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    font-size: 60pt;
+    padding-top:15px;
+}
+
+.help-text {
+    padding-bottom:15px;
+    display:block;
 }

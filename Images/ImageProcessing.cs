@@ -74,8 +74,9 @@ namespace Images
             set { _fileExtension = value; }
         }
 
-        public void ProcessImage()
+        public void ProcessImage(out string statusMessage)
         {
+            statusMessage = "";
             string fullFilePath = OriginalPath + ImageName + FileExtension;
 
             try
@@ -95,7 +96,7 @@ namespace Images
             }
             catch (Exception ex)
             {
-                string message = ex.Message;
+                statusMessage = ThumbnailPath + ImageName + FileExtension.ToLower() + "<br />" + ex.Message + ex.StackTrace;
             }
 
         }
@@ -114,28 +115,22 @@ namespace Images
             //Create an EncoderParameters object. It has an array of EncoderParameters object.
             myEncoderParameters = new EncoderParameters(1);
 
-            try
+            if (!System.IO.File.Exists(CompressedPath + ImageName + FileExtension.ToLower()))
             {
-                if (!System.IO.File.Exists(CompressedPath + ImageName + FileExtension.ToLower()))
-                {
-                    myEncoderParameter = new EncoderParameter(myEncoder, 50L);
-                    myEncoderParameters.Param[0] = myEncoderParameter;
-                    bmp.Save(CompressedPath + ImageName + FileExtension.ToLower(), jpgEncoder, myEncoderParameters);
-                }
-
-
-                if (!System.IO.File.Exists(ThumbnailPath + ImageName + FileExtension.ToLower()))
-                {
-                    myEncoderParameter = new EncoderParameter(myEncoder, 25L);
-                    myEncoderParameters.Param[0] = myEncoderParameter;
-                    bmp.Save(ThumbnailPath + ImageName + FileExtension.ToLower(), jpgEncoder, myEncoderParameters);
-                }
-            }
-            catch (Exception ex)
-            {
-                string error = ex.Message;
+                myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp.Save(CompressedPath + ImageName + FileExtension.ToLower(), jpgEncoder, myEncoderParameters);
             }
 
+
+            if (!System.IO.File.Exists(ThumbnailPath + ImageName + FileExtension.ToLower()))
+            {
+                myEncoderParameter = new EncoderParameter(myEncoder, 25L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp.Save(ThumbnailPath + ImageName + FileExtension.ToLower(), jpgEncoder, myEncoderParameters);
+            }
+
+            bmp.Dispose();
         }
 
         private ImageCodecInfo GetImageEncoder(ImageFormat format)
@@ -161,7 +156,6 @@ namespace Images
                 {
                     case 1: // landscape, do nothing
                         break;
-
                     case 8: // rotated 90 right
                         // de-rotate:
                         originalImage.RotateFlip(rotateFlipType: RotateFlipType.Rotate270FlipNone);
@@ -179,6 +173,7 @@ namespace Images
                         break;
                 }
             }
+            originalImage.Dispose();
         }
     }
 }
