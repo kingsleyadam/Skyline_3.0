@@ -78,21 +78,27 @@ namespace Images
         {
             statusMessage = "";
             string fullFilePath = OriginalPath + ImageName + FileExtension;
+            string fullThumbPath = ThumbnailPath + ImageName + FileExtension;
+            string fullCompressedPath = CompressedPath + ImageName + FileExtension;
 
             try
             {
-                Image img = new Bitmap(fullFilePath);
-                Bitmap bmp = new Bitmap(fullFilePath);
-
                 //Fix Orientation
-                FixOrientation(img, fullFilePath);
+                using (Image img = new Bitmap(fullFilePath))
+                {
+                    FixOrientation(img, fullFilePath);
+                }
 
                 //Adjust Quality and Save
-                AdjustQualityLevel(bmp);
+                using (Bitmap bmp = new Bitmap(fullFilePath)) 
+                {
+                    AdjustQualityLevel(bmp, 50L, fullCompressedPath);
+                }
 
-                //Dispose these so we can re-use the images later
-                img.Dispose();
-                bmp.Dispose();
+                using (Bitmap bmp = new Bitmap(fullFilePath))
+                {
+                    AdjustQualityLevel(bmp, 10L, fullThumbPath);
+                }
             }
             catch (Exception ex)
             {
@@ -101,7 +107,7 @@ namespace Images
 
         }
 
-        private void AdjustQualityLevel(Bitmap bmp)
+        private void AdjustQualityLevel(Bitmap bmp, Int64 percentage, string fullImagePath)
         {
             EncoderParameters myEncoderParameters;
             EncoderParameter myEncoderParameter;
@@ -115,19 +121,11 @@ namespace Images
             //Create an EncoderParameters object. It has an array of EncoderParameters object.
             myEncoderParameters = new EncoderParameters(1);
 
-            if (!System.IO.File.Exists(CompressedPath + ImageName + FileExtension.ToLower()))
+            if (!System.IO.File.Exists(fullImagePath))
             {
-                myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+                myEncoderParameter = new EncoderParameter(myEncoder, percentage);
                 myEncoderParameters.Param[0] = myEncoderParameter;
-                bmp.Save(CompressedPath + ImageName + FileExtension.ToLower(), jpgEncoder, myEncoderParameters);
-            }
-
-
-            if (!System.IO.File.Exists(ThumbnailPath + ImageName + FileExtension.ToLower()))
-            {
-                myEncoderParameter = new EncoderParameter(myEncoder, 25L);
-                myEncoderParameters.Param[0] = myEncoderParameter;
-                bmp.Save(ThumbnailPath + ImageName + FileExtension.ToLower(), jpgEncoder, myEncoderParameters);
+                bmp.Save(fullImagePath, jpgEncoder, myEncoderParameters);
             }
 
             bmp.Dispose();
