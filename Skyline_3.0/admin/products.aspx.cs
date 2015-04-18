@@ -262,6 +262,9 @@ namespace Skyline_3._0.admin
 
         protected void lbtnCancel_Click(object sender, EventArgs e)
         {
+            lbtnUpdate.CommandName = "Update";
+            lbtnUpdate.Text = "Update";
+
             pnlProductInfo.Visible = false;
             pnlProductImages.Visible = false;
             pnlProductCategories.Visible = false;
@@ -394,23 +397,49 @@ namespace Skyline_3._0.admin
 
         protected void lbtnUpdate_Click(object sender, EventArgs e)
         {
-            int productID = (int)grdProducts.DataKeys[grdProducts.SelectedIndex].Value;
+            Product pr = new Product();
+            pr.ConnectionString = _connectionString;
 
-            if (productID > 0)
+            pr.Name = txtProductName.Text;
+            pr.ProductNum = txtProductNum.Text;
+            pr.Description = txtDescription.Text;
+            pr.Price = decimal.Parse(txtPrice.Text);
+            pr.Quantity = int.Parse(txtQuantity.Text);
+            pr.SoldOut = chkSoldOut.Checked;
+            pr.BestSeller = chkBestSeller.Checked;
+
+            if (lbtnUpdate.CommandName == "Update")
             {
-                Product pr = new Product(productID, _connectionString);
+                int productID = (int)grdProducts.DataKeys[grdProducts.SelectedIndex].Value;
 
-                pr.Name = txtProductName.Text;
-                pr.ProductNum = txtProductNum.Text;
-                pr.Description = txtDescription.Text;
-                pr.Price = decimal.Parse(txtPrice.Text);
-                pr.Quantity = int.Parse(txtQuantity.Text);
-                pr.SoldOut = chkSoldOut.Checked;
-                pr.BestSeller = chkBestSeller.Checked;
+                if (productID > 0)
+                {
+                    pr.ProductID = productID;
+                    pr.UpdateDatabase();
+                    pnlUpdateSuccess.Visible = true;
+                }
+            }
+            else if (lbtnUpdate.CommandName == "Add")
+            {
+                //Add Product
+                pr.AddNewProduct();
 
-                pr.UpdateDatabase();
+                //Populate Images Repeater
+                repImages.DataSource = pr.GetAdminImagesDataSet();
+                repImages.DataBind();
 
+                //Populate Categories Repeater
+                repProductCategories.DataSource = pr.GetCategoriesDataSet();
+                repProductCategories.DataBind();
+
+                //Reset Button
+                lbtnUpdate.CommandName = "Update";
+                lbtnUpdate.Text = "Update";
+
+                //Re-Enable Panels
                 pnlUpdateSuccess.Visible = true;
+                pnlProductCategories.Visible = true;
+                pnlProductImages.Visible = true;
             }
         }
 
@@ -422,6 +451,41 @@ namespace Skyline_3._0.admin
                 grdProducts.CssClass = "table table-striped table-condensed table-hover no-margin table-hover-paged";
             else
                 grdProducts.CssClass = "table table-striped table-condensed table-hover no-margin";
+        }
+
+        protected void lbtnAddNew_Click(object sender, EventArgs e)
+        {
+            ClearProductInfo();
+            lbtnUpdate.CommandName = "Add";
+            lbtnUpdate.Text = "Add Product";
+
+            pnlProductInfo.Visible = true;
+            pnlProductImages.Visible = false;
+            pnlProductCategories.Visible = false;
+            pnlProducts.Visible = false;
+            pnlProductsFilter.Visible = false;
+        }
+
+        private void ClearProductInfo()
+        {
+            txtProductName.Text = "";
+            txtProductNum.Text = "";
+            txtDescription.Text = "";
+            txtPrice.Text = "";
+            txtQuantity.Text = "";
+            chkBestSeller.Checked = false;
+            chkSoldOut.Checked = false;
+        }
+
+        protected void grdProducts_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int productID = Convert.ToInt32(grdProducts.DataKeys[e.RowIndex].Value);
+
+            Product pr = new Product(productID, _connectionString);
+
+            pr.DeleteProduct();
+
+            PopulateProductsGrid();
         }
     }
 }

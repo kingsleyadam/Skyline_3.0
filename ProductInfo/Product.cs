@@ -483,5 +483,84 @@ namespace ProductInfo
                 con.Close();
             }
         }
+
+        public void AddNewProduct()
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admAddProduct", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramName = new SqlParameter("@Name", SqlDbType.NVarChar, 500);
+                paramName.Direction = ParameterDirection.Input;
+                SqlParameter paramProductNum = new SqlParameter("@ProductNum", SqlDbType.NVarChar, 50);
+                paramProductNum.Direction = ParameterDirection.Input;
+                SqlParameter paramDescription = new SqlParameter("@Description", SqlDbType.NVarChar, 2000);
+                paramDescription.Direction = ParameterDirection.Input;
+                SqlParameter paramPrice = new SqlParameter("@Price", SqlDbType.SmallMoney);
+                paramPrice.Direction = ParameterDirection.Input;
+                SqlParameter paramQuantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                paramQuantity.Direction = ParameterDirection.Input;
+                SqlParameter paramimgURL = new SqlParameter("@imgURL", SqlDbType.NVarChar, 100);
+                paramimgURL.Direction = ParameterDirection.Input;
+                SqlParameter paramIsSoldOut = new SqlParameter("@IsSoldOut", SqlDbType.Bit);
+                paramIsSoldOut.Direction = ParameterDirection.Input;
+                SqlParameter paramIsBestSeller = new SqlParameter("@IsBestSeller", SqlDbType.Bit);
+                paramIsBestSeller.Direction = ParameterDirection.Input;
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Output;
+
+                paramName.Value = Name;
+                paramProductNum.Value = ProductNum;
+                paramDescription.Value = Description;
+                paramPrice.Value = Price;
+                paramQuantity.Value = Quantity;
+                paramimgURL.Value = "";
+                paramIsSoldOut.Value = SoldOut;
+                paramIsBestSeller.Value = BestSeller;
+
+                cmd.Parameters.Add(paramName);
+                cmd.Parameters.Add(paramProductNum);
+                cmd.Parameters.Add(paramDescription);
+                cmd.Parameters.Add(paramPrice);
+                cmd.Parameters.Add(paramQuantity);
+                cmd.Parameters.Add(paramimgURL);
+                cmd.Parameters.Add(paramIsSoldOut);
+                cmd.Parameters.Add(paramIsBestSeller);
+                cmd.Parameters.Add(paramProductID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                ProductID = Convert.ToInt32(paramProductID.Value);
+
+                con.Close();
+            }
+        }
+
+        public void DeleteProduct()
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+
+            using (SqlCommand cmd = new SqlCommand("admDeleteProduct", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                paramProductID.Direction = ParameterDirection.Input;
+
+                paramProductID.Value = ProductID;
+
+                cmd.Parameters.Add(paramProductID);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
     }
 }

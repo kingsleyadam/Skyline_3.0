@@ -166,6 +166,15 @@ namespace Skyline_3._0.admin {
         protected global::System.Web.UI.WebControls.Label lblHelpText;
         
         /// <summary>
+        /// lbtnAddNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnAddNew;
+        
+        /// <summary>
         /// grdProducts control.
         /// </summary>
         /// <remarks>

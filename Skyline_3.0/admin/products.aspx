@@ -66,12 +66,20 @@
     <asp:Panel ID="pnlProducts" runat="server" CssClass="panel panel-default no-margin">
         <div class="panel-heading">Products</div>
         <div class="panel-body">
-            <asp:Label ID="lblHelpText" runat="server" Text="Below are the list of products, click on a products row to select the product. Once selected you can adjust product details as well as add/remove images and categories."></asp:Label>
+            <div class="row">
+                <div class="col-md-10 col-sm-9">
+                    <h5><asp:Label ID="lblHelpText" runat="server" Text="Below are the list of products, click on a products row to select the product. Once selected you can adjust product details as well as add/remove images and categories."></asp:Label></h5>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                    <h4><asp:LinkButton ID="lbtnAddNew" runat="server" OnClick="lbtnAddNew_Click" CssClass="btn btn-plain btn-fullwidth">New Product</asp:LinkButton></h4>
+                </div>
+            </div>
+            
         </div>
         <div class="table-responsive">
             <asp:GridView ID="grdProducts" runat="server" AllowPaging="True"
                 AutoGenerateColumns="False" DataKeyNames="ProductID" GridLines="None" Width="100%"
-                EnableModelValidation="True" CssClass="table table-striped table-condensed table-hover no-margin" OnPageIndexChanging="grdProducts_PageIndexChanging" OnPreRender="grdProducts_PreRender" OnRowDataBound="grdProducts_RowDataBound" OnSelectedIndexChanged="grdProducts_SelectedIndexChanged" OnDataBound="grdProducts_DataBound">
+                EnableModelValidation="True" CssClass="table table-striped table-condensed table-hover no-margin" OnPageIndexChanging="grdProducts_PageIndexChanging" OnPreRender="grdProducts_PreRender" OnRowDataBound="grdProducts_RowDataBound" OnSelectedIndexChanged="grdProducts_SelectedIndexChanged" OnDataBound="grdProducts_DataBound" OnRowDeleting="grdProducts_RowDeleting">
                 <Columns>
                     <asp:TemplateField ShowHeader="False">
                         <ItemTemplate>
@@ -194,7 +202,7 @@
                 </div>
                 <asp:Panel ID="pnlUpdateSuccess" runat="server" CssClass="col-xs-12" Visible="false">
                     <div class="alert alert-success no-margin">
-                        <asp:Label ID="lblSuccess" runat="server"><strong>Success!</strong> The project has been successfully updated.</asp:Label>
+                        <asp:Label ID="lblSuccess" runat="server"><strong>Success!</strong> The project has been successfully added/updated.</asp:Label>
                     </div>
                 </asp:Panel>
             </div>
