@@ -74,7 +74,6 @@
                     <h4><asp:LinkButton ID="lbtnAddNew" runat="server" OnClick="lbtnAddNew_Click" CssClass="btn btn-plain btn-fullwidth">New Product</asp:LinkButton></h4>
                 </div>
             </div>
-            
         </div>
         <div class="table-responsive">
             <asp:GridView ID="grdProducts" runat="server" AllowPaging="True"

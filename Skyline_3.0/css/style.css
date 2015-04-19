@@ -318,8 +318,7 @@ span.valerror[style*="inline"] {
 }
 
     .table-select-row > td > a {
-        /*background-color:#EAEAEA;*/
-        background-color: black;
+        background-color: transparent;
         color: white;
         font-weight: bold;
     }
