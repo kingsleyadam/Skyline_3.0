@@ -82,9 +82,6 @@ namespace Skyline_3._0.admin
                                 pnlImageUploadStatus.Visible = true;
                                 lblImageUploadMessage.Text = "<strong>Error!</strong> " + ex.Message + ex.StackTrace;
                             }
-                            
-
-
 
                             //Populate Images Repeater
                             repImages.DataSource = pr.GetAdminImagesDataSet();
@@ -238,8 +235,15 @@ namespace Skyline_3._0.admin
                 txtProductName.Text = pr.Name;
                 txtProductNum.Text = pr.ProductNum;
                 txtDescription.Text = pr.Description;
-                txtPrice.Text = pr.Price.ToString("0.00");
-                txtQuantity.Text = pr.Quantity.ToString();
+                if (pr.Price > 0)
+                    txtPrice.Text = pr.Price.ToString("0.00");
+                else
+                    txtPrice.Text = "";
+
+                if (pr.Quantity > 0)
+                    txtQuantity.Text = pr.Quantity.ToString();
+                else
+                    txtQuantity.Text = "";
 
                 chkBestSeller.Checked = pr.BestSeller;
                 chkSoldOut.Checked = pr.SoldOut;
@@ -398,13 +402,17 @@ namespace Skyline_3._0.admin
         protected void lbtnUpdate_Click(object sender, EventArgs e)
         {
             Product pr = new Product();
+            decimal price;
+            int quantity;
             pr.ConnectionString = _connectionString;
 
             pr.Name = txtProductName.Text;
             pr.ProductNum = txtProductNum.Text;
             pr.Description = txtDescription.Text;
-            pr.Price = decimal.Parse(txtPrice.Text);
-            pr.Quantity = int.Parse(txtQuantity.Text);
+            if (decimal.TryParse(txtPrice.Text, out price))
+                pr.Price = price;
+            if (int.TryParse(txtQuantity.Text, out quantity))
+                pr.Quantity = quantity;
             pr.SoldOut = chkSoldOut.Checked;
             pr.BestSeller = chkBestSeller.Checked;
 

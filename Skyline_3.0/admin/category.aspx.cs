@@ -50,14 +50,8 @@ namespace Skyline_3._0.admin
             {
                 Button selectButton = (Button)e.Row.FindControl("EditButton");
                 int colCount = gr.Columns.Count;
-                int startCol;
 
-                if (gr.EditIndex > -1)
-                    startCol = 2;
-                else
-                    startCol = 1;
-
-                for (int i = startCol; i < colCount; i++)
+                for (int i = 2; i < colCount; i++)
                 {
                     e.Row.Cells[i].Attributes["OnClick"] = ClientScript.GetPostBackEventReference(selectButton, "");
                 }

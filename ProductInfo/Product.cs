@@ -35,18 +35,24 @@ namespace ProductInfo
             ConnectionString = connectionString;
             DataSet ds = GetDataSet();
 
+            decimal price;
+            int quantity;
+
             if (ds.Tables["Product"].Rows.Count > 0)
             {
                 ProductNum = ds.Tables["Product"].Rows[0]["ProductNum"].ToString();
                 Name = ds.Tables["Product"].Rows[0]["Name"].ToString();
                 Description = ds.Tables["Product"].Rows[0]["Description"].ToString();
-                Price = Convert.ToDecimal(ds.Tables["Product"].Rows[0]["Price"].ToString());
                 FullImage = ds.Tables["Product"].Rows[0]["imgURL"].ToString();
                 Thumbnail = ds.Tables["Product"].Rows[0]["imgThumb"].ToString();
                 OriginalImage = ds.Tables["Product"].Rows[0]["imgOrig"].ToString();
                 BestSeller = (bool)ds.Tables["Product"].Rows[0]["IsBestSeller"];
                 SoldOut = (bool)ds.Tables["Product"].Rows[0]["IsSoldOut"];
-                Quantity = Convert.ToInt32(ds.Tables["Product"].Rows[0]["Quantity"].ToString());
+
+                if (decimal.TryParse(ds.Tables["Product"].Rows[0]["Price"].ToString(), out price))
+                    Price = price;
+                if (int.TryParse(ds.Tables["Product"].Rows[0]["Quantity"].ToString(), out quantity))
+                    Quantity = quantity;
             }
         }
 
@@ -460,8 +466,17 @@ namespace ProductInfo
                 paramName.Value = Name;
                 paramProductNum.Value = ProductNum;
                 paramDescription.Value = Description;
-                paramPrice.Value = Price;
-                paramQuantity.Value = Quantity;
+
+                if (Price > 0)
+                    paramPrice.Value = Price;
+                else
+                    paramPrice.Value = DBNull.Value;
+
+                if (Quantity > 0)
+                    paramQuantity.Value = Quantity;
+                else
+                    paramQuantity.Value = DBNull.Value;
+
                 paramimgURL.Value = "";
                 paramIsSoldOut.Value = SoldOut;
                 paramIsBestSeller.Value = BestSeller;
@@ -514,8 +529,17 @@ namespace ProductInfo
                 paramName.Value = Name;
                 paramProductNum.Value = ProductNum;
                 paramDescription.Value = Description;
-                paramPrice.Value = Price;
-                paramQuantity.Value = Quantity;
+
+                if (Price > 0)
+                    paramPrice.Value = Price;
+                else
+                    paramPrice.Value = DBNull.Value;
+
+                if (Quantity > 0)
+                    paramQuantity.Value = Quantity;
+                else
+                    paramQuantity.Value = DBNull.Value;
+
                 paramimgURL.Value = "";
                 paramIsSoldOut.Value = SoldOut;
                 paramIsBestSeller.Value = BestSeller;
