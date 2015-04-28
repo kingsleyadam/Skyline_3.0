@@ -416,7 +416,7 @@ namespace Admin
         }
 
 
-        public void UpdataeCurrent(bool updateDate)
+        public void UpdateCurrent(bool updateDate)
         {
             DataSet ds = new DataSet();
             SqlConnection con = new SqlConnection(ConnectionString);

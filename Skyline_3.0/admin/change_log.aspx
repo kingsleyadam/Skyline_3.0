@@ -156,7 +156,7 @@
                 <asp:LinkButton ID="btnAddNewVersion" runat="server" CssClass="btn btn-plain" OnClick="btnAddNewVersion_Click">Add New Version</asp:LinkButton>
                 <asp:LinkButton ID="btnAddToChangeLog" runat="server" CssClass="btn btn-plain" OnClick="btnAddToChangeLog_Click">Add to Change Log</asp:LinkButton>
             </asp:Panel>
-
+            <asp:Label ID="lblEmailError" runat="server" Text="lblEmailError" Visible="false"></asp:Label>
         </div>
     </div>
 

@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Admin;
+using Email;
 using System.Configuration;
 using System.Web.Security;
+using System.Data;
 
 namespace Skyline_3._0.admin
 {
@@ -274,7 +276,7 @@ namespace Skyline_3._0.admin
         protected void btnMakeCurrent_Click(object sender, EventArgs e)
         {
             bool updateDate = false;
-            string confirmValue = Request.Form["confirm_value"];
+            string confirmValue = Request.Form["confirm_value"], errorMessage;
 
             if (confirmValue == "Yes")
                 updateDate = true;
@@ -282,9 +284,35 @@ namespace Skyline_3._0.admin
             int iterationID = Convert.ToInt32(ddAllVersions.SelectedValue);
             ChangeLog cl = new ChangeLog(iterationID, connectionString);
 
-            cl.UpdataeCurrent(updateDate);
+            cl.UpdateCurrent(updateDate);
 
             PopulateAllObjects(iterationID);
+
+            //Put together the email body
+            DataSet ds = ChangeLog.GetVersionChangeLogDataSet(iterationID, connectionString);
+
+            string message = "", changeType = "", description = "";
+            message = "The following changes have been applied in this site version:<br/>";
+
+            foreach (DataRow dr in ds.Tables[0].Rows) {
+                changeType = "<strong>" + dr[4].ToString() + "</strong>";
+                description = dr[3].ToString();
+
+                message = message + changeType + ": " + description + "<br />";
+            }
+
+            //SendEmail
+            string version = ddAllVersions.SelectedItem.ToString().Replace(" (Current)", ""); ;
+            string emailSubject = "New Version of SkylineBigRedDistributing.com has been deployed.";
+            string emailBody = "This is a note that a new version of the website <a href='http://hhwskylinedist.com'>hhwskylinedist.com</a> has been deployed. The new version number is " + version + " and was deployed on " + DateTime.Now.ToShortDateString() + ".<br/><br/>" + message + "<br/>You can also view the changes here: <a href='http://hhwskylinedist.com/admin/change_log.aspx'>http://hhwskylinedist.com/admin/change_log.aspx</a>";
+            SendEmail se = new SendEmail();
+            se.SendAdminUsersEmail(emailSubject, emailBody, connectionString, out errorMessage);
+
+            if (errorMessage.Length > 0)
+            { 
+                lblEmailError.Text = errorMessage;
+                lblEmailError.Visible = true;
+            }
         }
 
         private void SuppressBasedOnUser()
