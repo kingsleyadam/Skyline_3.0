@@ -132,7 +132,6 @@
                                 <p>
                                     <div id="divProductNum" runat="server">
                                         <asp:Label ID="lblProductNumLabel" runat="server">Product #: </asp:Label><asp:Label ID="lblProductNum" runat="server" Text='<%# Eval("ProductNum") %>' />
-
                                     </div>
 
                                     <div id="divImageCount" runat="server">
@@ -208,10 +207,13 @@
                             <asp:Image ID="imgProductImg" runat="server" CssClass="img-rounded" />
                         </asp:HyperLink>
                     </div>
-                    <h3>
-                        <asp:Label ID="lblProductInfoPrice" runat="server" />
-                        <asp:HiddenField ID="hdnProductInfoPrice" runat="server" />
-                    </h3>
+                    <asp:Panel ID="pnlPrice" runat="server">
+                        <h3>
+                            <asp:Label ID="lblProductInfoPrice" runat="server" />
+                            <asp:HiddenField ID="hdnProductInfoPrice" runat="server" />
+                        </h3>
+                    </asp:Panel>
+
                     <div class="form-group">
                         <asp:Panel runat="server" ID="pnlProductInfoAdd2Order" CssClass="input-group" DefaultButton="btnAdd2CartFromInfo">
                             <asp:TextBox ID="txtQuantityFromInfo" runat="server" CssClass="form-control" Text="1"></asp:TextBox><span class="input-group-btn"><asp:LinkButton ID="btnAdd2CartFromInfo" runat="server" CssClass="btn btn-default" CommandName="Add2CartFromInfo" Text="Add To Order" Width="130px" OnClick="Add2Cart" />

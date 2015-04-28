@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -418,16 +419,15 @@ namespace Skyline_3._0.stores
             bool isSoldOut = Convert.ToBoolean(hdnSoldOut.Value);
 
             if (isBestSeller)
-            {
                 pnlThumnnail.CssClass = "thumbnail thumbnail-bestseller";
-            }
 
-            if (isSoldOut)
+            if (Roles.IsUserInRole("Demo"))
+                pnlPrice.Visible = false;
+
+            if (isSoldOut || !Roles.IsUserInRole("Order"))
             {
                 if (pnlAdd2Order != null)
-                {
                     pnlAdd2Order.Visible = false;
-                }
             }
             else
             {
@@ -488,6 +488,12 @@ namespace Skyline_3._0.stores
                     pnlSoldOut.Visible = false;
                     pnlProductInfoAdd2Order.Visible = true;
                 }
+
+                if (!Roles.IsUserInRole("Order"))
+                    pnlProductInfoAdd2Order.Visible = false;
+
+                if (Roles.IsUserInRole("Demo"))
+                    pnlPrice.Visible = false;
 
                 if (prod.BestSeller)
                     pnlBestSeller.Visible = true;

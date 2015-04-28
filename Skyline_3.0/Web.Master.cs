@@ -18,7 +18,16 @@ namespace Skyline_3._0
             string site = Path.GetFileName(Request.Url.AbsolutePath).ToLower();
             string dir = VirtualPathUtility.GetDirectory(Request.Path).ToString().Replace("/", "");
 
-            if (!dir.Contains("admin")) 
+            if (dir.Contains("admin"))
+            {
+                if (Request.IsAuthenticated)
+                {
+                    HyperLink hl = (HyperLink)lgnView.FindControl("lnkAdminDropDown");
+                    if (hl != null)
+                        hl.ForeColor = System.Drawing.Color.White;
+                }
+            }
+            else
             {
                 switch (site)
                 {
@@ -139,6 +148,28 @@ namespace Skyline_3._0
             }
 
 
+        }
+
+        private Control FindChildControl(Control parent, string idToFind)
+        {
+            foreach (Control child in parent.Controls)
+            {
+                if (child.ID == idToFind)
+                {
+                    return child;
+                    break;
+                }
+                else
+                {
+                    Control control = FindChildControl(child, idToFind);
+                    if (control != null)
+                    {
+                        return control;
+                        break;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

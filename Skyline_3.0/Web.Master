@@ -79,7 +79,7 @@
                                 <asp:RoleGroup Roles="admin">
                                     <ContentTemplate>
                                         <li id="liAdmin" runat="server" class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                            <asp:HyperLink ID="lnkAdminDropDown" runat="server" NavigateUrl="#" data-toggle="dropdown" CssClass="dropdown-toggle">Admin <b class="caret"></b></asp:HyperLink>
                                             <ul class="dropdown-menu">
                                                 <li class="divider"></li>
 
