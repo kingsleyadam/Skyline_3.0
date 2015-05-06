@@ -13,49 +13,13 @@ namespace Skyline_3._0.stores {
     public partial class products {
         
         /// <summary>
-        /// pnlFinishOrder control.
+        /// updatePanelSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlFinishOrder;
-        
-        /// <summary>
-        /// pnlCartItemCount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlCartItemCount;
-        
-        /// <summary>
-        /// lnkFinishOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFinishOrder;
-        
-        /// <summary>
-        /// lblFinishOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFinishOrder;
-        
-        /// <summary>
-        /// lblCartItemCount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCartItemCount;
+        protected global::System.Web.UI.UpdatePanel updatePanelSearch;
         
         /// <summary>
         /// pnlProductsFilter control.
@@ -191,6 +155,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        
+        /// <summary>
+        /// updateProgressSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updateProgressSearch;
         
         /// <summary>
         /// pnlProductsGrid control.
@@ -373,6 +346,15 @@ namespace Skyline_3._0.stores {
         protected global::System.Web.UI.WebControls.LinkButton lnkLastPage;
         
         /// <summary>
+        /// updateProgressProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updateProgressProducts;
+        
+        /// <summary>
         /// pnlProductInfo control.
         /// </summary>
         /// <remarks>
@@ -551,5 +533,14 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnBack;
+        
+        /// <summary>
+        /// updateProgressProductInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updateProgressProductInfo;
     }
 }

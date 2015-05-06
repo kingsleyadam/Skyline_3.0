@@ -18,6 +18,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="scriptManager" runat="server"></asp:ScriptManager>
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -34,9 +35,15 @@
                         <li id="liProducts" runat="server">
                             <asp:LinkButton ID="lnkProducts" runat="server" CssClass="open-Login">Products</asp:LinkButton>
                         </li>
+
                         <li id="liOrder" runat="server">
-                            <asp:HyperLink ID="lnkOrderForm" runat="server" NavigateUrl="~/stores/order.aspx">Your Order</asp:HyperLink>
+                            <asp:UpdatePanel ID="upOrder" runat="server" RenderMode="Inline">
+                                <ContentTemplate>
+                                    <asp:HyperLink ID="lnkOrderForm" runat="server" NavigateUrl="~/stores/order.aspx" />
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </li>
+
                         <li id="liAboutUs" runat="server">
                             <asp:HyperLink ID="lnkAboutUs" runat="server" NavigateUrl="~/about_us.aspx">About Us</asp:HyperLink>
                         </li>

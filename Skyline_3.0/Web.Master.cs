@@ -8,6 +8,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Web.SessionState;
 using System.Web.Security;
+using ProductInfo;
 
 namespace Skyline_3._0
 {
@@ -94,6 +95,14 @@ namespace Skyline_3._0
             litJavascriptRef.Text = "<script src='" + appPath + "scripts/javascript.js'></script>";
         }
 
+        protected void Page_PreRender(Object sender, EventArgs e)
+        {
+            if (Cart.Instance.Items.Count > 0)
+                lnkOrderForm.Text = "Your Order <span class='badge'>" + Cart.Instance.Items.Count.ToString() + "</span>";
+            else
+                lnkOrderForm.Text = "Your Order";
+        }
+
         protected void lgnForm_LoginError(object sender, EventArgs e)
         {
             MembershipUser user = Membership.GetUser(lgnForm.UserName);
@@ -115,27 +124,29 @@ namespace Skyline_3._0
 
         protected void lgnForm_PreRender(object sender, EventArgs e)
         {
-            Button btnLogin = (Button)lgnForm.Controls[0].FindControl("LoginButton");
-            TextBox txtUsername = (TextBox)lgnForm.Controls[0].FindControl("Username");
-            TextBox txtPassword = (TextBox)lgnForm.Controls[0].FindControl("Password");
-
-            if (btnLogin != null && txtUsername != null && txtPassword != null)
+            if (!IsPostBack)
             {
-                login.DefaultButton = btnLogin.UniqueID;
+                Button btnLogin = (Button)lgnForm.Controls[0].FindControl("LoginButton");
+                TextBox txtUsername = (TextBox)lgnForm.Controls[0].FindControl("Username");
+                TextBox txtPassword = (TextBox)lgnForm.Controls[0].FindControl("Password");
 
-                if (lgnForm.UserName.ToString().Length > 0)
+                if (btnLogin != null && txtUsername != null && txtPassword != null)
                 {
-                    txtPassword.Attributes.Add("autofocus", "");
-                    txtUsername.Attributes.Remove("autofocus");
+                    login.DefaultButton = btnLogin.UniqueID;
+
+                    if (lgnForm.UserName.ToString().Length > 0)
+                    {
+                        txtPassword.Attributes.Add("autofocus", "");
+                        txtUsername.Attributes.Remove("autofocus");
+                    }
+                    else
+                    {
+                        txtUsername.Attributes.Add("autofocus", "");
+                        txtPassword.Attributes.Remove("autofocus");
+                    }
+
                 }
-                else
-                {
-                    txtUsername.Attributes.Add("autofocus", "");
-                    txtPassword.Attributes.Remove("autofocus");
-                }
-                    
             }
-                
         }
 
         protected void lgnForm_LoggedIn(object sender, EventArgs e)
@@ -157,7 +168,6 @@ namespace Skyline_3._0
                 if (child.ID == idToFind)
                 {
                     return child;
-                    break;
                 }
                 else
                 {
@@ -165,7 +175,6 @@ namespace Skyline_3._0
                     if (control != null)
                     {
                         return control;
-                        break;
                     }
                 }
             }

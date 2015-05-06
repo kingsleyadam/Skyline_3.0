@@ -15,9 +15,8 @@
                     <asp:Login ID="lgnForm" runat="server" RenderOuterTable="False" OnLoginError="lgnForm_LoginError" OnPreRender="lgnForm_PreRender">
                         <LayoutTemplate>
                             <h2 class="form-signin-heading line-break">Login</h2>
-
                             <div class="form-group line-break">
-                                <div class="" role="group">
+                                <div class="login-controls" role="group">
                                     <h4 class="no-margin hidden"><asp:Label ID="lblUsername" runat="server" Text="Username" AssociatedControlID="Username"></asp:Label></h4>
                                     <asp:TextBox ID="UserName" CssClass="textbox-top form-control input-lg" placeholder="Username" runat="server" type="username" />
                                     <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" Display="None" ControlToValidate="UserName" ErrorMessage="UserName is required." ToolTip="User Name is required." ValidationGroup="ctl00$lgnForm" Text="Required" ForeColor="Red" />

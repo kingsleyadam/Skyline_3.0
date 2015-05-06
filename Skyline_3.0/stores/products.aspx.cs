@@ -77,16 +77,6 @@ namespace Skyline_3._0.stores
                     //Populate Products
                     PopulateListView();
                 }
-
-                if (Cart.Instance.Items.Count == 0)
-                {
-                    pnlCartItemCount.Visible = false;
-                }
-                else
-                {
-                    pnlCartItemCount.Visible = true;
-                    lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
-                }
             }
 
             txtSearch.Focus();
@@ -273,16 +263,6 @@ namespace Skyline_3._0.stores
                     btnAdd2Cart.Text = "Update Quantity";
                 else
                     btnAdd2Cart.Text = "Add To Order";
-
-                if (Cart.Instance.Items.Count == 0)
-                {
-                    pnlCartItemCount.Visible = false;
-                }
-                else
-                {
-                    pnlCartItemCount.Visible = true;
-                    lblCartItemCount.Text = Cart.Instance.Items.Count.ToString();
-                }
             }
         }
 

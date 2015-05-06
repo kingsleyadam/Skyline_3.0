@@ -332,6 +332,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="images\add_product.png" />
+    <Content Include="images\ajax-loader.gif" />
     <Content Include="images\product_images\compressed\20100809000123000274.jpg" />
     <Content Include="images\product_images\compressed\20100809000123000275.jpg" />
     <Content Include="images\product_images\compressed\20100809000161000302.jpg" />
@@ -1272,7 +1273,6 @@
     <Content Include="contact_us.aspx" />
     <Content Include="css\style.css" />
     <Content Include="default.aspx" />
-    <Content Include="images\ajax-loader.gif" />
     <Content Include="images\template_r1_c1.png" />
     <Content Include="login.aspx" />
     <Content Include="scripts\jquery-2.1.3.min.js" />
@@ -1484,7 +1484,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56461</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

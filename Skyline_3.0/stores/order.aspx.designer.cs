@@ -13,6 +13,15 @@ namespace Skyline_3._0.stores {
     public partial class order {
         
         /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
+        
+        /// <summary>
         /// pnlCheckOutWizard control.
         /// </summary>
         /// <remarks>
@@ -560,6 +569,15 @@ namespace Skyline_3._0.stores {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkStep3;
+        
+        /// <summary>
+        /// updateProgressProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updateProgressProducts;
         
         /// <summary>
         /// pnlSuccess control.

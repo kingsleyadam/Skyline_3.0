@@ -497,21 +497,21 @@ a.list-group-item-danger:hover, a.list-group-item-danger:focus {
     width: 100%; /* for IE 6 */
 }
 
-.image .overlay {
-    display:none;
-    position: absolute;
-    color:white;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgb(0, 0, 0); /* fallback color */
-    background: rgba(0, 0, 0, 0.7);
-    height: 100%;
-    border-radius: 4px;
-}
+    .image .overlay {
+        display: none;
+        position: absolute;
+        color: white;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0.7);
+        height: 100%;
+        border-radius: 4px;
+    }
 
     .image:hover .overlay {
-        display:block;
+        display: block;
     }
 
 .thumbnail a > .image > img {
@@ -530,10 +530,88 @@ a.list-group-item-danger:hover, a.list-group-item-danger:focus {
     margin: auto;
     text-align: center;
     font-size: 60pt;
-    padding-top:15px;
+    padding-top: 15px;
 }
 
 .help-text {
-    padding-bottom:15px;
-    display:block;
+    padding-bottom: 15px;
+    display: block;
+}
+
+.products {
+    position: relative;
+}
+
+.products-modal {
+    z-index: 100;
+    cursor: not-allowed;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba( 255, 255, 255, .8 ) url('../images/ajax-loader.gif') 50% 50% no-repeat;
+}
+
+.search {
+    position: relative;
+}
+
+.no-image-modal {
+    z-index: 100;
+    cursor: not-allowed;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba( 255, 255, 255, .8 ) 50% 50% no-repeat;
+}
+
+.nav > li > span > a > img {
+    max-width: none;
+}
+
+.nav > li > span > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+    .nav > li > span > a:hover, .nav > li > span > a:focus {
+        text-decoration: none;
+        background-color: #dddddd;
+    }
+
+
+.navbar-inverse .navbar-nav > li > span > a {
+    color: #fac0ba;
+}
+
+    .navbar-inverse .navbar-nav > li > span > a:hover, .navbar-inverse .navbar-nav > li > span > a:focus {
+        color: #ffffff;
+        background-color: transparent;
+    }
+
+.navbar-nav > li > span > a {
+    color: #777777;
+}
+
+.navbar-nav > li > span > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 18px;
+}
+
+    .navbar-nav > li > span > a:hover, .navbar-default .navbar-nav > li > span > a:focus {
+        color: #d9230f;
+        background-color: transparent;
+    }
+
+
+@media (min-width:768px) {
+    .navbar-nav > li > span > a {
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
 }
