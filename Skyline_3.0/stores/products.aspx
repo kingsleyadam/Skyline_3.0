@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdatePanel ID="updatePanelSearch" runat="server">
+    <asp:UpdatePanel ID="updatePanelSearch" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:Panel runat="server" ID="pnlProductsFilter" CssClass="panel panel-default search">
                 <div class="panel-body">
@@ -96,7 +96,7 @@
 
                 </asp:Panel>
                 <div class="panel-body">
-                    <asp:ListView ID="lvProducts" runat="server" GroupItemCount="4" OnItemDataBound="lvProducts_ItemDataBound">
+                    <asp:ListView ID="lvProducts" runat="server" GroupItemCount="4" OnItemDataBound="lvProducts_ItemDataBound" ClientIDMode="AutoID">
                         <LayoutTemplate>
                             <div id="groupPlaceholderContainer" runat="server">
                                 <div id="groupPlaceholder" runat="server">
