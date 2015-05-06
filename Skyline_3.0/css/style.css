@@ -568,6 +568,11 @@ a.list-group-item-danger:hover, a.list-group-item-danger:focus {
     background: rgba( 255, 255, 255, .8 ) 50% 50% no-repeat;
 }
 
+.navbar-nav > .active > span > a, .navbar-inverse .navbar-nav > .active > span > a:hover, .navbar-inverse .navbar-nav > .active > span > a:focus {
+    color: #ffffff !important;
+    background-color: transparent;
+}
+
 .nav > li > span > a > img {
     max-width: none;
 }
@@ -582,7 +587,6 @@ a.list-group-item-danger:hover, a.list-group-item-danger:focus {
         text-decoration: none;
         background-color: #dddddd;
     }
-
 
 .navbar-inverse .navbar-nav > li > span > a {
     color: #fac0ba;
